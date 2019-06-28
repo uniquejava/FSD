@@ -1,3 +1,6 @@
+const VOTE_UP = 'up';
+const VOTE_DOWN = 'down';
+
 class Player {
   constructor() {
     let player = (this.player = document.querySelector('#smartPlayer'));
@@ -8,8 +11,25 @@ class Player {
     this.btnMute = document.querySelector('#btnMute');
     this.progressBar = document.querySelector('progress');
 
+    this._bindEvents(player);
+    this._displayVoteInfo();
+  }
+
+  _bindEvents(player) {
     player.addEventListener('timeupdate', this.updateProgressBar.bind(this), false);
     player.addEventListener('ended', this.stop.bind(this), false);
+  }
+
+  _getItem(key, defaultValue) {
+    return +localStorage.getItem(key) || defaultValue;
+  }
+
+  _displayVoteInfo() {
+    let up = document.querySelector('#btnVoteUp i');
+    up.innerText = ` ${this._getItem(VOTE_UP, 0)}`;
+
+    let down = document.querySelector('#btnVoteDown i');
+    down.innerText = ` ${this._getItem(VOTE_DOWN, 0)}`;
   }
 
   reload() {
@@ -64,5 +84,13 @@ class Player {
     let player = this.player;
     let percent = (player.currentTime * 100.0) / player.duration;
     this.progressBar.setAttribute('value', percent);
+  }
+
+  vote(type) {
+    let key = type === 'up' ? VOTE_UP : VOTE_DOWN;
+    let current = this._getItem(key, 0);
+    localStorage.setItem(key, current + 1);
+
+    this._displayVoteInfo();
   }
 }

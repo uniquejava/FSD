@@ -1,6 +1,8 @@
-# FSD badage exercises
+# FSD badge assignments
 
 Try different tech stacks to build a html media player.
+
+![player screenshot](./lab01_html5_bootstrap4/player.png)
 
 Source code: https://github.com/uniquejava/FSD
 

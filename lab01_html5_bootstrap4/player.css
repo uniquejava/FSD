@@ -11,6 +11,10 @@
   color: rgba(255, 255, 255);
 }
 
+.smart-player .btn-vote {
+  float: right;
+}
+
 .smart-player .smart-controls {
   position: relative;
   top: -70px;

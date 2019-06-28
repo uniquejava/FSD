@@ -17,55 +17,127 @@
       integrity="sha384-i1LQnF23gykqWXg6jxC2ZbCbUMxyw5gLZY6UiUS98LYV5unm8GWmfkIS6jqJfb4E"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="player.css" />
+    <link rel="stylesheet" href="css/course.css" />
+    <link rel="stylesheet" href="css/player.css" />
     <script src="player.js"></script>
     <script>
       let me;
+      let courses = [
+        {
+          id: 0,
+          title: 'Introduction to HTML5',
+          url: 'mp4/SampleVideo_1280x720_2mb.mp4'
+        },
+        {
+          id: 1,
+          title: 'Introduction to Styling with CSS3',
+          url: 'mp4/SampleVideo_720x480_1mb.mp4'
+        },
+        {
+          id: 2,
+          title: 'Introduction to Bootstrap 4',
+          url: 'mp4/SampleVideo_1280x720_2mb.mp4'
+        },
+        {
+          id: 3,
+          title: 'Learn to create website with HTML5, CSS3 and Bootstrap4',
+          url: 'mp4/SampleVideo_720x480_1mb.mp4'
+        },
+        {
+          id: 4,
+          title: 'Introduction to Javascript',
+          url: 'mp4/SampleVideo_1280x720_2mb.mp4'
+        }
+      ];
+
       function setupPlayer() {
-        me = new Player();
+        me = new Player(courses);
       }
     </script>
   </head>
-  <body onload="setupPlayer()">
-    <div class="smart-player">
-      <h4>Sample Videos</h4>
-      <video id="smartPlayer" width="640" height="360">
-        <source src="mp4/SampleVideo_1280x720_2mb.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <div class="smart-controls">
-        <progress value="0" max="100"></progress>
-        <div class="buttons">
-          <button id="btnReload" class="btn" onclick="me.reload()">
-            <i class="fas fa-redo"></i>
-          </button>
-          <button id="btnPlay" class="btn" onclick="me.play()">
-            <i class="fas fa-play"></i>
-          </button>
-          <button id="btnPause" class="btn" disabled onclick="me.pause()">
-            <i class="fas fa-pause"></i>
-          </button>
-          <button id="btnStop" class="btn" disabled onclick="me.stop()">
-            <i class="fas fa-stop"></i>
-          </button>
-          <button id="btnVolumeUp" class="btn" onclick="me.volume(0.1)">
-            <i class="fas fa-plus"></i>
-          </button>
-          <button id="btnVolumeDown" class="btn" onclick="me.volume(-0.1)">
-            <i class="fas fa-minus"></i>
-          </button>
-          <button id="btnMute" class="btn" onclick="me.toggleMute()">
-            <i class="fas fa-volume-up"></i>
-          </button>
+  <body onload="setupPlayer()" class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <div class="smart-player">
+          <video id="smartPlayer" width="100%" height="100%">
+            <source src="mp4/SampleVideo_1280x720_2mb.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div class="smart-controls">
+            <progress value="0" max="100"></progress>
+            <div class="buttons">
+              <button id="btnReload" class="btn" onclick="me.reload()">
+                <i class="fas fa-redo"></i>
+              </button>
+              <button id="btnPlay" class="btn" onclick="me.play()">
+                <i class="fas fa-play"></i>
+              </button>
+              <button id="btnPause" class="btn" disabled onclick="me.pause()">
+                <i class="fas fa-pause"></i>
+              </button>
+              <button id="btnStop" class="btn" disabled onclick="me.stop()">
+                <i class="fas fa-stop"></i>
+              </button>
+              <button id="btnVolumeUp" class="btn" onclick="me.volume(0.1)">
+                <i class="fas fa-plus"></i>
+              </button>
+              <button id="btnVolumeDown" class="btn" onclick="me.volume(-0.1)">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button id="btnMute" class="btn" onclick="me.toggleMute()">
+                <i class="fas fa-volume-up"></i>
+              </button>
 
-          <button id="btnVoteDown" class="btn btn-vote" onclick="me.vote('down')">
-            <i class="fas fa-thumbs-down"> </i>
-          </button>
+              <button id="btnVoteDown" class="btn btn-vote" onclick="me.vote('down')">
+                <i class="fas fa-thumbs-down"> </i>
+              </button>
 
-          <button id="btnVoteUp" class="btn btn-vote" onclick="me.vote('up')">
-            <i class="fas fa-thumbs-up"> </i>
-          </button>
+              <button id="btnVoteUp" class="btn btn-vote" onclick="me.vote('up')">
+                <i class="fas fa-thumbs-up"> </i>
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div class="col-md-5">
+        <div class="section-title">
+          Full stack courses
+        </div>
+        <ul class="course-list">
+          <li class="course">
+            <div class="flex items-center">
+              <a href="javascript:void(0)" onclick="me.load(0)"> <i class="fab fa-youtube"></i> Introduction to HTML5 </a>
+            </div>
+            <div><span class="time">0:13</span></div>
+          </li>
+          <li class="course">
+            <div class="flex items-center">
+              <a href="javascript:void(0)" onclick="me.load(1)"> <i class="fab fa-youtube"></i> Introduction to Styling with CSS3 </a>
+            </div>
+            <div><span class="time">0:05</span></div>
+          </li>
+          <li class="course">
+            <div class="flex items-center">
+              <a href="javascript:void(0)" onclick="me.load(2)"> <i class="fab fa-youtube"></i> Introduction to Bootstrap 4 </a>
+            </div>
+            <div><span class="time">0:13</span></div>
+          </li>
+          <li class="course">
+            <div class="flex items-center">
+              <a href="javascript:void(0)" onclick="me.load(3)">
+                <i class="fab fa-youtube"></i> Learn to create website with HTML5, CSS3 and Bootstrap4
+              </a>
+            </div>
+            <div><span class="time">0:05</span></div>
+          </li>
+          <li class="course">
+            <div class="flex items-center">
+              <a href="javascript:void(0)" onclick="me.load(4)"> <i class="fab fa-youtube"></i> Introduction to Javascript </a>
+            </div>
+            <div><span class="time">0:13</span></div>
+          </li>
+        </ul>
       </div>
     </div>
   </body>

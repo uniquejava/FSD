@@ -2,7 +2,10 @@ const VOTE_UP = 'up';
 const VOTE_DOWN = 'down';
 
 class Player {
-  constructor() {
+  constructor(courses) {
+    this.courses = courses;
+    this.currentCourse = courses[0];
+
     let player = (this.player = document.querySelector('#smartPlayer'));
 
     this.btnPlay = document.querySelector('#btnPlay');
@@ -26,15 +29,24 @@ class Player {
 
   _displayVoteInfo() {
     let up = document.querySelector('#btnVoteUp i');
-    up.innerText = ` ${this._getItem(VOTE_UP, 0)}`;
+    let key = `${VOTE_UP}@${this.currentCourse.id}`;
+    up.innerText = ` ${this._getItem(key, 0)}`;
 
     let down = document.querySelector('#btnVoteDown i');
-    down.innerText = ` ${this._getItem(VOTE_DOWN, 0)}`;
+    key = `${VOTE_DOWN}@${this.currentCourse.id}`;
+    down.innerText = ` ${this._getItem(key, 0)}`;
   }
 
   reload() {
     this.stop();
     this.play();
+  }
+
+  load(index) {
+    this.currentCourse = this.courses[index];
+    this.player.src = this.currentCourse.url;
+    this.play();
+    this._displayVoteInfo();
   }
 
   play() {
@@ -88,6 +100,7 @@ class Player {
 
   vote(type) {
     let key = type === 'up' ? VOTE_UP : VOTE_DOWN;
+    key = `${key}@${this.currentCourse.id}`;
     let current = this._getItem(key, 0);
     localStorage.setItem(key, current + 1);
 

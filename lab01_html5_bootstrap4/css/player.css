@@ -1,5 +1,5 @@
 .smart-player {
-  width: 640px;
+  /* width: 640px; */
   margin: 0 auto;
 }
 
@@ -17,7 +17,7 @@
 
 .smart-player .smart-controls {
   position: relative;
-  top: -70px;
+  top: -68px;
 }
 
 .smart-player .smart-controls .buttons {

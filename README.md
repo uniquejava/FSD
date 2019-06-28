@@ -1,6 +1,8 @@
 # FSD badage exercises
 
-Try different tech stacks to build a html media player
+Try different tech stacks to build a html media player.
+
+Source code: https://github.com/uniquejava/FSD
 
 ## Environment
 

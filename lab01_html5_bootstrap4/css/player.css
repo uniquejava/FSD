@@ -1,6 +1,11 @@
 .smart-player {
-  /* width: 640px; */
   margin: 0 auto;
+}
+
+.smart-player video {
+  min-width: 375px;
+  width: 100%;
+  max-height: 100%;
 }
 
 .smart-player .btn, .smart-player .btn[disabled]:hover {
@@ -17,6 +22,7 @@
 
 .smart-player .smart-controls {
   position: relative;
+  min-width: 375px;
   top: -68px;
 }
 

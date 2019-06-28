@@ -6,21 +6,31 @@ class Player {
     this.courses = courses;
     this.currentCourse = courses[0];
 
-    let player = (this.player = document.querySelector('#smartPlayer'));
+    let video = (this.video = document.querySelector('video'));
 
+    this.wrapper = document.querySelector('.smart-player-wrapper');
+    this.controls = document.querySelector('.smart-controls');
     this.btnPlay = document.querySelector('#btnPlay');
     this.btnStop = document.querySelector('#btnStop');
     this.btnPause = document.querySelector('#btnPause');
     this.btnMute = document.querySelector('#btnMute');
     this.progressBar = document.querySelector('progress');
 
-    this._bindEvents(player);
+    this._bindEvents(video);
     this._displayVoteInfo();
+    this._resizePlayer();
   }
 
-  _bindEvents(player) {
-    player.addEventListener('timeupdate', this.updateProgressBar.bind(this), false);
-    player.addEventListener('ended', this.stop.bind(this), false);
+  _bindEvents(video) {
+    video.addEventListener('timeupdate', this.updateProgressBar.bind(this), false);
+    video.addEventListener('ended', this.stop.bind(this), false);
+
+    window.addEventListener('resize', this._resizePlayer.bind(this), false);
+  }
+
+  _resizePlayer(event) {
+    let style = window.getComputedStyle(this.video, null);
+    this.wrapper.style.height = style.height;
   }
 
   _getItem(key, defaultValue) {
@@ -44,7 +54,7 @@ class Player {
 
   load(index) {
     this.currentCourse = this.courses[index];
-    this.player.src = this.currentCourse.url;
+    this.video.src = this.currentCourse.url;
     this.play();
     this._displayVoteInfo();
   }
@@ -53,26 +63,26 @@ class Player {
     this.btnPlay.disabled = true;
     this.btnPause.disabled = false;
     this.btnStop.disabled = false;
-    this.player.play();
+    this.video.play();
   }
 
   pause() {
     this.btnPlay.disabled = false;
     this.btnPause.disabled = true;
     this.btnStop.disabled = false;
-    this.player.pause();
+    this.video.pause();
   }
 
   stop() {
     this.btnPlay.disabled = false;
     this.btnPause.disabled = true;
     this.btnStop.disabled = true;
-    this.player.pause();
-    this.player.currentTime = 0;
+    this.video.pause();
+    this.video.currentTime = 0;
   }
 
   volume(amount) {
-    let current = +this.player.volume;
+    let current = +this.video.volume;
     let expected = current + amount;
 
     if (expected > 1) {
@@ -81,20 +91,20 @@ class Player {
       expected = 0;
     }
 
-    this.player.volume = expected;
+    this.video.volume = expected;
   }
 
   toggleMute() {
-    let muted = this.player.muted;
+    let muted = this.video.muted;
     let icon = document.querySelector('#btnMute i');
     icon.classList.toggle('fa-volume-mute', !muted);
     icon.classList.toggle('fa-volume-up', muted);
-    this.player.muted = !muted;
+    this.video.muted = !muted;
   }
 
   updateProgressBar() {
-    let player = this.player;
-    let percent = (player.currentTime * 100.0) / player.duration;
+    let video = this.video;
+    let percent = (video.currentTime * 100.0) / video.duration;
     this.progressBar.setAttribute('value', percent);
   }
 

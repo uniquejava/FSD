@@ -1,0 +1,19 @@
+.smart-player {
+  width: 640px;
+  margin: 0 auto;
+}
+
+.smart-player .btn, .smart-player .btn[disabled]:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.smart-player .btn:hover:not([disabled]) {
+  color: rgba(255, 255, 255);
+}
+
+.smart-player .smart-controls {
+  position: relative;
+  top: -46px;
+  padding: 0 1em;
+  background-color: rgba(0, 0, 0, 0.3);
+}

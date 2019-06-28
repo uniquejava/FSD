@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Smart Media Player</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.9.0/css/all.css"
+      integrity="sha384-i1LQnF23gykqWXg6jxC2ZbCbUMxyw5gLZY6UiUS98LYV5unm8GWmfkIS6jqJfb4E"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="player.css" />
+    <script src="player.js"></script>
+    <script>
+      var me;
+      function setupPlayer() {
+        me = new Player();
+      }
+    </script>
+  </head>
+  <body onload="setupPlayer()">
+    <div class="smart-player">
+      <h4>Sample Videos</h4>
+      <video id="smartPlayer" width="640" height="360">
+        <source src="mp4/SampleVideo_1280x720_2mb.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <div class="smart-controls">
+        <button id="btnPlay" class="btn" onclick="me.play()">
+          <i class="fas fa-play"></i>
+        </button>
+        <button id="btnPause" class="btn" disabled onclick="me.pause()">
+          <i class="fas fa-pause"></i>
+        </button>
+        <button id="btnStop" class="btn" disabled onclick="me.stop()">
+          <i class="fas fa-stop"></i>
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

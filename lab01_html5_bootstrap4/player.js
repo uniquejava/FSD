@@ -28,4 +28,17 @@ class Player {
     this.player.pause();
     this.player.currentTime = 0;
   }
+
+  volume(amount) {
+    let current = +this.player.volume;
+    let expected = current + amount;
+
+    if (expected > 1) {
+      expected = 1;
+    } else if (expected < 0) {
+      expected = 0;
+    }
+
+    this.player.volume = expected;
+  }
 }

@@ -52,11 +52,18 @@ class Player {
     this.play();
   }
 
-  load(index) {
+  load(index, link) {
     this.currentCourse = this.courses[index];
     this.video.src = this.currentCourse.url;
     this.play();
     this._displayVoteInfo();
+
+    // highlight course that is currently playing.
+    if (link && link.style) {
+      let links = document.querySelectorAll('.course-list .link');
+      links.forEach(link => link.classList.toggle('active', false));
+      link.classList.toggle('active', true);
+    }
   }
 
   play() {

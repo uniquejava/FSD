@@ -1,6 +1,34 @@
 const VOTE_UP = 'up';
 const VOTE_DOWN = 'down';
 
+const PLAYING = 'playing';
+const PAUSED = 'paused';
+const STOPPED = 'stopped';
+
+const toHHMMSS = seconds => {
+  let h,
+    m,
+    s,
+    result = '';
+
+  // hours
+  h = Math.floor(seconds / 3600);
+  seconds -= h * 3600;
+  if (h) {
+    result = h + ':';
+  }
+
+  // minutes
+  m = Math.floor(seconds / 60);
+  seconds -= m * 60;
+  result += m < 10 && h > 0 ? '0' + m + ':' : m + ':';
+
+  // seconds
+  s = Math.floor(seconds % 60);
+  result += s < 10 ? '0' + s : s;
+  return result;
+};
+
 class Player {
   constructor(courses) {
     this.courses = courses;
@@ -15,6 +43,9 @@ class Player {
     this.btnPause = document.querySelector('#btnPause');
     this.btnMute = document.querySelector('#btnMute');
     this.progressBar = document.querySelector('progress');
+    this.timeTag = document.querySelector('.time-tag');
+
+    this.status = STOPPED;
 
     this._bindEvents(video);
     this._displayVoteInfo();
@@ -22,9 +53,8 @@ class Player {
   }
 
   _bindEvents(video) {
-    video.addEventListener('timeupdate', this.updateProgressBar.bind(this), false);
+    video.addEventListener('timeupdate', this.onTimeUpdate.bind(this), false);
     video.addEventListener('ended', this.stop.bind(this), false);
-
     window.addEventListener('resize', this._resizePlayer.bind(this), false);
   }
 
@@ -71,6 +101,8 @@ class Player {
     this.btnPause.disabled = false;
     this.btnStop.disabled = false;
     this.video.play();
+
+    this.status = PLAYING;
   }
 
   pause() {
@@ -78,6 +110,8 @@ class Player {
     this.btnPause.disabled = true;
     this.btnStop.disabled = false;
     this.video.pause();
+
+    this.status = PAUSED;
   }
 
   stop() {
@@ -86,6 +120,8 @@ class Player {
     this.btnStop.disabled = true;
     this.video.pause();
     this.video.currentTime = 0;
+
+    this.status = STOPPED;
   }
 
   volume(amount) {
@@ -109,10 +145,16 @@ class Player {
     this.video.muted = !muted;
   }
 
-  updateProgressBar() {
+  onTimeUpdate() {
+    // update progress bar
     let video = this.video;
     let percent = (video.currentTime * 100.0) / video.duration;
     this.progressBar.setAttribute('value', percent);
+
+    // update time tag
+    let current = toHHMMSS(video.currentTime);
+    let duration = toHHMMSS(video.duration || 0);
+    this.timeTag.innerText = `${current} / ${duration}`;
   }
 
   vote(type) {

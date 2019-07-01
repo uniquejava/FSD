@@ -8,12 +8,20 @@
   max-height: 100%;
 }
 
-.smart-player .btn, .smart-player .btn[disabled]:hover {
+.smart-player .btn,
+.smart-player .btn[disabled]:hover {
   color: rgba(255, 255, 255, 0.8);
 }
 
 .smart-player .btn:hover:not([disabled]) {
   color: rgba(255, 255, 255);
+}
+
+.smart-player .time-tag {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 300;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .smart-player .btn-vote {

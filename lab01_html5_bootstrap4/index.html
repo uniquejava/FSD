@@ -64,17 +64,13 @@
               <source src="mp4/SampleVideo_1280x720_2mb.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-            <div class="extra-controls">
-              <button id="btnVoteUp" class="btn btn-vote" onclick="me.vote('up')">
-                <i class="fas fa-thumbs-up"> </i>
-              </button>
 
-              <button id="btnVoteDown" class="btn btn-vote" onclick="me.vote('down')">
-                <i class="fas fa-thumbs-down"> </i>
-              </button>
-            </div>
-            <div id="videoControls" class="smart-controls">
+            <div id="progressContainer">
               <progress value="0" max="100"></progress>
+              <div id="btnCircle" class="circle"></div>
+            </div>
+
+            <div id="videoControls">
               <div class="buttons">
                 <button id="btnReload" class="btn" onclick="me.reload()">
                   <i class="fas fa-redo"></i>
@@ -104,6 +100,16 @@
                   <i class="fas fa-expand"></i>
                 </button>
               </div>
+            </div>
+
+            <div id="extraControls">
+              <button id="btnVoteUp" class="btn btn-vote" onclick="me.vote('up')">
+                <i class="fas fa-thumbs-up"> </i>
+              </button>
+
+              <button id="btnVoteDown" class="btn btn-vote" onclick="me.vote('down')">
+                <i class="fas fa-thumbs-down"> </i>
+              </button>
             </div>
           </div>
         </div>

@@ -10,14 +10,14 @@
   height: auto;
 }
 
-.smart-player .smart-controls {
+.smart-player #videoControls {
   position: absolute;
   min-width: 375px;
   bottom: 6px;
   width: 100%;
 }
 
-.smart-player .extra-controls {
+.smart-player #extraControls {
   position: absolute;
   top: 1em;
   right: 1em;
@@ -28,7 +28,7 @@
   height: 90px;
 }
 
-.smart-player .extra-controls .btn-vote {
+.smart-player #extraControls .btn-vote {
   width: 54px;
   height: 42px;
   padding: 6px;
@@ -54,7 +54,7 @@
   font-family: 'Courier New', Courier, monospace;
 }
 
-.smart-player .smart-controls .buttons {
+.smart-player #videoControls .buttons {
   padding: 0 1em;
   background-color: rgba(0, 0, 0, 0.3);
 }
@@ -78,6 +78,25 @@ cyper: why do we need to use html5 progress element.
 A simple div will make life much easier!
 see https://stackoverflow.com/questions/21476748/how-to-change-the-color-of-html5-progress-bar */
 
+#progressContainer {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  padding: 0;
+}
+
+#progressContainer .circle {
+  position: absolute;
+  left: 10%;
+  top: 10px;
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+  background: #fff;
+  z-index: 99;
+  cursor: pointer;
+}
+
 progress[value] {
   /* Reset the default appearance */
   -webkit-appearance: none;
@@ -88,10 +107,6 @@ progress[value] {
   /* Dimensions */
   width: 100%;
   height: 3px;
-  /* Locations */
-  position: relative;
-  bottom: -8px;
-  padding: 0 4px;
 }
 
 progress[value]::-webkit-progress-bar {

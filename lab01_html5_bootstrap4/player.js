@@ -41,6 +41,7 @@ class Player {
     this.btnPause = document.querySelector('#btnPause');
     this.btnMute = document.querySelector('#btnMute');
     this.progressBar = document.querySelector('progress');
+    this.btnCircle = document.querySelector('#btnCircle');
     this.timeTag = document.querySelector('.time-tag');
 
     this.status = STOPPED;
@@ -169,12 +170,15 @@ class Player {
     // update progress bar
     let video = this.video;
     let percent = (video.currentTime * 100.0) / video.duration;
+    percent = percent.toFixed(2);
     this.progressBar.setAttribute('value', percent);
 
     // update time tag
     let current = toHHMMSS(video.currentTime);
     let duration = toHHMMSS(video.duration || 0);
     this.timeTag.innerText = `${current} / ${duration}`;
+
+    this.btnCircle.style.left = `calc(${percent}% - 0px)`;
   }
 
   vote(type) {

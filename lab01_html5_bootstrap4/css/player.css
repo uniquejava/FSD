@@ -81,13 +81,13 @@ see https://stackoverflow.com/questions/21476748/how-to-change-the-color-of-html
 #progressContainer {
   position: absolute;
   bottom: 40px;
-  width: 100%;
+  width: calc(100% - 12px);
   padding: 0;
 }
 
 #progressContainer .circle {
   position: absolute;
-  left: 10%;
+  left: 0;
   top: 10px;
   width: 12px;
   height: 12px;

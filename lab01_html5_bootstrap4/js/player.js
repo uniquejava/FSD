@@ -5,29 +5,6 @@ const PLAYING = 'playing';
 const PAUSED = 'paused';
 const STOPPED = 'stopped';
 
-const toHHMMSS = seconds => {
-  let h,
-    m,
-    s,
-    result = '';
-
-  // hours
-  h = Math.floor(seconds / 3600);
-  seconds -= h * 3600;
-  if (h) {
-    result = h + ':';
-  }
-
-  // minutes
-  m = Math.floor(seconds / 60);
-  result += m < 10 && h > 0 ? '0' + m + ':' : m + ':';
-
-  // seconds
-  s = Math.floor(seconds % 60);
-  result += s < 10 ? '0' + s : s;
-  return result;
-};
-
 class Player {
   constructor(courses) {
     this.courses = courses;
@@ -40,6 +17,7 @@ class Player {
     this.btnStop = document.querySelector('#btnStop');
     this.btnPause = document.querySelector('#btnPause');
     this.btnMute = document.querySelector('#btnMute');
+    this.progressContainer = document.querySelector('#progressContainer');
     this.progressBar = document.querySelector('progress');
     this.btnCircle = document.querySelector('#btnCircle');
     this.timeTag = document.querySelector('.time-tag');
@@ -47,17 +25,40 @@ class Player {
     this.status = STOPPED;
 
     this._bindEvents();
+    this._calcProgressContainerSize();
     this._displayVoteInfo();
   }
 
   _bindEvents() {
-    this.video.addEventListener('timeupdate', this.onTimeUpdate.bind(this), false);
-    this.video.addEventListener('ended', this.stop.bind(this), false);
-    this.videoContainer.addEventListener('fullscreenchange', this.onFullscreenchange.bind(this), false);
+    let video = this.video;
+    video.addEventListener('timeupdate', this.onTimeUpdate.bind(this), false);
+    video.addEventListener('ended', this.stop.bind(this), false);
+
+    let videoContainer = this.videoContainer;
+    videoContainer.addEventListener('fullscreenchange', this.onFullscreenchange.bind(this), false);
+
+    // drag
+    let btnCircle = this.btnCircle;
+    btnCircle.addEventListener('mousedown', this.onMousedown.bind(this), false);
+
+    this.debouncedSeekTime = debounce(this.seekTime, 80);
+
+    videoContainer.addEventListener('mousemove', this.onMousemove.bind(this), false);
+    videoContainer.addEventListener('mouseup', this.onMouseup.bind(this), false);
+    videoContainer.addEventListener('mouseleave', this.onMouseup.bind(this), false);
+
+    // resize
+    this.debouncedResize = debounce(this.onResize, 100);
+    window.addEventListener('resize', this.onResize.bind(this), false);
   }
 
   _getItem(key, defaultValue) {
     return +localStorage.getItem(key) || defaultValue;
+  }
+
+  _calcProgressContainerSize() {
+    this.containerLeft = offset(this.progressContainer).left;
+    this.containerWidth = parseFloat(window.getComputedStyle(this.progressContainer).width);
   }
 
   _displayVoteInfo() {
@@ -161,6 +162,8 @@ class Player {
 
   onFullscreenchange() {
     let isFullScreen = !!document.fullscreenElement;
+    this._calcProgressContainerSize();
+
     let icon = document.querySelector('.btn-fullscreen i');
     icon.classList.toggle('fa-expand', !isFullScreen);
     icon.classList.toggle('fa-compress', isFullScreen);
@@ -178,7 +181,46 @@ class Player {
     let duration = toHHMMSS(video.duration || 0);
     this.timeTag.innerText = `${current} / ${duration}`;
 
-    this.btnCircle.style.left = `calc(${percent}% - 0px)`;
+    if (!this.dragging) {
+      this.btnCircle.style.left = `${percent}%`;
+    }
+  }
+
+  onMousedown(event) {
+    this.dragging = true;
+  }
+
+  onMousemove(event) {
+    if (this.dragging) {
+      let myleft = event.clientX - this.containerLeft - 6;
+      let ratio = Math.max(Math.min((myleft * 1.0) / this.containerWidth, 1.0), 0.0);
+
+      // set circle button position
+      this._onMouseMoveQuickUpdateUI(ratio);
+
+      // set time (debounced)
+      this.debouncedSeekTime(ratio);
+    }
+  }
+
+  _onMouseMoveQuickUpdateUI(ratio) {
+    this.progressBar.setAttribute('value', ratio * 100);
+    let current = toHHMMSS(video.duration * ratio);
+    let duration = toHHMMSS(video.duration || 0);
+    this.timeTag.innerText = `${current} / ${duration}`;
+    this.btnCircle.style.left = `${this.containerWidth * ratio}px`;
+  }
+
+  seekTime(ratio) {
+    this.video.currentTime = (this.video.duration * ratio).toFixed(2);
+  }
+
+  onMouseup(event) {
+    this.dragging = false;
+  }
+
+  onResize() {
+    this._calcProgressContainerSize();
   }
 
   vote(type) {

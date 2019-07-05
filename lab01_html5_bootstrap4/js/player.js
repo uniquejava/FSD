@@ -20,7 +20,7 @@ class Player {
     this.progressContainer = document.querySelector('#progressContainer');
     this.progressBar = document.querySelector('progress');
     this.btnCircle = document.querySelector('#btnCircle');
-    this.timeTag = document.querySelector('.time-tag');
+    this.timeTag = document.querySelector('#timeTag');
 
     this.status = STOPPED;
 
@@ -34,18 +34,21 @@ class Player {
     video.addEventListener('timeupdate', this.onTimeUpdate.bind(this), false);
     video.addEventListener('ended', this.stop.bind(this), false);
 
+    // toggle fullscreen icon
     let videoContainer = this.videoContainer;
     videoContainer.addEventListener('fullscreenchange', this.onFullscreenchange.bind(this), false);
 
-    // drag
+    // seek time via `slider`
     let btnCircle = this.btnCircle;
     btnCircle.addEventListener('mousedown', this.onMousedown.bind(this), false);
 
     this.debouncedSeekTime = debounce(this.seekTime, 80);
-
     videoContainer.addEventListener('mousemove', this.onMousemove.bind(this), false);
     videoContainer.addEventListener('mouseup', this.onMouseup.bind(this), false);
     videoContainer.addEventListener('mouseleave', this.onMouseup.bind(this), false);
+
+    // seek time by click anywhere on the progress bar
+    this.progressContainer.addEventListener('click', this.onClickProgressBar.bind(this), false);
 
     // resize
     this.debouncedResize = debounce(this.onResize, 100);
@@ -186,11 +189,19 @@ class Player {
     }
   }
 
+  onClickProgressBar(event) {
+    let myleft = event.clientX - this.containerLeft - 6;
+    let ratio = Math.max(Math.min((myleft * 1.0) / this.containerWidth, 1.0), 0.0);
+    this.seekTime(ratio);
+  }
+
   onMousedown(event) {
     this.dragging = true;
   }
 
   onMousemove(event) {
+    event.preventDefault();
+
     if (this.dragging) {
       let myleft = event.clientX - this.containerLeft - 6;
       let ratio = Math.max(Math.min((myleft * 1.0) / this.containerWidth, 1.0), 0.0);

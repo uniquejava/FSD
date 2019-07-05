@@ -12,7 +12,7 @@
 ```sh
 npm i -g gulp-server-livereload  # optional
 git clone https://github.com/uniquejava/FSD.git
-cd 01xxx
+cd lab01xxx
 livereload  # recommended
 Open index.html directly in Chrome browser # not recommended
 ```

@@ -6,11 +6,14 @@
 
 ### Setup
 
+http://localhost:4200
+
 ```sh
 git clone https://github.com/uniquejava/FSD.git
 cd lab02xxx
 npm i
-ng serve
+ng serve # allow localhost only
+ng serve --host 0.0.0.0  # via mobile browser
 ```
 
 ### Install notes
@@ -23,6 +26,9 @@ ng new smart-player # 以交互式的方式创建
 ng new smart-player --skip-install --style scss --routing false # 跳过各种提示
 ng build # 开发环境编译 使用environment.ts
 ng build --prod # 生产环境使用environment.prod.ts
+
+
+ng g c components/Playlist
 ```
 
 ### VSCode plugins

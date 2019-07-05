@@ -38,6 +38,13 @@ class Player {
     let videoContainer = this.videoContainer;
     videoContainer.addEventListener('fullscreenchange', this.onFullscreenchange.bind(this), false);
 
+    // double click to toggle fullscren
+    videoContainer.addEventListener('dblclick', this.toggleFullScreen.bind(this), false);
+
+    // click to play/pause
+    this.controls.addEventListener('click', event => event.stopPropagation(), false);
+    videoContainer.addEventListener('click', this.togglePlay.bind(this), false);
+
     // seek time via `slider`
     let btnCircle = this.btnCircle;
     btnCircle.addEventListener('mousedown', this.onMousedown.bind(this), false);
@@ -55,10 +62,12 @@ class Player {
     window.addEventListener('resize', this.onResize.bind(this), false);
   }
 
+  // get value from localStorage
   _getItem(key, defaultValue) {
     return +localStorage.getItem(key) || defaultValue;
   }
 
+  // recalcuate current size of progressbar (when toggle fullscreen or resize window, to reposition the circle button)
   _calcProgressContainerSize() {
     this.containerLeft = offset(this.progressContainer).left;
     this.containerWidth = parseFloat(window.getComputedStyle(this.progressContainer).width);
@@ -100,6 +109,14 @@ class Player {
     this.video.play();
 
     this.status = PLAYING;
+  }
+
+  togglePlay() {
+    if (this.status === PLAYING) {
+      this.pause();
+    } else {
+      this.play();
+    }
   }
 
   pause() {
@@ -190,6 +207,8 @@ class Player {
   }
 
   onClickProgressBar(event) {
+    event.stopPropagation();
+
     let myleft = event.clientX - this.containerLeft - 6;
     let ratio = Math.max(Math.min((myleft * 1.0) / this.containerWidth, 1.0), 0.0);
     this.seekTime(ratio);

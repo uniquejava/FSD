@@ -20,7 +20,6 @@ const toHHMMSS = seconds => {
 
   // minutes
   m = Math.floor(seconds / 60);
-  seconds -= m * 60;
   result += m < 10 && h > 0 ? '0' + m + ':' : m + ':';
 
   // seconds
@@ -34,10 +33,9 @@ class Player {
     this.courses = courses;
     this.currentCourse = courses[0];
 
-    let video = (this.video = document.querySelector('video'));
-
-    this.wrapper = document.querySelector('.smart-player-wrapper');
-    this.controls = document.querySelector('.smart-controls');
+    this.videoContainer = document.querySelector('#videoContainer');
+    this.video = document.querySelector('#video');
+    this.controls = document.querySelector('#videoControls');
     this.btnPlay = document.querySelector('#btnPlay');
     this.btnStop = document.querySelector('#btnStop');
     this.btnPause = document.querySelector('#btnPause');
@@ -47,20 +45,14 @@ class Player {
 
     this.status = STOPPED;
 
-    this._bindEvents(video);
+    this._bindEvents();
     this._displayVoteInfo();
-    this._resizePlayer();
   }
 
-  _bindEvents(video) {
-    video.addEventListener('timeupdate', this.onTimeUpdate.bind(this), false);
-    video.addEventListener('ended', this.stop.bind(this), false);
-    window.addEventListener('resize', this._resizePlayer.bind(this), false);
-  }
-
-  _resizePlayer(event) {
-    let style = window.getComputedStyle(this.video, null);
-    this.wrapper.style.height = style.height;
+  _bindEvents() {
+    this.video.addEventListener('timeupdate', this.onTimeUpdate.bind(this), false);
+    this.video.addEventListener('ended', this.stop.bind(this), false);
+    this.videoContainer.addEventListener('fullscreenchange', this.onFullscreenchange.bind(this), false);
   }
 
   _getItem(key, defaultValue) {
@@ -143,6 +135,34 @@ class Player {
     icon.classList.toggle('fa-volume-mute', !muted);
     icon.classList.toggle('fa-volume-up', muted);
     this.video.muted = !muted;
+  }
+
+  toggleFullScreen() {
+    // see Fullscreen API: https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API
+    let elem = document.fullscreenElement;
+    if (!elem) {
+      this.enterFS(this.videoContainer);
+    } else {
+      this.exitFS();
+    }
+  }
+
+  enterFS(elem) {
+    // see https://developer.mozilla.org/en-US/docs/Web/API/Element/requestFullscreen#Examples
+    let enter = elem.requestFullscreen || elem.msRequestFullscreen || elem.mozRequestFullScreen || elem.webkitRequestFullscreen;
+    enter.call(elem);
+  }
+
+  exitFS() {
+    let exit = document.exitFullscreen || document.msExitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
+    exit.call(document);
+  }
+
+  onFullscreenchange() {
+    let isFullScreen = !!document.fullscreenElement;
+    let icon = document.querySelector('.btn-fullscreen i');
+    icon.classList.toggle('fa-expand', !isFullScreen);
+    icon.classList.toggle('fa-compress', isFullScreen);
   }
 
   onTimeUpdate() {

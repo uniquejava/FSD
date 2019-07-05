@@ -1,16 +1,46 @@
 .smart-player {
-  margin: 0 auto;
+  /* background: #000; */
+  position: relative;
+  z-index: 2147483647;
 }
 
 .smart-player video {
   min-width: 375px;
   width: 100%;
-  max-height: 100%;
+  height: auto;
 }
 
-.smart-player .btn,
-.smart-player .btn[disabled]:hover {
+.smart-player .smart-controls {
+  position: absolute;
+  min-width: 375px;
+  bottom: 6px;
+  width: 100%;
+}
+
+.smart-player .extra-controls {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 90px;
+}
+
+.smart-player .extra-controls .btn-vote {
+  width: 54px;
+  height: 42px;
+  padding: 6px;
+  background: rgba(200, 200, 200, 0.2);
+}
+
+.smart-player .btn, .smart-player .btn[disabled]:hover {
   color: rgba(255, 255, 255, 0.8);
+}
+
+.smart-player .btn, .btn-fullscreen:hover .fa-expand:before {
+  font-size: 1.1em;
 }
 
 .smart-player .btn:hover:not([disabled]) {
@@ -24,16 +54,6 @@
   font-family: 'Courier New', Courier, monospace;
 }
 
-.smart-player .btn-vote {
-  float: right;
-}
-
-.smart-player .smart-controls {
-  position: relative;
-  min-width: 375px;
-  top: -68px;
-}
-
 .smart-player .smart-controls .buttons {
   padding: 0 1em;
   background-color: rgba(0, 0, 0, 0.3);
@@ -42,6 +62,15 @@
 .smart-player button:focus {
   outline: 0;
   box-shadow: none;
+}
+
+/*
+ hide native html5 controls
+ see https://css-tricks.com/custom-controls-in-html5-video-full-screen/
+*/
+
+video::-webkit-media-controls-enclosure {
+  display: none !important;
 }
 
 /*

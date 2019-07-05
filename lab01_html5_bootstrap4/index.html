@@ -46,7 +46,7 @@
         {
           id: 4,
           title: 'Introduction to Javascript',
-          url: 'mp4/SampleVideo_1280x720_2mb.mp4'
+          url: 'mp4/SampleVideo_720x480_1mb.mp4'
         }
       ];
 
@@ -58,13 +58,22 @@
   <body onload="setupPlayer()">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-8 smart-player-wrapper">
-          <div class="smart-player">
-            <video>
+        <div class="col-lg-8">
+          <div id="videoContainer" class="smart-player">
+            <video id="video">
               <source src="mp4/SampleVideo_1280x720_2mb.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-            <div class="smart-controls">
+            <div class="extra-controls">
+              <button id="btnVoteUp" class="btn btn-vote" onclick="me.vote('up')">
+                <i class="fas fa-thumbs-up"> </i>
+              </button>
+
+              <button id="btnVoteDown" class="btn btn-vote" onclick="me.vote('down')">
+                <i class="fas fa-thumbs-down"> </i>
+              </button>
+            </div>
+            <div id="videoControls" class="smart-controls">
               <progress value="0" max="100"></progress>
               <div class="buttons">
                 <button id="btnReload" class="btn" onclick="me.reload()">
@@ -91,12 +100,8 @@
 
                 <span class="time-tag">0:00 / 0:00</span>
 
-                <button id="btnVoteDown" class="btn btn-vote" onclick="me.vote('down')">
-                  <i class="fas fa-thumbs-down"> </i>
-                </button>
-
-                <button id="btnVoteUp" class="btn btn-vote" onclick="me.vote('up')">
-                  <i class="fas fa-thumbs-up"> </i>
+                <button id="btnFullScreen" class="btn btn-fullscreen float-right" onclick="me.toggleFullScreen()">
+                  <i class="fas fa-expand"></i>
                 </button>
               </div>
             </div>

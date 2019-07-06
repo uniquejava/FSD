@@ -2,10 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { PlaylistComponent } from './components';
+import { VideoPlayerComponent, PlayerComponent, ControlsComponent, PlaylistComponent } from './components';
 
 @NgModule({
-  declarations: [AppComponent, PlaylistComponent],
+  declarations: [AppComponent, VideoPlayerComponent, PlayerComponent, ControlsComponent, PlaylistComponent],
   imports: [BrowserModule],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,35 @@
+#videoControls {
+  position: absolute;
+  min-width: 375px;
+  bottom: 6px;
+  width: 100%;
+}
+
+.btn, .btn[disabled]:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.btn, .btn-fullscreen:hover .fa-expand:before {
+  font-size: 1.1em;
+}
+
+.btn:hover:not([disabled]) {
+  color: rgba(255, 255, 255);
+}
+
+.time-tag {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 300;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.buttons {
+  padding: 0 1em;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+button:focus {
+  outline: 0;
+  box-shadow: none;
+}

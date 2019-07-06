@@ -2,6 +2,10 @@
   <progress [value]="ratio * 100" max="100"></progress>
 
   <div class="buttons">
+    <button id="btnReload" class="btn" (click)="reload()">
+      <i class="fas fa-redo"></i>
+    </button>
+
     <button id="btnPlay" #btnPlay class="btn" (click)="play()">
       <i class="fas fa-play"></i>
     </button>

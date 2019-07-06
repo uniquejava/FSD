@@ -20,27 +20,32 @@ export class VideoPlayerComponent implements OnInit {
     {
       id: 0,
       title: 'Introduction to HTML5',
-      url: 'mp4/SampleVideo_1280x720_2mb.mp4'
+      url: 'assets/mp4/SampleVideo_1280x720_2mb.mp4',
+      duration: '0:13'
     },
     {
       id: 1,
       title: 'Introduction to Styling with CSS3',
-      url: 'mp4/Sample1280.mp4'
+      url: 'assets/mp4/Sample1280.mp4',
+      duration: '0:18'
     },
     {
       id: 2,
       title: 'Introduction to Bootstrap 4',
-      url: 'mp4/SampleVideo_1280x720_2mb.mp4'
+      url: 'assets/mp4/SampleVideo_1280x720_2mb.mp4',
+      duration: '0:13'
     },
     {
       id: 3,
       title: 'Learn to create website with HTML5, CSS3 and Bootstrap4',
-      url: 'mp4/Sample1280.mp4'
+      url: 'assets/mp4/Sample1280.mp4',
+      duration: '0:18'
     },
     {
       id: 4,
       title: 'Introduction to Javascript',
-      url: 'mp4/SampleVideo_720x480_1mb.mp4'
+      url: 'assets/mp4/SampleVideo_720x480_1mb.mp4',
+      duration: '0:13'
     }
   ];
 
@@ -63,7 +68,11 @@ export class VideoPlayerComponent implements OnInit {
   handleTimeUpdate() {
     // update progress bar
     const video = this.video;
-    this.ratio = +((video.currentTime * 1.0) / video.duration).toFixed(2);
+    if (video.duration) {
+      this.ratio = +((video.currentTime * 1.0) / video.duration).toFixed(2);
+    } else {
+      this.ratio = 0;
+    }
   }
 
   handleVideoEnded() {
@@ -126,6 +135,9 @@ export class VideoPlayerComponent implements OnInit {
 
   // playlist's events
   handleCourseSelected(course: Course) {
-    console.log(course);
+    this.currentCourse = course;
+    this.video.src = this.currentCourse.url;
+    this.controlsComponent.play();
+    this._displayVoteInfo();
   }
 }

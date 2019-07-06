@@ -5,7 +5,9 @@
   <li class="course" *ngFor="let c of courses; let i = index; trackBy: c ? c.id : null">
     <a class="link" [class.active]="selectedIndex === i" href="javascript:void(0)" (click)="handleSelection(i)">
       <div class="flex items-center"><i class="fab fa-youtube"></i> {{ c.title }}</div>
-      <div><span class="time">0:13</span></div>
+      <div>
+        <span class="time">{{ c.duration }}</span>
+      </div>
     </a>
   </li>
 </ul>

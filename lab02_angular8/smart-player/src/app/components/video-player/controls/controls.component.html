@@ -1,4 +1,6 @@
 <div id="videoControls">
+  <progress [value]="ratio * 100" max="100"></progress>
+
   <div class="buttons">
     <button id="btnPlay" #btnPlay class="btn" (click)="play()">
       <i class="fas fa-play"></i>
@@ -17,6 +19,14 @@
     </button>
     <button id="btnMute" #btnMute class="btn" (click)="mute()">
       <i class="fas" [ngClass]="{ 'fa-volume-up': !muted, 'fa-volume-mute': muted }"></i>
+    </button>
+
+    <button id="btnUnlike" class="btn float-right" (click)="vote('down')">
+      <i class="fas fa-thumbs-down"> {{ unlikes }}</i>
+    </button>
+
+    <button id="btnLike" class="btn float-right" (click)="vote('up')">
+      <i class="fas fa-thumbs-up"> {{ likes }}</i>
     </button>
   </div>
 </div>

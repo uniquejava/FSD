@@ -11,19 +11,20 @@ const STOPPED = 'stopped';
 })
 export class ControlsComponent implements OnInit {
   @Input() muted = false;
+  @Input() likes = 0;
+  @Input() unlikes = 0;
+  @Input() ratio = 0;
 
   @Output() playClicked = new EventEmitter();
   @Output() pauseClicked = new EventEmitter();
   @Output() stopClicked = new EventEmitter();
   @Output() volumeClicked = new EventEmitter();
   @Output() muteClicked = new EventEmitter();
+  @Output() voteClicked = new EventEmitter();
 
   @ViewChild('btnPlay', { static: true }) btnPlay: ElementRef;
   @ViewChild('btnPause', { static: true }) btnPause: ElementRef;
   @ViewChild('btnStop', { static: true }) btnStop: ElementRef;
-  @ViewChild('btnVolumeUp', { static: true }) btnVolumeUp: ElementRef;
-  @ViewChild('btnVolumeDown', { static: true }) btnVolumeDown: ElementRef;
-  @ViewChild('btnMute', { static: true }) btnMute: ElementRef;
 
   status = '';
 
@@ -66,5 +67,9 @@ export class ControlsComponent implements OnInit {
 
   mute() {
     this.muteClicked.emit();
+  }
+
+  vote(type: string) {
+    this.voteClicked.emit(type);
   }
 }

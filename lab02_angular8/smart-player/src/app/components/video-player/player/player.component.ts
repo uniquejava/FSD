@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-player',
@@ -7,8 +7,22 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 })
 export class PlayerComponent implements OnInit {
   @ViewChild('video', { static: true }) videoRef: ElementRef;
+  @Output() videoTimeUpdated = new EventEmitter();
+  @Output() videoEnded = new EventEmitter();
 
   constructor() {}
 
-  ngOnInit() {}
+  get video() {
+    return this.videoRef.nativeElement;
+  }
+
+  ngOnInit() {
+    this.video.addEventListener('timeupdate', event => {
+      this.videoTimeUpdated.emit(event);
+    });
+
+    this.video.addEventListener('ended', () => {
+      this.videoEnded.emit();
+    });
+  }
 }

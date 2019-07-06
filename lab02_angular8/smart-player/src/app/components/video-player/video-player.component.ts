@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Course } from '..';
 import { PlayerComponent } from './player';
+import { ControlsComponent } from './controls';
+
+const VOTE_UP = 'up';
+const VOTE_DOWN = 'down';
 
 @Component({
   selector: 'app-video-player',
@@ -9,7 +13,9 @@ import { PlayerComponent } from './player';
 })
 export class VideoPlayerComponent implements OnInit {
   @ViewChild(PlayerComponent, { static: true }) playerComponent: PlayerComponent;
+  @ViewChild(ControlsComponent, { static: true }) controlsComponent: ControlsComponent;
 
+  currentCourse: Course;
   courses: Course[] = [
     {
       id: 0,
@@ -37,18 +43,34 @@ export class VideoPlayerComponent implements OnInit {
       url: 'mp4/SampleVideo_720x480_1mb.mp4'
     }
   ];
+
+  likes = 0;
+  unlikes = 0;
+  ratio = 0;
+
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.currentCourse = this.courses[0];
+    this._displayVoteInfo();
+  }
 
   get video() {
     return this.playerComponent.videoRef.nativeElement;
   }
 
-  handleCourseSelected(course: Course) {
-    console.log(course);
+  // player's events
+  handleTimeUpdate() {
+    // update progress bar
+    const video = this.video;
+    this.ratio = +((video.currentTime * 1.0) / video.duration).toFixed(2);
   }
 
+  handleVideoEnded() {
+    this.controlsComponent.stop();
+  }
+
+  // control's events
   play() {
     this.video.play();
   }
@@ -78,5 +100,32 @@ export class VideoPlayerComponent implements OnInit {
   toggleMute() {
     const muted = this.video.muted;
     this.video.muted = !muted;
+  }
+
+  // get value from localStorage
+  _getItem(key, defaultValue) {
+    return +localStorage.getItem(key) || defaultValue;
+  }
+
+  _displayVoteInfo() {
+    let key = `${VOTE_UP}@${this.currentCourse.id}`;
+    this.likes = this._getItem(key, 0);
+
+    key = `${VOTE_DOWN}@${this.currentCourse.id}`;
+    this.unlikes = this._getItem(key, 0);
+  }
+
+  vote(type: string) {
+    let key = type === 'up' ? VOTE_UP : VOTE_DOWN;
+    key = `${key}@${this.currentCourse.id}`;
+    const current = this._getItem(key, 0);
+    localStorage.setItem(key, current + 1);
+
+    this._displayVoteInfo();
+  }
+
+  // playlist's events
+  handleCourseSelected(course: Course) {
+    console.log(course);
   }
 }

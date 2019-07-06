@@ -2,14 +2,18 @@
   <div class="row">
     <div class="col-lg-8">
       <div id="videoContainer" class="smart-player">
-        <app-player></app-player>
+        <app-player (videoTimeUpdated)="handleTimeUpdate($event)" (videoEnded)="handleVideoEnded()"></app-player>
         <app-controls
           [muted]="video.muted"
+          [likes]="likes"
+          [unlikes]="unlikes"
+          [ratio]="ratio"
           (playClicked)="play()"
           (pauseClicked)="pause()"
           (stopClicked)="stop()"
           (volumeClicked)="volume($event)"
           (muteClicked)="toggleMute()"
+          (voteClicked)="vote($event)"
         ></app-controls>
       </div>
     </div>

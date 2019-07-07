@@ -17,8 +17,9 @@
 .smart-player #subtitleContainer {
   position: absolute;
   bottom: 46px;
-  left: 0;
-  width: 100%;
+  left: 15%;
+  width: 70%;
+  min-height: 2em;
   overflow: hidden;
   padding: 6px 0;
   color: #fff;
@@ -47,10 +48,10 @@
 }
 
 .smart-player #extraControls .btn-vote {
-  width: 54px;
+  width: 64px;
   height: 42px;
   padding: 6px;
-  background: rgba(200, 200, 200, 0.2);
+  background: rgba(80, 80, 80, 0.701);
 }
 
 .smart-player .btn, .smart-player .btn[disabled]:hover {

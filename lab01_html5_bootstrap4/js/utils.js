@@ -35,16 +35,6 @@ const offset = elem => {
   return { left: x, top: y };
 };
 
-const debounce = (func, delay = 200) => {
-  let timeout = null;
-  return function() {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      func.apply(this, arguments);
-    }, delay);
-  };
-};
-
 const SUBTITLES = [
   `1
 00:00:00,322 --> 00:00:02,353
@@ -76,13 +66,13 @@ This tutorial introduces you to the essentials of Angular.
 
 3
 00:00:06,925 --> 00:00:09,361
-It leverages what you already know about HTML and JavaScript
+It leverages what you already know about HTML and JavaScript plus some useful Angular features
 
 4
 00:00:10,921 --> 00:00:12,635
-plus some useful Angular features
+to build a simple online store application, with a catalog, shopping cart, and check-out form.
 
 5
 00:00:13,620 --> 00:00:16,785
-to build a simple online store application, with a catalog, shopping cart, and check-out form.`
+You don't need to install anything: you'll build the app using the StackBlitz online development environment.`
 ];

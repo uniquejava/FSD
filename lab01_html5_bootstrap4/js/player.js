@@ -17,6 +17,7 @@ class Player {
     this.videoContainer = document.querySelector('#videoContainer');
     this.video = document.querySelector('#video');
     this.controls = document.querySelector('#videoControls');
+    this.extraControls = document.querySelector('#extraControls');
     this.btnPlay = document.querySelector('#btnPlay');
     this.btnStop = document.querySelector('#btnStop');
     this.btnPause = document.querySelector('#btnPause');
@@ -40,8 +41,14 @@ class Player {
     video.addEventListener('timeupdate', this.onTimeUpdate.bind(this), false);
     video.addEventListener('ended', this.stop.bind(this), false);
 
-    // toggle fullscreen icon
+    // auto show/hide video controls
     let videoContainer = this.videoContainer;
+    videoContainer.addEventListener('mouseenter', this.onMouseEnter.bind(this), false);
+    this.throttledKeepControls = _.throttle(this.keepControls, 200);
+    videoContainer.addEventListener('mousemove', this.throttledKeepControls.bind(this), false);
+    videoContainer.addEventListener('mouseleave', this.onMouseLeave.bind(this), false);
+
+    // toggle fullscreen icon
     videoContainer.addEventListener('fullscreenchange', this.onFullscreenchange.bind(this), false);
 
     // double click to toggle fullscren
@@ -55,7 +62,7 @@ class Player {
     let btnCircle = this.btnCircle;
     btnCircle.addEventListener('mousedown', this.onMousedown.bind(this), false);
 
-    this.debouncedSeekTime = debounce(this.seekTime, 80);
+    this.debouncedSeekTime = _.debounce(this.seekTime, 80);
     videoContainer.addEventListener('mousemove', this.onMousemove.bind(this), false);
     videoContainer.addEventListener('mouseup', this.onMouseup.bind(this), false);
     videoContainer.addEventListener('mouseleave', this.onMouseup.bind(this), false);
@@ -64,8 +71,8 @@ class Player {
     this.progressContainer.addEventListener('click', this.onClickProgressBar.bind(this), false);
 
     // resize
-    this.debouncedResize = debounce(this.onResize, 100);
-    window.addEventListener('resize', this.onResize.bind(this), false);
+    this.throttledResize = _.throttle(this.onResize, 100);
+    window.addEventListener('resize', this.throttledResize.bind(this), false);
   }
 
   // get value from localStorage
@@ -97,7 +104,7 @@ class Player {
   load(index, link) {
     this.currentCourse = this.courses[index];
     this.subtitles = Subtitle.parse(SUBTITLES[index % 2]);
-    this.subtitleContainer.innerHTML = '';
+    this.subtitleContainer.innerHTML = this.currentCourse.title;
     this.video.src = this.currentCourse.url;
     this.play();
     this._displayVoteInfo();
@@ -144,6 +151,7 @@ class Player {
     this.video.currentTime = 0;
 
     this.status = STOPPED;
+    this.subtitleContainer.innerHTML = '';
   }
 
   volume(amount) {
@@ -212,6 +220,62 @@ class Player {
     icon.classList.toggle('fas', !off);
   }
 
+  onMouseEnter() {
+    this.mouseStatus = 'ENTER';
+    this.showControls();
+  }
+
+  onMouseLeave() {
+    this.mouseStatus = 'LEAVE';
+    this.hideControls();
+  }
+
+  showControls() {
+    this.controlsHided = false;
+
+    this.progressContainer.style.display = 'block';
+    this.controls.style.display = 'block';
+    this.extraControls.style.display = 'flex';
+    this.subtitleContainer.style.bottom = '46px';
+  }
+
+  keepControls() {
+    if (this.mouseStatus !== 'LEAVE') {
+      this.lastActiveTime = Date.now();
+
+      if (!this.timer) {
+        console.log('new timer ...');
+        this.timer = setInterval(() => {
+          let idleTime = Date.now() - this.lastActiveTime;
+          if (idleTime >= 2500) {
+            this.hideControls();
+          }
+        }, 500);
+      }
+
+      if (this.controlsHided) {
+        this.showControls();
+      }
+    }
+  }
+
+  hideControls() {
+    this.controlsHided = true;
+
+    if (this.timer) {
+      console.log('clear timer');
+      clearInterval(this.timer);
+      this.timer = null;
+    }
+
+    if (this.status === PLAYING) {
+      this.progressContainer.style.display = 'none';
+      this.controls.style.display = 'none';
+      this.extraControls.style.display = 'none';
+      this.subtitleContainer.style.bottom = '6px';
+    }
+  }
+
   onTimeUpdate() {
     // update progress bar
     let video = this.video;
@@ -254,6 +318,7 @@ class Player {
 
   onMousemove(event) {
     event.preventDefault();
+    event.stopPropagation();
 
     if (this.dragging) {
       let myleft = event.clientX - this.containerLeft - 6;

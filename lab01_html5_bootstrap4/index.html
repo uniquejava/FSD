@@ -19,6 +19,7 @@
     />
     <link rel="stylesheet" href="css/course.css" />
     <link rel="stylesheet" href="css/player.css" />
+    <script src="js/3rd-party/subtitle.bundle.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/player.js"></script>
     <script>
@@ -66,6 +67,8 @@
               Your browser does not support the video tag.
             </video>
 
+            <div id="subtitleContainer"></div>
+
             <div id="progressContainer">
               <progress value="0" max="100"></progress>
               <div id="btnCircle" class="circle"></div>
@@ -99,6 +102,9 @@
 
                 <button id="btnFullScreen" class="btn btn-fullscreen float-right" onclick="me.toggleFullScreen()">
                   <i class="fas fa-expand"></i>
+                </button>
+                <button id="btnCaption" class="btn btn-caption float-right" onclick="me.toggleCaption()">
+                  <i class="fas fa-closed-captioning"></i>
                 </button>
               </div>
             </div>

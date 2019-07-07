@@ -4,10 +4,28 @@
   z-index: 2147483647;
 }
 
+.smart-player .hide {
+  display: none;
+}
+
 .smart-player video {
   min-width: 375px;
   width: 100%;
   height: auto;
+}
+
+.smart-player #subtitleContainer {
+  position: absolute;
+  bottom: 46px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  padding: 6px 0;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.3);
+  text-align: center;
+  font-size: 18px;
+  font-weight: 400;
 }
 
 .smart-player #videoControls {

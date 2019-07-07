@@ -8,7 +8,11 @@ const STOPPED = 'stopped';
 class Player {
   constructor(courses) {
     this.courses = courses;
-    this.currentCourse = courses[0];
+
+    let selectedIndex = 0;
+
+    this.currentCourse = courses[selectedIndex];
+    this.subtitles = Subtitle.parse(SUBTITLES[selectedIndex % 2]);
 
     this.videoContainer = document.querySelector('#videoContainer');
     this.video = document.querySelector('#video');
@@ -17,12 +21,14 @@ class Player {
     this.btnStop = document.querySelector('#btnStop');
     this.btnPause = document.querySelector('#btnPause');
     this.btnMute = document.querySelector('#btnMute');
+    this.subtitleContainer = document.querySelector('#subtitleContainer');
     this.progressContainer = document.querySelector('#progressContainer');
     this.progressBar = document.querySelector('progress');
     this.btnCircle = document.querySelector('#btnCircle');
     this.timeTag = document.querySelector('#timeTag');
 
     this.status = STOPPED;
+    this.caption = 'on';
 
     this._bindEvents();
     this._calcProgressContainerSize();
@@ -90,6 +96,8 @@ class Player {
 
   load(index, link) {
     this.currentCourse = this.courses[index];
+    this.subtitles = Subtitle.parse(SUBTITLES[index % 2]);
+    this.subtitleContainer.innerHTML = '';
     this.video.src = this.currentCourse.url;
     this.play();
     this._displayVoteInfo();
@@ -189,9 +197,35 @@ class Player {
     icon.classList.toggle('fa-compress', isFullScreen);
   }
 
+  toggleCaption() {
+    this.caption = this.caption === 'off' ? 'on' : 'off';
+
+    let off = this.caption === 'off';
+    if (off) {
+      this.subtitle = '';
+    }
+
+    this.subtitleContainer.classList.toggle('hide', off);
+
+    let icon = document.querySelector('.btn-caption i');
+    icon.classList.toggle('far', off);
+    icon.classList.toggle('fas', !off);
+  }
+
   onTimeUpdate() {
     // update progress bar
     let video = this.video;
+
+    if (this.caption === 'on') {
+      let offset = Math.floor(video.currentTime * 1000);
+      for (let i = 0; i < this.subtitles.length; i++) {
+        const item = this.subtitles[i];
+        if (offset > item.start && offset < item.end) {
+          this.subtitleContainer.innerHTML = item.text;
+        }
+      }
+    }
+
     let percent = (video.currentTime * 100.0) / video.duration;
     percent = percent.toFixed(2);
     this.progressBar.setAttribute('value', percent);

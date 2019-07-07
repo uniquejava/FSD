@@ -1,4 +1,4 @@
-<video id="video" #video>
-  <source src="assets/mp4/SampleVideo_1280x720_2mb.mp4" type="video/mp4" />
+<video #video (timeupdate)="handleTimeupdate($event)" (ended)="handleVideoEnded()">
+  <source src="" type="video/mp4" />
   Your browser does not support the video tag.
 </video>

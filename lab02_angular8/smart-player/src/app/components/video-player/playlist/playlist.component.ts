@@ -13,7 +13,7 @@ export interface Course {
 })
 export class PlaylistComponent implements OnInit {
   constructor() {}
-  selectedIndex = 0;
+  selectedIndex = -1;
   @Input() courses: Course[] = [];
   @Output() courseSelected = new EventEmitter();
 

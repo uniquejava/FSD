@@ -10,7 +10,12 @@ http://localhost:4200
 
 ```sh
 git clone https://github.com/uniquejava/FSD.git
-cd lab02xxx
+
+cd FSD
+npm install -g json-server
+json-server --watch json-server/db.json
+
+cd lab02_angular8
 npm i
 ng serve # allow localhost only
 ng serve --host 0.0.0.0  # via mobile browser

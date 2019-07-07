@@ -10,10 +10,10 @@
 ### Setup
 
 ```sh
-npm i -g gulp-server-livereload  # optional
 git clone https://github.com/uniquejava/FSD.git
-cd lab01xxx
-livereload  # recommended
+cd FSD/lab01_html5_bootstrap4
+npm i -g gulp-server-livereload  # optional
+livereload  # optional
 Open index.html directly in Chrome browser # not recommended
 ```
 

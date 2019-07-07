@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Course } from '..';
 import { PlayerComponent } from './player';
 import { ControlsComponent } from './controls';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 const VOTE_UP = 'up';
 const VOTE_DOWN = 'down';
@@ -16,48 +18,18 @@ export class VideoPlayerComponent implements OnInit {
   @ViewChild(ControlsComponent, { static: true }) controlsComponent: ControlsComponent;
 
   currentCourse: Course;
-  courses: Course[] = [
-    {
-      id: 0,
-      title: 'Introduction to HTML5',
-      url: 'assets/mp4/SampleVideo_1280x720_2mb.mp4',
-      duration: '0:13'
-    },
-    {
-      id: 1,
-      title: 'Introduction to Styling with CSS3',
-      url: 'assets/mp4/Sample1280.mp4',
-      duration: '0:18'
-    },
-    {
-      id: 2,
-      title: 'Introduction to Bootstrap 4',
-      url: 'assets/mp4/SampleVideo_1280x720_2mb.mp4',
-      duration: '0:13'
-    },
-    {
-      id: 3,
-      title: 'Learn to create website with HTML5, CSS3 and Bootstrap4',
-      url: 'assets/mp4/Sample1280.mp4',
-      duration: '0:18'
-    },
-    {
-      id: 4,
-      title: 'Introduction to Javascript',
-      url: 'assets/mp4/SampleVideo_720x480_1mb.mp4',
-      duration: '0:13'
-    }
-  ];
+  courses: Course[] = [];
 
   likes = 0;
   unlikes = 0;
   ratio = 0;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.currentCourse = this.courses[0];
-    this._displayVoteInfo();
+    this.http.get<Course[]>(`${environment.baseUrl}/courses`).subscribe(courses => {
+      this.courses = courses;
+    });
   }
 
   get video() {
@@ -81,7 +53,9 @@ export class VideoPlayerComponent implements OnInit {
 
   // control's events
   play() {
-    this.video.play();
+    if (this.currentCourse) {
+      this.video.play();
+    }
   }
 
   pause() {

@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Course } from '..';
 import { PlayerComponent } from './player';
 import { ControlsComponent } from './controls';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Course } from '.';
 
 const VOTE_UP = 'up';
 const VOTE_DOWN = 'down';
@@ -11,7 +11,7 @@ const VOTE_DOWN = 'down';
 @Component({
   selector: 'app-video-player',
   templateUrl: './video-player.component.html',
-  styleUrls: ['./video-player.component.css']
+  styleUrls: ['./video-player.component.css'],
 })
 export class VideoPlayerComponent implements OnInit {
   @ViewChild(PlayerComponent, { static: true }) playerComponent: PlayerComponent;

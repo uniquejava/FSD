@@ -4,6 +4,7 @@ import { ControlsComponent } from './controls';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Course } from '.';
+import { CourseService } from 'src/app/services';
 
 const VOTE_UP = 'up';
 const VOTE_DOWN = 'down';
@@ -14,8 +15,10 @@ const VOTE_DOWN = 'down';
   styleUrls: ['./video-player.component.css'],
 })
 export class VideoPlayerComponent implements OnInit {
-  @ViewChild(PlayerComponent, { static: true }) playerComponent: PlayerComponent;
-  @ViewChild(ControlsComponent, { static: true }) controlsComponent: ControlsComponent;
+  @ViewChild(PlayerComponent, { static: true })
+  playerComponent: PlayerComponent;
+  @ViewChild(ControlsComponent, { static: true })
+  controlsComponent: ControlsComponent;
 
   currentCourse: Course;
   courses: Course[] = [];
@@ -24,10 +27,10 @@ export class VideoPlayerComponent implements OnInit {
   unlikes = 0;
   ratio = 0;
 
-  constructor(private http: HttpClient) {}
+  constructor(private courseService: CourseService) {}
 
   ngOnInit() {
-    this.http.get<Course[]>(`${environment.baseUrl}/courses`).subscribe(courses => {
+    this.courseService.getCourses().subscribe(courses => {
       this.courses = courses;
     });
   }

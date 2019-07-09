@@ -6,14 +6,23 @@
     </button>
   </div>
   <div class="modal-body">
-    <form>
+    <form [formGroup]="courseEditForm">
       <div class="form-group">
         <label for="title">Title:</label>
-        <input id="title" class="form-control" autocomplete="off" />
+        <input
+          formControlName="title"
+          class="form-control"
+          autocomplete="off"
+        />
       </div>
       <div class="form-group">
         <label for="url">URL:</label>
-        <input type="url" id="url" class="form-control" autocomplete="off" />
+        <input
+          type="url"
+          formControlName="url"
+          class="form-control"
+          autocomplete="off"
+        />
       </div>
     </form>
   </div>
@@ -55,11 +64,28 @@
       Add New Video Component
     </div>
     <div class="card-body">
-      <form (submit)="save()">
+      <form [formGroup]="courseForm" (ngSubmit)="save()">
         <div class="form-group row">
-          <label for="title" class="col-sm-2">Title:</label>
+          <label class="col-sm-2">Title:</label>
           <div class="col-sm-9">
-            <input id="title" class="form-control" autocomplete="off" />
+            <input
+              type="text"
+              class="form-control"
+              autocomplete="off"
+              formControlName="title"
+              [class.is-invalid]="
+                courseForm.get('title').invalid &&
+                courseForm.get('title').touched
+              "
+            />
+            <small
+              [class.d-none]="
+                courseForm.get('title').valid ||
+                courseForm.get('title').untouched
+              "
+              class="text-danger"
+              >Title is required</small
+            >
           </div>
         </div>
         <div class="form-group row">
@@ -67,17 +93,42 @@
           <div class="col-sm-9">
             <input
               type="url"
-              id="url"
               class="form-control"
               placeholder="http://"
               autocomplete="off"
+              formControlName="url"
+              [class.is-invalid]="
+                courseForm.get('url').invalid && courseForm.get('url').touched
+              "
             />
+            <div
+              *ngIf="
+                courseForm.get('url').invalid && courseForm.get('url').touched
+              "
+            >
+              <small
+                class="text-danger"
+                *ngIf="courseForm.get('url').hasError('required')"
+                >URL is required.</small
+              >
+              <small
+                class="text-danger"
+                *ngIf="courseForm.get('url').hasError('pattern')"
+                >URL is invalid.</small
+              >
+            </div>
           </div>
         </div>
         <div class="row">
           <label class="col-sm-2 d-none d-sm-block">&nbsp;</label>
           <div class="col-sm-9">
-            <button type="submit" class="btn btn-primary">Add Video</button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="courseForm.invalid"
+            >
+              Add Video
+            </button>
           </div>
         </div>
       </form>
@@ -103,12 +154,12 @@
               <a [href]="c.url" target="_blank">{{ c.url }}</a>
             </td>
             <td>
-              <button class="btn btn-primary" (click)="edit(t_edit)">
+              <button class="btn btn-primary" (click)="edit(t_edit, c.id)">
                 Edit
               </button>
             </td>
             <td>
-              <button class="btn btn-danger" (click)="delete(t_delete)">
+              <button class="btn btn-danger" (click)="delete(t_delete, c.id)">
                 Delete
               </button>
             </td>
@@ -116,7 +167,7 @@
               <button
                 class="btn btn-success"
                 [disabled]="c.approved"
-                (click)="approve()"
+                (click)="approve(c.id)"
               >
                 Approve
               </button>

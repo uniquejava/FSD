@@ -1,13 +1,21 @@
 # Angular8 Media Player
 
+watch video: http://localhost:4200
+
+add video: http://localhost:4200/course
+
 ### Tech stack
 
 1. Angular 8.1
-2. Bootstrap 4.3
+2. NgBootstrap/Bootstrap 4.3
+3. Reactive Forms
+4. Form Validators
+
+### Project Structure
+
+TODO
 
 ### Setup
-
-http://localhost:4200
 
 ```sh
 git clone https://github.com/uniquejava/FSD.git
@@ -56,3 +64,7 @@ angular files
 保存时自动 fix tslint 错误， 需要安装 Prettier - Code Formatter 插件， `ext install esbenp.prettier-vscode`
 
 ### References
+
+1. https://github.com/gothinkster/angular-realworld-example-app
+2. https://angular.io/guide/styleguide
+3. https://ng-bootstrap.github.io/#/components/modal/examples

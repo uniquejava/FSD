@@ -9,7 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home/home.module';
 import { CourseModule } from './course/course.module';
 import { CourseService } from './services';
-import { ReqInterceptor, ResInterceptor } from './shared/interceptors';
+import { ReqInterceptor, ResInterceptor } from './core/interceptors';
 
 @NgModule({
   declarations: [AppComponent],

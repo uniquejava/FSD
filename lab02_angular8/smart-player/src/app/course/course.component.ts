@@ -1,38 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Country {
-  name: string;
-  flag: string;
-  area: number;
-  population: number;
-}
-
-const COUNTRIES: Country[] = [
-  {
-    name: 'Russia',
-    flag: 'f/f3/Flag_of_Russia.svg',
-    area: 17075200,
-    population: 146989754,
-  },
-  {
-    name: 'Canada',
-    flag: 'c/cf/Flag_of_Canada.svg',
-    area: 9976140,
-    population: 36624199,
-  },
-  {
-    name: 'United States',
-    flag: 'a/a4/Flag_of_the_United_States.svg',
-    area: 9629091,
-    population: 324459463,
-  },
-  {
-    name: 'China',
-    flag: 'f/fa/Flag_of_the_People%27s_Republic_of_China.svg',
-    area: 9596960,
-    population: 1409517397,
-  },
-];
+import { CourseService } from '../services';
+import { Course } from '../home/video-player';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-course',
@@ -40,8 +9,42 @@ const COUNTRIES: Country[] = [
   styleUrls: ['./course.component.css'],
 })
 export class CourseComponent implements OnInit {
-  countries = COUNTRIES;
-  constructor() {}
+  courses: Course[] = [];
 
-  ngOnInit() {}
+  constructor(
+    private courseService: CourseService,
+    private modalService: NgbModal
+  ) {}
+
+  ngOnInit() {
+    this.courseService.getCourses().subscribe(courses => {
+      this.courses = courses;
+    });
+  }
+
+  save() {
+    console.log('saved.');
+  }
+
+  edit(content) {
+    this.modalService.open(content, { size: 'lg' }).result.then(
+      _ => {
+        console.log('update...');
+      },
+      f => f
+    );
+  }
+
+  delete(content) {
+    this.modalService.open(content, { size: 'lg' }).result.then(
+      _ => {
+        console.log('delete...');
+      },
+      f => f
+    );
+  }
+
+  approve() {
+    console.log('approve...');
+  }
 }

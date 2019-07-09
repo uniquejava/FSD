@@ -8,4 +8,8 @@ export class CourseService {
   getCourses() {
     return this.http.get<Course[]>('/courses');
   }
+
+  getApprovedCourses() {
+    return this.http.get<Course[]>('/courses?approved=true');
+  }
 }

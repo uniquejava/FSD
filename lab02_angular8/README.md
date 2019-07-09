@@ -3,6 +3,7 @@
 ### Tech stack
 
 1. Angular 8.1
+2. Bootstrap 4.3
 
 ### Setup
 

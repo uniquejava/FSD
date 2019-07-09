@@ -4,31 +4,36 @@
       "id": 0,
       "title": "Introduction to HTML5",
       "url": "https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
-      "duration": "0:13"
+      "duration": "0:13",
+      "approved": true
     },
     {
       "id": 1,
       "title": "Introduction to Styling with CSS3",
       "url": "https://file-examples.com/wp-content/uploads/2017/04/file_example_MP4_1280_10MG.mp4",
-      "duration": "0:18"
+      "duration": "0:18",
+      "approved": true
     },
     {
       "id": 2,
       "title": "Introduction to Bootstrap 4",
       "url": "https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
-      "duration": "0:13"
+      "duration": "0:13",
+      "approved": true
     },
     {
       "id": 3,
       "title": "Learn to create website with HTML5, CSS3 and Bootstrap4",
       "url": "https://file-examples.com/wp-content/uploads/2017/04/file_example_MP4_1280_10MG.mp4",
-      "duration": "0:18"
+      "duration": "0:18",
+      "approved": true
     },
     {
       "id": 4,
       "title": "Introduction to Javascript",
       "url": "https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
-      "duration": "0:13"
+      "duration": "0:13",
+      "approved": false
     }
   ]
 }

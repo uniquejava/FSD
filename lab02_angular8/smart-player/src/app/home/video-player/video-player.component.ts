@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { PlayerComponent } from './player';
 import { ControlsComponent } from './controls';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { Course } from '.';
 import { CourseService } from 'src/app/services';
 
@@ -30,7 +28,7 @@ export class VideoPlayerComponent implements OnInit {
   constructor(private courseService: CourseService) {}
 
   ngOnInit() {
-    this.courseService.getCourses().subscribe(courses => {
+    this.courseService.getApprovedCourses().subscribe(courses => {
       this.courses = courses;
     });
   }

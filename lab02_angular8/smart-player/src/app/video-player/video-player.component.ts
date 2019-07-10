@@ -100,12 +100,14 @@ export class VideoPlayerComponent implements OnInit {
   }
 
   vote(type: string) {
-    let key = type === 'up' ? VOTE_UP : VOTE_DOWN;
-    key = `${key}@${this.currentCourse.id}`;
-    const current = this._getItem(key, 0);
-    localStorage.setItem(key, current + 1);
+    if (this.currentCourse) {
+      let key = type === 'up' ? VOTE_UP : VOTE_DOWN;
+      key = `${key}@${this.currentCourse.id}`;
+      const current = this._getItem(key, 0);
+      localStorage.setItem(key, current + 1);
 
-    this._displayVoteInfo();
+      this._displayVoteInfo();
+    }
   }
 
   // playlist's events

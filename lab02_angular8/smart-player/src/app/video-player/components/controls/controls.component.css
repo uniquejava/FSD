@@ -3,6 +3,8 @@
   min-width: 375px;
   bottom: 0;
   width: 100%;
+  padding: 2px 0;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .btn, .btn[disabled]:hover {
@@ -24,13 +26,33 @@
   font-family: 'Courier New', Courier, monospace;
 }
 
-.buttons {
-  background-color: rgba(0, 0, 0, 0.3);
-}
-
 button:focus {
   outline: 0;
   box-shadow: none;
+}
+
+/*
+cyper: why do we need to use html5 progress element.
+A simple div will make life much easier!
+see https://stackoverflow.com/questions/21476748/how-to-change-the-color-of-html5-progress-bar */
+
+#progressContainer {
+  position: absolute;
+  bottom: 42px;
+  width: calc(100% - 12px);
+  padding: 0;
+}
+
+#progressContainer .circle {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+  background: #fff;
+  z-index: 99;
+  cursor: pointer;
 }
 
 progress[value] {
@@ -40,12 +62,9 @@ progress[value] {
   appearance: none;
   /* Get rid of default border in Firefox. */
   border: none;
-  border-radius: 3px;
   /* Dimensions */
-  position: absolute;
   width: 100%;
   height: 3px;
-  padding: 0 2px;
 }
 
 progress[value]:hover {

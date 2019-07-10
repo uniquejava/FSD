@@ -43,19 +43,43 @@ class Player {
 
     // auto show/hide video controls
     let videoContainer = this.videoContainer;
-    videoContainer.addEventListener('mouseenter', this.onMouseEnter.bind(this), false);
+    videoContainer.addEventListener(
+      'mouseenter',
+      this.onMouseEnter.bind(this),
+      false
+    );
     this.throttledKeepControls = _.throttle(this.keepControls, 200);
-    videoContainer.addEventListener('mousemove', this.throttledKeepControls.bind(this), false);
-    videoContainer.addEventListener('mouseleave', this.onMouseLeave.bind(this), false);
+    videoContainer.addEventListener(
+      'mousemove',
+      this.throttledKeepControls.bind(this),
+      false
+    );
+    videoContainer.addEventListener(
+      'mouseleave',
+      this.onMouseLeave.bind(this),
+      false
+    );
 
     // toggle fullscreen icon
-    videoContainer.addEventListener('fullscreenchange', this.onFullscreenchange.bind(this), false);
+    videoContainer.addEventListener(
+      'fullscreenchange',
+      this.onFullscreenchange.bind(this),
+      false
+    );
 
     // double click to toggle fullscren
-    videoContainer.addEventListener('dblclick', this.toggleFullScreen.bind(this), false);
+    videoContainer.addEventListener(
+      'dblclick',
+      this.toggleFullScreen.bind(this),
+      false
+    );
 
     // click to play/pause
-    this.controls.addEventListener('click', event => event.stopPropagation(), false);
+    this.controls.addEventListener(
+      'click',
+      event => event.stopPropagation(),
+      false
+    );
     videoContainer.addEventListener('click', this.togglePlay.bind(this), false);
 
     // seek time via `slider`
@@ -63,12 +87,28 @@ class Player {
     btnCircle.addEventListener('mousedown', this.onMousedown.bind(this), false);
 
     this.debouncedSeekTime = _.debounce(this.seekTime, 80);
-    videoContainer.addEventListener('mousemove', this.onMousemove.bind(this), false);
-    videoContainer.addEventListener('mouseup', this.onMouseup.bind(this), false);
-    videoContainer.addEventListener('mouseleave', this.onMouseup.bind(this), false);
+    videoContainer.addEventListener(
+      'mousemove',
+      this.onMousemove.bind(this),
+      false
+    );
+    videoContainer.addEventListener(
+      'mouseup',
+      this.onMouseup.bind(this),
+      false
+    );
+    videoContainer.addEventListener(
+      'mouseleave',
+      this.onMouseup.bind(this),
+      false
+    );
 
     // seek time by click anywhere on the progress bar
-    this.progressContainer.addEventListener('click', this.onClickProgressBar.bind(this), false);
+    this.progressContainer.addEventListener(
+      'click',
+      this.onClickProgressBar.bind(this),
+      false
+    );
 
     // resize
     this.throttledResize = _.throttle(this.onResize, 100);
@@ -83,7 +123,9 @@ class Player {
   // recalcuate current size of progressbar (when toggle fullscreen or resize window, to reposition the circle button)
   _calcProgressContainerSize() {
     this.containerLeft = offset(this.progressContainer).left;
-    this.containerWidth = parseFloat(window.getComputedStyle(this.progressContainer).width);
+    this.containerWidth = parseFloat(
+      window.getComputedStyle(this.progressContainer).width
+    );
   }
 
   _displayVoteInfo() {
@@ -187,12 +229,20 @@ class Player {
 
   enterFS(elem) {
     // see https://developer.mozilla.org/en-US/docs/Web/API/Element/requestFullscreen#Examples
-    let enter = elem.requestFullscreen || elem.msRequestFullscreen || elem.mozRequestFullScreen || elem.webkitRequestFullscreen;
+    let enter =
+      elem.requestFullscreen ||
+      elem.msRequestFullscreen ||
+      elem.mozRequestFullScreen ||
+      elem.webkitRequestFullscreen;
     enter.call(elem);
   }
 
   exitFS() {
-    let exit = document.exitFullscreen || document.msExitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
+    let exit =
+      document.exitFullscreen ||
+      document.msExitFullscreen ||
+      document.mozCancelFullScreen ||
+      document.webkitExitFullscreen;
     exit.call(document);
   }
 
@@ -236,7 +286,7 @@ class Player {
     this.progressContainer.style.display = 'block';
     this.controls.style.display = 'block';
     this.extraControls.style.display = 'flex';
-    this.subtitleContainer.style.bottom = '46px';
+    this.subtitleContainer.style.bottom = '42px';
   }
 
   keepControls() {
@@ -272,7 +322,7 @@ class Player {
       this.progressContainer.style.display = 'none';
       this.controls.style.display = 'none';
       this.extraControls.style.display = 'none';
-      this.subtitleContainer.style.bottom = '6px';
+      this.subtitleContainer.style.bottom = '0';
     }
   }
 
@@ -308,7 +358,10 @@ class Player {
     event.stopPropagation();
 
     let myleft = event.clientX - this.containerLeft - 6;
-    let ratio = Math.max(Math.min((myleft * 1.0) / this.containerWidth, 1.0), 0.0);
+    let ratio = Math.max(
+      Math.min((myleft * 1.0) / this.containerWidth, 1.0),
+      0.0
+    );
     this.seekTime(ratio);
   }
 
@@ -322,7 +375,10 @@ class Player {
 
     if (this.dragging) {
       let myleft = event.clientX - this.containerLeft - 6;
-      let ratio = Math.max(Math.min((myleft * 1.0) / this.containerWidth, 1.0), 0.0);
+      let ratio = Math.max(
+        Math.min((myleft * 1.0) / this.containerWidth, 1.0),
+        0.0
+      );
 
       // set circle button position
       this._onMouseMoveQuickUpdateUI(ratio);

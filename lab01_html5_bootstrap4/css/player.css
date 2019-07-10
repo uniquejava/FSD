@@ -1,7 +1,13 @@
 .smart-player {
-  /* background: #000; */
+  background: #000;
   position: relative;
   z-index: 2147483647;
+  /* see https://stackoverflow.com/questions/40432274/html5-video-element-1px-white-bottom-border-on-chrome */
+  line-height: 0;
+}
+
+.smart-player * {
+  line-height: 1;
 }
 
 .smart-player .hide {
@@ -11,12 +17,13 @@
 .smart-player video {
   min-width: 375px;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
 }
 
 .smart-player #subtitleContainer {
   position: absolute;
-  bottom: 46px;
+  bottom: 42px;
   left: 15%;
   width: 70%;
   min-height: 2em;
@@ -32,8 +39,10 @@
 .smart-player #videoControls {
   position: absolute;
   min-width: 375px;
-  bottom: 6px;
+  bottom: 0;
   width: 100%;
+  padding: 6px 0;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .smart-player #extraControls {
@@ -73,11 +82,6 @@
   font-family: 'Courier New', Courier, monospace;
 }
 
-.smart-player #videoControls .buttons {
-  padding: 0 1em;
-  background-color: rgba(0, 0, 0, 0.3);
-}
-
 .smart-player button:focus {
   outline: 0;
   box-shadow: none;
@@ -99,7 +103,7 @@ see https://stackoverflow.com/questions/21476748/how-to-change-the-color-of-html
 
 #progressContainer {
   position: absolute;
-  bottom: 40px;
+  bottom: 42px;
   width: calc(100% - 12px);
   padding: 0;
 }
@@ -107,7 +111,7 @@ see https://stackoverflow.com/questions/21476748/how-to-change-the-color-of-html
 #progressContainer .circle {
   position: absolute;
   left: 0;
-  top: 10px;
+  top: 6px;
   width: 12px;
   height: 12px;
   border-radius: 100%;

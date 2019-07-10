@@ -30,28 +30,28 @@
         {
           id: 0,
           title: 'Introduction to HTML5',
-          url: 'mp4/SampleVideo_1280x720_2mb.mp4'
+          url: 'mp4/SampleVideo_1280x720_2mb.mp4',
         },
         {
           id: 1,
           title: 'Introduction to Styling with CSS3',
-          url: 'mp4/Sample1280.mp4'
+          url: 'mp4/Sample1280.mp4',
         },
         {
           id: 2,
           title: 'Introduction to Bootstrap 4',
-          url: 'mp4/SampleVideo_1280x720_2mb.mp4'
+          url: 'mp4/SampleVideo_1280x720_2mb.mp4',
         },
         {
           id: 3,
           title: 'Learn to create website with HTML5, CSS3 and Bootstrap4',
-          url: 'mp4/Sample1280.mp4'
+          url: 'mp4/Sample1280.mp4',
         },
         {
           id: 4,
           title: 'Introduction to Javascript',
-          url: 'mp4/SampleVideo_720x480_1mb.mp4'
-        }
+          url: 'mp4/SampleVideo_720x480_1mb.mp4',
+        },
       ];
 
       function setupPlayer() {
@@ -93,7 +93,11 @@
                 <button id="btnVolumeUp" class="btn" onclick="me.volume(0.1)">
                   <i class="fas fa-plus"></i>
                 </button>
-                <button id="btnVolumeDown" class="btn" onclick="me.volume(-0.1)">
+                <button
+                  id="btnVolumeDown"
+                  class="btn"
+                  onclick="me.volume(-0.1)"
+                >
                   <i class="fas fa-minus"></i>
                 </button>
                 <button id="btnMute" class="btn" onclick="me.toggleMute()">
@@ -102,21 +106,37 @@
 
                 <span id="timeTag" class="time-tag">0:00 / 0:00</span>
 
-                <button id="btnFullScreen" class="btn btn-fullscreen float-right" onclick="me.toggleFullScreen()">
+                <button
+                  id="btnFullScreen"
+                  class="btn btn-fullscreen float-right"
+                  onclick="me.toggleFullScreen()"
+                >
                   <i class="fas fa-expand"></i>
                 </button>
-                <button id="btnCaption" class="btn btn-caption float-right" onclick="me.toggleCaption()">
+                <button
+                  id="btnCaption"
+                  class="btn btn-caption float-right"
+                  onclick="me.toggleCaption()"
+                >
                   <i class="fas fa-closed-captioning"></i>
                 </button>
               </div>
             </div>
 
             <div id="extraControls">
-              <button id="btnVoteUp" class="btn btn-vote" onclick="me.vote('up')">
+              <button
+                id="btnVoteUp"
+                class="btn btn-vote"
+                onclick="me.vote('up')"
+              >
                 <i class="fas fa-thumbs-up"> </i>
               </button>
 
-              <button id="btnVoteDown" class="btn btn-vote" onclick="me.vote('down')">
+              <button
+                id="btnVoteDown"
+                class="btn btn-vote"
+                onclick="me.vote('down')"
+              >
                 <i class="fas fa-thumbs-down"> </i>
               </button>
             </div>
@@ -129,32 +149,64 @@
           </div>
           <ul class="course-list">
             <li class="course">
-              <a class="link active" href="javascript:void(0)" onclick="me.load(0, this)">
-                <div class="flex items-center"><i class="fab fa-youtube"></i> Introduction to HTML5</div>
+              <a
+                class="link active"
+                href="javascript:void(0)"
+                onclick="me.load(0, this)"
+              >
+                <div class="flex items-center">
+                  <i class="fab fa-youtube"></i> Introduction to HTML5
+                </div>
                 <div><span class="time">0:13</span></div>
               </a>
             </li>
             <li class="course">
-              <a class="link" href="javascript:void(0)" onclick="me.load(1, this)">
-                <div class="flex items-center"><i class="fab fa-youtube"></i> Introduction to Styling with CSS3</div>
+              <a
+                class="link"
+                href="javascript:void(0)"
+                onclick="me.load(1, this)"
+              >
+                <div class="flex items-center">
+                  <i class="fab fa-youtube"></i> Introduction to Styling with
+                  CSS3
+                </div>
                 <div><span class="time">0:18</span></div>
               </a>
             </li>
             <li class="course">
-              <a class="link" href="javascript:void(0)" onclick="me.load(2, this)">
-                <div class="flex items-center"><i class="fab fa-youtube"></i> Introduction to Bootstrap 4</div>
+              <a
+                class="link"
+                href="javascript:void(0)"
+                onclick="me.load(2, this)"
+              >
+                <div class="flex items-center">
+                  <i class="fab fa-youtube"></i> Introduction to Bootstrap 4
+                </div>
                 <div><span class="time">0:13</span></div>
               </a>
             </li>
             <li class="course">
-              <a class="link" href="javascript:void(0)" onclick="me.load(3, this)">
-                <div class="flex items-center"><i class="fab fa-youtube"></i> Learn to create website with HTML5, CSS3 and Bootstrap4</div>
+              <a
+                class="link"
+                href="javascript:void(0)"
+                onclick="me.load(3, this)"
+              >
+                <div class="flex items-center">
+                  <i class="fab fa-youtube"></i> Learn to create website with
+                  HTML5, CSS3 and Bootstrap4
+                </div>
                 <div><span class="time">0:18</span></div>
               </a>
             </li>
             <li class="course">
-              <a class="link" href="javascript:void(0)" onclick="me.load(4, this)">
-                <div class="flex items-center"><i class="fab fa-youtube"></i> Introduction to Javascript</div>
+              <a
+                class="link"
+                href="javascript:void(0)"
+                onclick="me.load(4, this)"
+              >
+                <div class="flex items-center">
+                  <i class="fab fa-youtube"></i> Introduction to Javascript
+                </div>
                 <div><span class="time">0:13</span></div>
               </a>
             </li>

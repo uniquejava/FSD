@@ -1,23 +1,19 @@
 import { NgModule } from '@angular/core';
-
-import { HomeRoutingModule } from './home-routing.module';
 import { SharedModule } from '../shared';
 import {
-  VideoPlayerComponent,
   PlayerComponent,
   ControlsComponent,
   PlaylistComponent,
-} from './video-player';
-import { HomeComponent } from './home.component';
+} from './components';
+import { VideoPlayerComponent } from './video-player.component';
 
 @NgModule({
   declarations: [
-    HomeComponent,
     VideoPlayerComponent,
     PlayerComponent,
     ControlsComponent,
     PlaylistComponent,
   ],
-  imports: [SharedModule, HomeRoutingModule],
+  imports: [SharedModule],
 })
-export class HomeModule {}
+export class VideoPlayerModule {}

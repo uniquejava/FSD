@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { PlayerComponent } from './player';
-import { ControlsComponent } from './controls';
+import { PlayerComponent } from './components/player';
+import { ControlsComponent } from './components/controls';
 import { CourseService } from 'src/app/core/services';
 import { Course } from 'src/app/core/models';
 

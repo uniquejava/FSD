@@ -6,10 +6,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HomeModule } from './home/home.module';
 import { CourseModule } from './course/course.module';
 import { HeaderComponent, SidemenuComponent } from './shared';
 import { CoreModule } from './core/core.module';
+import { VideoPlayerModule } from './video-player';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, SidemenuComponent],
@@ -19,8 +19,8 @@ import { CoreModule } from './core/core.module';
     HttpClientModule,
     AppRoutingModule,
     CoreModule,
-    HomeModule,
     CourseModule,
+    VideoPlayerModule,
   ],
 
   bootstrap: [AppComponent],

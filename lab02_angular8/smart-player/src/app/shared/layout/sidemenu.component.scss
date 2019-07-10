@@ -12,6 +12,19 @@ nav {
   border-right: solid 1px #e6e6e6;
 }
 
+.menu.hide {
+  width: 40px;
+  transition: width 0.2s;
+
+  .menu-item {
+    padding: 0 10px;
+
+    span {
+      display: none;
+    }
+  }
+}
+
 .menu-item {
   padding: 0 20px;
   height: 56px;

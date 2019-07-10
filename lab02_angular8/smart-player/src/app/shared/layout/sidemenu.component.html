@@ -1,5 +1,5 @@
 <nav>
-  <ul role="menubar" class="menu">
+  <ul #menuRef role="menubar" class="menu">
     <li
       class="menu-item"
       [routerLink]="['/course']"
@@ -7,7 +7,7 @@
       [routerLinkActiveOptions]="{ exact: true }"
     >
       <i class="fas fa-folder-plus"></i>
-      Add Video
+      <span>Add Video</span>
     </li>
     <li
       class="menu-item"
@@ -16,7 +16,7 @@
       [routerLinkActiveOptions]="{ exact: true }"
     >
       <i class="fas fa-video"> </i>
-      Watch Video
+      <span>Watch Video</span>
     </li>
   </ul>
 </nav>

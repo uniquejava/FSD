@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Course } from '../core/models';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-course',
@@ -35,7 +36,8 @@ export class CourseComponent implements OnInit {
     private courseService: CourseService,
     private fb: FormBuilder,
     private modalService: NgbModal,
-    config: NgbModalConfig
+    config: NgbModalConfig,
+    private toastr: ToastrService
   ) {
     // customize default values of modals used by this component tree
     config.backdrop = 'static';
@@ -63,6 +65,8 @@ export class CourseComponent implements OnInit {
       res => {
         this.courses.unshift(course);
         this.courseForm.reset({ url: 'http://' });
+
+        this.toastr.success('Save success!', 'Success');
       },
       error => {
         console.error(error);
@@ -87,6 +91,7 @@ export class CourseComponent implements OnInit {
             console.log(res);
 
             this.courses.splice(idx, 1, course2save);
+            this.toastr.success('Update success!', 'Success');
           },
           error => {
             console.error(error);
@@ -106,6 +111,8 @@ export class CourseComponent implements OnInit {
 
             const idx = this.courses.findIndex(c => c.id === cid);
             this.courses.splice(idx, 1);
+
+            this.toastr.success('Delete success!', 'Success');
           },
           error => {
             console.error(error);
@@ -122,6 +129,8 @@ export class CourseComponent implements OnInit {
         const idx = this.courses.findIndex(c => c.id === cid);
         const course = this.courses[idx];
         this.courses.splice(idx, 1, { ...course, approved: true });
+
+        this.toastr.success('Approve success! Enjoy this video.', 'Success');
       },
       error => {
         console.error(error);

@@ -1,4 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+// bootstrap style toast
+// or import a bootstrap 4 alert styled design (SASS ONLY)
+// if you'd like to use it without importing all of bootstrap it requires
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~ngx-toastr/toastr-bs4-alert';
 html,
 body,
 app-root {

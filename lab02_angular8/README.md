@@ -1,15 +1,13 @@
 # Angular8 Media Player
 
-watch video: http://localhost:4200
-
-add video: http://localhost:4200/course
-
 ### Tech stack
 
 1. Angular 8.1
-2. NgBootstrap/Bootstrap 4.3
-3. Reactive Forms
-4. Form Validators
+2. Routing
+3. NgBootstrap/Bootstrap 4.3
+4. Reactive Forms
+5. Http Interceptors
+6. Ngx Toast
 
 ### Project Structure
 

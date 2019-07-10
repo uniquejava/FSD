@@ -68,3 +68,5 @@ angular files
 1. https://github.com/gothinkster/angular-realworld-example-app
 2. https://angular.io/guide/styleguide
 3. https://ng-bootstrap.github.io/#/components/modal/examples
+4. [Angular Forms Tutorial (youtube)](https://www.youtube.com/playlist?list=PLC3y8-rFHvwhwL-XH04cHOpJnkgRKykFi)
+5. [Color Scheme Designer (Chinese)](http://www.peise.net/tools/web/#)

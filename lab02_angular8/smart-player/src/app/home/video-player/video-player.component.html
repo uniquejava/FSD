@@ -2,7 +2,10 @@
   <div class="row">
     <div class="col-lg-8">
       <div id="videoContainer" class="smart-player">
-        <app-player (videoTimeUpdated)="handleTimeUpdate($event)" (videoEnded)="handleVideoEnded()"></app-player>
+        <app-player
+          (videoTimeUpdated)="handleTimeUpdate($event)"
+          (videoEnded)="handleVideoEnded()"
+        ></app-player>
         <app-controls
           [muted]="video.muted"
           [likes]="likes"
@@ -19,7 +22,10 @@
     </div>
 
     <div class="col-lg-4">
-      <app-playlist [courses]="courses" (courseSelected)="handleCourseSelected($event)"></app-playlist>
+      <app-playlist
+        [courses]="courses"
+        (courseSelected)="handleCourseSelected($event)"
+      ></app-playlist>
     </div>
   </div>
 </div>

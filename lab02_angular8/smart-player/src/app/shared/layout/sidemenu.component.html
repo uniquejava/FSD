@@ -1,0 +1,22 @@
+<nav>
+  <ul role="menubar" class="menu">
+    <li
+      class="menu-item"
+      [routerLink]="['/course']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <i class="fas fa-folder-plus"></i>
+      Add Video
+    </li>
+    <li
+      class="menu-item"
+      [routerLink]="['/watch']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <i class="fas fa-video"> </i>
+      Watch Video
+    </li>
+  </ul>
+</nav>

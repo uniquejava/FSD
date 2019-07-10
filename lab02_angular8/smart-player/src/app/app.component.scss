@@ -1,0 +1,11 @@
+.body {
+  display: flex;
+  max-height: calc(100vh - 56px);
+  overflow: hidden;
+}
+
+main {
+  padding: 0.5rem 0 0 0.5rem;
+  width: 100%;
+  overflow: auto;
+}

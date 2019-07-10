@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CourseService } from '../services';
-import { Course } from '../home/video-player';
+import { CourseService } from '../core/services';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import {
   FormGroup,
@@ -8,6 +7,7 @@ import {
   FormBuilder,
   Validators,
 } from '@angular/forms';
+import { Course } from '../core/models';
 
 @Component({
   selector: 'app-course',

@@ -58,123 +58,119 @@
   </div>
 </ng-template>
 
-<div class="container-fluid">
-  <div class="card mt-2 mb-2">
-    <div class="card-header">
-      Add New Video Component
-    </div>
-    <div class="card-body">
-      <form [formGroup]="courseForm" (ngSubmit)="save()">
-        <div class="form-group row">
-          <label class="col-sm-2">Title:</label>
-          <div class="col-sm-9">
-            <input
-              type="text"
-              class="form-control"
-              autocomplete="off"
-              formControlName="title"
-              [class.is-invalid]="
-                courseForm.get('title').invalid &&
-                courseForm.get('title').touched
-              "
-            />
-            <small
-              [class.d-none]="
-                courseForm.get('title').valid ||
-                courseForm.get('title').untouched
-              "
-              class="text-danger"
-              >Title is required</small
-            >
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="url" class="col-sm-2">URL:</label>
-          <div class="col-sm-9">
-            <input
-              type="url"
-              class="form-control"
-              placeholder="http://"
-              autocomplete="off"
-              formControlName="url"
-              [class.is-invalid]="
-                courseForm.get('url').invalid && courseForm.get('url').touched
-              "
-            />
-            <div
-              *ngIf="
-                courseForm.get('url').invalid && courseForm.get('url').touched
-              "
-            >
-              <small
-                class="text-danger"
-                *ngIf="courseForm.get('url').hasError('required')"
-                >URL is required.</small
-              >
-              <small
-                class="text-danger"
-                *ngIf="courseForm.get('url').hasError('pattern')"
-                >URL is invalid.</small
-              >
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <label class="col-sm-2 d-none d-sm-block">&nbsp;</label>
-          <div class="col-sm-9">
-            <button
-              type="submit"
-              class="btn btn-primary"
-              [disabled]="courseForm.invalid"
-            >
-              Add Video
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
+<div class="card mb-2">
+  <div class="card-header">
+    New Video
   </div>
+  <div class="card-body">
+    <form [formGroup]="courseForm" (ngSubmit)="save()">
+      <div class="form-group row">
+        <label class="col-sm-2">Title:</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            autocomplete="off"
+            formControlName="title"
+            [class.is-invalid]="
+              courseForm.get('title').invalid && courseForm.get('title').touched
+            "
+          />
+          <small
+            [class.d-none]="
+              courseForm.get('title').valid || courseForm.get('title').untouched
+            "
+            class="text-danger"
+            >Title is required</small
+          >
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="url" class="col-sm-2">URL:</label>
+        <div class="col-sm-9">
+          <input
+            type="url"
+            class="form-control"
+            placeholder="http://"
+            autocomplete="off"
+            formControlName="url"
+            [class.is-invalid]="
+              courseForm.get('url').invalid && courseForm.get('url').touched
+            "
+          />
+          <div
+            *ngIf="
+              courseForm.get('url').invalid && courseForm.get('url').touched
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="courseForm.get('url').hasError('required')"
+              >URL is required.</small
+            >
+            <small
+              class="text-danger"
+              *ngIf="courseForm.get('url').hasError('pattern')"
+              >URL is invalid.</small
+            >
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-sm-2 d-none d-sm-block">&nbsp;</label>
+        <div class="col-sm-9">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="courseForm.invalid"
+          >
+            Add Video
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 
-  <div class="card">
-    <div class="card-body">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">S.no</th>
-            <th scope="col" nowrap>Title</th>
-            <th scope="col">URL</th>
-            <th scope="col" colspan="3">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let c of courses; index as i">
-            <th scope="row">{{ i + 1 }}</th>
-            <td class="title">{{ c.title }}</td>
-            <td class="url">
-              <a [href]="c.url" target="_blank">{{ c.url }}</a>
-            </td>
-            <td>
-              <button class="btn btn-primary" (click)="edit(t_edit, c.id)">
-                Edit
-              </button>
-            </td>
-            <td>
-              <button class="btn btn-danger" (click)="delete(t_delete, c.id)">
-                Delete
-              </button>
-            </td>
-            <td>
-              <button
-                class="btn btn-success"
-                [disabled]="c.approved"
-                (click)="approve(c.id)"
-              >
-                Approve
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<div class="card">
+  <div class="card-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">S.no</th>
+          <th scope="col" nowrap>Title</th>
+          <th scope="col">URL</th>
+          <th scope="col" colspan="3">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of courses; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+          <td class="title">{{ c.title }}</td>
+          <td class="url">
+            <a [href]="c.url" target="_blank">{{ c.url }}</a>
+          </td>
+          <td>
+            <button class="btn btn-primary" (click)="edit(t_edit, c.id)">
+              Edit
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-danger" (click)="delete(t_delete, c.id)">
+              Delete
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-success"
+              [disabled]="c.approved"
+              (click)="approve(c.id)"
+            >
+              Approve
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

@@ -1,7 +1,7 @@
 #videoControls {
   position: absolute;
   min-width: 375px;
-  bottom: 6px;
+  bottom: 0;
   width: 100%;
 }
 

@@ -8,32 +8,21 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home/home.module';
 import { CourseModule } from './course/course.module';
-import { CourseService } from './services';
-import { ReqInterceptor, ResInterceptor } from './core/interceptors';
+import { HeaderComponent, SidemenuComponent } from './shared';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, HeaderComponent, SidemenuComponent],
   imports: [
     NgbModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    CoreModule,
     HomeModule,
     CourseModule,
   ],
-  providers: [
-    CourseService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ReqInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ResInterceptor,
-      multi: true,
-    },
-  ],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -4,4 +4,22 @@ body,
 app-root {
   margin: 0;
   padding: 0;
+
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+}
+
+body {
+  font-size: 0.875rem;
+}
+
+/* bootstrap */
+.card-header {
+  padding: 0.5rem 1rem;
+}
+
+.card-body {
+  padding: 1rem;
 }

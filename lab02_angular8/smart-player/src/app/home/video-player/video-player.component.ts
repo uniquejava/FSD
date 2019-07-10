@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { PlayerComponent } from './player';
 import { ControlsComponent } from './controls';
-import { Course } from '.';
-import { CourseService } from 'src/app/services';
+import { CourseService } from 'src/app/core/services';
+import { Course } from 'src/app/core/models';
 
 const VOTE_UP = 'up';
 const VOTE_DOWN = 'down';

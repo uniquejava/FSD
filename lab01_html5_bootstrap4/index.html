@@ -23,9 +23,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
     <script src="js/3rd-party/subtitle.bundle.js"></script>
     <script src="js/utils.js"></script>
-    <script src="js/player.js"></script>
+    <script src="js/player_youtube.js"></script>
+    <script src="js/youtube.js"></script>
     <script>
-      let me;
       let courses = [
         {
           id: 0,
@@ -35,7 +35,7 @@
         {
           id: 1,
           title: 'Introduction to Styling with CSS3',
-          url: 'mp4/Sample1280.mp4',
+          url: 'https://www.youtube.com/embed/80pRyn7fZRk?controls=0',
         },
         {
           id: 2,
@@ -53,23 +53,17 @@
           url: 'mp4/SampleVideo_720x480_1mb.mp4',
         },
       ];
-
-      function setupPlayer() {
-        me = new Player(courses);
-      }
     </script>
   </head>
-  <body onload="setupPlayer()">
+  <body>
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-8">
           <div id="videoContainer" class="smart-player">
             <video id="video">
-              <source src="mp4/SampleVideo_1280x720_2mb.mp4" type="video/mp4" />
+              <source src="" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-
-            <div id="subtitleContainer"></div>
 
             <div id="progressContainer">
               <progress value="0" max="100"></progress>
@@ -78,29 +72,25 @@
 
             <div id="videoControls">
               <div class="buttons">
-                <button id="btnReload" class="btn" onclick="me.reload()">
+                <button id="btnReload" class="btn">
                   <i class="fas fa-redo"></i>
                 </button>
-                <button id="btnPlay" class="btn" onclick="me.play()">
+                <button id="btnPlay" class="btn" disabled>
                   <i class="fas fa-play"></i>
                 </button>
-                <button id="btnPause" class="btn" disabled onclick="me.pause()">
+                <button id="btnPause" class="btn" disabled>
                   <i class="fas fa-pause"></i>
                 </button>
-                <button id="btnStop" class="btn" disabled onclick="me.stop()">
+                <button id="btnStop" class="btn" disabled>
                   <i class="fas fa-stop"></i>
                 </button>
-                <button id="btnVolumeUp" class="btn" onclick="me.volume(0.1)">
+                <button id="btnVolumeUp" class="btn">
                   <i class="fas fa-plus"></i>
                 </button>
-                <button
-                  id="btnVolumeDown"
-                  class="btn"
-                  onclick="me.volume(-0.1)"
-                >
+                <button id="btnVolumeDown" class="btn">
                   <i class="fas fa-minus"></i>
                 </button>
-                <button id="btnMute" class="btn" onclick="me.toggleMute()">
+                <button id="btnMute" class="btn">
                   <i class="fas fa-volume-up"></i>
                 </button>
 
@@ -124,19 +114,11 @@
             </div>
 
             <div id="extraControls">
-              <button
-                id="btnVoteUp"
-                class="btn btn-vote"
-                onclick="me.vote('up')"
-              >
+              <button id="btnVoteUp" class="btn btn-vote">
                 <i class="fas fa-thumbs-up"> </i>
               </button>
 
-              <button
-                id="btnVoteDown"
-                class="btn btn-vote"
-                onclick="me.vote('down')"
-              >
+              <button id="btnVoteDown" class="btn btn-vote">
                 <i class="fas fa-thumbs-down"> </i>
               </button>
             </div>

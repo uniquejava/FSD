@@ -21,6 +21,10 @@ const toHHMMSS = seconds => {
   return result;
 };
 
+const bind = (element, eventName, handler) => {
+  element.addEventListener(eventName, handler, false);
+};
+
 const offset = elem => {
   if (!elem) elem = this;
 
@@ -74,5 +78,5 @@ to build a simple online store application, with a catalog, shopping cart, and c
 
 5
 00:00:13,620 --> 00:00:16,785
-You don't need to install anything: you'll build the app using the StackBlitz online development environment.`
+You don't need to install anything: you'll build the app using the StackBlitz online development environment.`,
 ];

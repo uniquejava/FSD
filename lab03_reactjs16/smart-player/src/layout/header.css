@@ -1,5 +1,16 @@
+header {
+  height: 56px;
+}
+
 .navbar {
   background-color: #2e8b57;
+  color: #fff;
+  height: 56px;
+}
+
+.btn-link,
+.btn-link:hover,
+.btn-link:visited {
   color: #fff;
 }
 

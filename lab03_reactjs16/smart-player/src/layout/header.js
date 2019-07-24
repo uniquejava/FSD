@@ -5,27 +5,23 @@ import { faUser } from '@fortawesome/free-regular-svg-icons';
 import './header.css';
 
 class Header extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.clickMenuButton = this.clickMenuButton.bind(this);
-  }
-
   render() {
     return (
-      <nav className="navbar navbar-light">
-        <a className="navbar-brand" onClick={this.clickMenuButton}>
+      <header className="navbar">
+        <button
+          className="btn btn-link navbar-brand"
+          onClick={this.props.toggleSideMenu}
+        >
           <span className="mr-2">FSD Course Center</span>
           <FontAwesomeIcon icon={faBars} />
-        </a>
+        </button>
         <div>
           <FontAwesomeIcon icon={faUser} />
           uniquejava
         </div>
-      </nav>
+      </header>
     );
   }
-
-  clickMenuButton() {}
 }
 
 export default Header;

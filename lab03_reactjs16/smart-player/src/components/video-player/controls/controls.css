@@ -1,0 +1,98 @@
+#videoControls {
+  position: absolute;
+  min-width: 375px;
+  bottom: 0;
+  width: 100%;
+  padding: 2px 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.btn,
+.btn[disabled]:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.btn,
+.btn-fullscreen:hover .fa-expand:before {
+  font-size: 1.1em;
+}
+
+.btn:hover:not([disabled]) {
+  color: rgba(255, 255, 255);
+}
+
+.time-tag {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 300;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+button:focus {
+  outline: 0;
+  box-shadow: none;
+}
+
+/*
+cyper: why do we need to use html5 progress element.
+A simple div will make life much easier!
+see https://stackoverflow.com/questions/21476748/how-to-change-the-color-of-html5-progress-bar */
+
+#progressContainer {
+  position: absolute;
+  bottom: 42px;
+  width: calc(100% - 12px);
+  padding: 0;
+}
+
+#progressContainer .circle {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+  background: #fff;
+  z-index: 99;
+  cursor: pointer;
+}
+
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Get rid of default border in Firefox. */
+  border: none;
+  /* Dimensions */
+  width: 100%;
+  height: 3px;
+}
+
+progress[value]:hover {
+  height: 4px;
+  cursor: pointer;
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: rgba(200, 200, 200, 0.5);
+  border-radius: 0;
+}
+
+/* IE10 */
+
+progress {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Firefox */
+
+progress::-moz-progress-bar {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Chrome */
+
+progress::-webkit-progress-value {
+  background: rgba(255, 255, 255, 0.8);
+}

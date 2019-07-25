@@ -1,0 +1,7 @@
+.smart-player {
+  position: relative;
+  background: #000;
+  z-index: 2147483647;
+  /* see https://stackoverflow.com/questions/40432274/html5-video-element-1px-white-bottom-border-on-chrome */
+  line-height: 0;
+}

@@ -19,7 +19,24 @@ yarn add react-bootstrap bootstrap
 yarn add react-router-dom
 ```
 
+## 坑
+
+`ref.current.disabled=false` 在外观上让按钮可用， 但是绑定的 onClick 依然不可用， 正确的方式是使用 state
+
+错误的写法 (会导致 vote 立即被调用一次)
+
+```js
+<button id="btnUnlike" className="btn float-right" onClick={this.vote('down')} >
+```
+
+正确的写法
+
+```js
+<button id="btnUnlike" className="btn float-right" onClick={() => {this.vote('down'); }} >
+```
+
 ## References
 
 1. https://react-bootstrap.github.io/
 2. https://github.com/FortAwesome/react-fontawesome
+3. [How to reference a DOM element in React](https://flaviocopes.com/react-ref-element/)

@@ -33,11 +33,10 @@ class Controls extends Component {
 
   render() {
     const { status } = this.state;
-
     return (
       <Fragment>
         <div id="progressContainer">
-          <progress value="ratio * 100" max="100" />
+          <progress value={this.props.ratio * 100} max="100" />
         </div>
         <div id="videoControls">
           <div className="buttons">
@@ -56,7 +55,7 @@ class Controls extends Component {
             <button
               id="btnPause"
               className="btn"
-              disabled={status === 'paused' || status === ''}
+              disabled={status !== 'playing'}
               onClick={this.pause}
             >
               <FontAwesomeIcon icon={faPause} />
@@ -137,9 +136,7 @@ class Controls extends Component {
   }
 
   pause() {
-    console.log('this.pause');
     this.setState({ status: PAUSED });
-
     this.props.pauseClicked();
   }
 
@@ -157,7 +154,6 @@ class Controls extends Component {
   }
 
   vote(type) {
-    console.log('vote:type=', type);
     this.props.voteClicked(type);
   }
 }

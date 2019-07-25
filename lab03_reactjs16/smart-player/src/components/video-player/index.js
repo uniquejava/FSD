@@ -11,13 +11,9 @@ const VOTE_DOWN = 'down';
 class VideoPlayer extends Component {
   constructor(props, context) {
     super(props, context);
-    // this.playerRef = React.createRef();
-    // this.controlsRef = React.createRef();
-
     this.state = {
-      currentCourse: {},
+      currentCourse: null,
       courses: [],
-      video: {},
       muted: false,
       likes: 0,
       unlikes: 0,
@@ -32,19 +28,23 @@ class VideoPlayer extends Component {
     this.vote = this.vote.bind(this);
     this._displayVoteInfo = this._displayVoteInfo.bind(this);
     this.handleCourseSelected = this.handleCourseSelected.bind(this);
+    this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
+    this.handleVideoEnded = this.handleVideoEnded.bind(this);
+  }
+
+  get video() {
+    return this.playerRef.video;
   }
 
   componentDidMount() {
-    console.log('this.playerRef=', this.playerRef);
     axios
       .get('http://localhost:3000/courses')
       .then(res => {
         let courses = res.data;
         this.setState({
           courses: courses,
-          currentCourse: courses[0],
-          video: this.playerRef.video,
-          muted: this.playerRef.video.muted,
+          currentCourse: null,
+          muted: this.video.muted,
         });
       })
       .catch(err => {
@@ -54,21 +54,17 @@ class VideoPlayer extends Component {
 
   render() {
     const { muted, likes, unlikes, ratio, courses } = this.state;
-
     return (
       <div className="container-fluid">
         <div className="row">
           <div className="col-lg-8">
             <div id="videoContainer" className="smart-player mb-2">
               <Player
-                // ref={this.playerRef}
                 ref={el => (this.playerRef = el)}
-                src={this.state.currentCourse.url}
                 handleTimeUpdate={this.handleTimeUpdate}
                 handleVideoEnded={this.handleVideoEnded}
               />
               <Controls
-                // ref={this.controlsRef}
                 ref={el => (this.controlsRef = el)}
                 muted={muted}
                 likes={likes}
@@ -87,7 +83,7 @@ class VideoPlayer extends Component {
           <div className="col-lg-4">
             <PlayList
               courses={courses}
-              courseSelected={this.handleCourseSelected}
+              selectCourse={this.handleCourseSelected}
             />
           </div>
         </div>
@@ -95,37 +91,51 @@ class VideoPlayer extends Component {
     );
   }
 
+  // player's events
+  handleTimeUpdate() {
+    // update progress bar
+
+    const video = this.video;
+    let ratio = 0;
+    if (video.duration) {
+      ratio = +((video.currentTime * 1.0) / video.duration).toFixed(2);
+    } else {
+      ratio = 0;
+    }
+
+    this.setState({
+      ratio,
+    });
+  }
+
+  handleVideoEnded() {
+    this.controlsRef.stop();
+  }
+
   // control's events
   play() {
-    const { currentCourse, video } = this.state;
-
-    console.log('currentCourse=', currentCourse);
-    console.log('video=', video);
+    const { currentCourse } = this.state;
 
     if (currentCourse) {
-      video.src = currentCourse.url;
-      video.play();
+      this.video.src = currentCourse.url;
+      this.video.play();
     }
   }
 
   pause() {
     console.log('pause is clicked.');
-
-    const { video } = this.state;
-
-    console.log('video=', video);
-    video.pause();
+    this.video.pause();
   }
 
   stop() {
-    const { video } = this.state;
+    const video = this.video;
 
     video.pause();
     video.currentTime = 0;
   }
 
   volume(amount) {
-    const { video } = this.state;
+    const video = this.video;
 
     const current = +video.volume;
     let expected = current + amount;
@@ -140,8 +150,7 @@ class VideoPlayer extends Component {
   }
 
   toggleMute() {
-    const { video } = this.state;
-
+    const video = this.video;
     const muted = video.muted;
     video.muted = !muted;
 
@@ -153,9 +162,7 @@ class VideoPlayer extends Component {
     return +localStorage.getItem(key) || defaultValue;
   }
 
-  _displayVoteInfo() {
-    const currentCourse = this.state.currentCourse;
-
+  _displayVoteInfo(currentCourse) {
     let key = `${VOTE_UP}@${currentCourse.id}`;
 
     const likes = this._getItem(key, 0);
@@ -178,15 +185,17 @@ class VideoPlayer extends Component {
       const current = this._getItem(key, 0);
       localStorage.setItem(key, current + 1);
 
-      this._displayVoteInfo();
+      this._displayVoteInfo(currentCourse);
     }
   }
 
   // playlist's events
   handleCourseSelected(course) {
-    this.setState({ currentCourse: course });
-    this.controlsRef.play();
-    this._displayVoteInfo();
+    this.setState({ currentCourse: course }, () => {
+      this.controlsRef.play();
+    });
+
+    this._displayVoteInfo(course);
   }
 }
 

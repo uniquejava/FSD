@@ -1,0 +1,42 @@
+.section-title {
+  border-bottom: 1px solid rgba(233, 102, 86, 0.1);
+  background: #e8e8e8;
+  padding: 10px 16px;
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  border-bottom: 1px solid #fff;
+}
+
+ul.course-list {
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style-type: none;
+    border-bottom: 1px solid rgba(233, 102, 86, 0.1);
+  }
+
+  .link {
+    align-items: center;
+    border-radius: 0.25rem;
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    color: #766b93;
+    text-decoration: none;
+    text-align: left;
+
+    outline: 0;
+    box-shadow: none;
+  }
+
+  .link:hover,
+  .link.active {
+    color: #e33d29;
+    background: #f5e2df;
+    text-decoration: none;
+  }
+}

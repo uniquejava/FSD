@@ -6,8 +6,8 @@ class Player extends Component {
     return (
       <video
         ref={el => (this.video = el)}
-        timeupdate={this.props.handleTimeUpdate}
-        ended={this.props.handleVideoEnded}
+        onTimeUpdate={this.props.handleTimeUpdate}
+        onEnded={this.props.handleVideoEnded}
       >
         <source src={this.props.src} type="video/mp4" />
         Your browser does not support the video tag.

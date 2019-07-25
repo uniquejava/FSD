@@ -2,6 +2,7 @@
 
 ```sh
 yarn add @fortawesome/fontawesome-svg-core
+yarn add @fortawesome/free-brands-svg-icons
 yarn add @fortawesome/free-solid-svg-icons
 yarn add @fortawesome/free-regular-svg-icons
 yarn add @fortawesome/react-fontawesome
@@ -13,6 +14,14 @@ yarn add @fortawesome/react-fontawesome
 yarn add react-bootstrap bootstrap
 ```
 
+## scss
+
+```sh
+yarn add node-sass
+```
+
+Then we can `import './xxxx.scss'`
+
 ## react-router
 
 ```sh
@@ -20,6 +29,12 @@ yarn add react-router-dom
 ```
 
 ## 坑
+
+ngClass
+
+```js
+ <ul role="menubar" className={`menu ${this.props.hide ? 'hide' : ''}`}>
+```
 
 `ref.current.disabled=false` 在外观上让按钮可用， 但是绑定的 onClick 依然不可用， 正确的方式是使用 state
 

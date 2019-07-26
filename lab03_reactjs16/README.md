@@ -1,14 +1,33 @@
 # Smart Player (React 16)
 
-## setup
+## Tech stacks
+
+1. react
+2. react-router
+3. react-bootstrap
+4. axios
+
+## Setup
 
 ```sh
-cd lab03xxx/smart-player
+https://github.com/uniquejava/FSD.git
+cd FSD
+json-server --watch json-server/db.json
+
+cd lab03_reactjs16/smart-player
 npm start
 
 ```
 
-## fontawesome
+open http://localhost:3001 (as port 3000 occupied by json-server)
+
+## Todo
+
+1. extract service layer
+2. http interceptors
+3. toasts
+
+## Add fontawesome
 
 ```sh
 yarn add @fortawesome/fontawesome-svg-core
@@ -18,13 +37,13 @@ yarn add @fortawesome/free-regular-svg-icons
 yarn add @fortawesome/react-fontawesome
 ```
 
-## bootstrap
+## Add bootstrap
 
 ```sh
 yarn add react-bootstrap bootstrap
 ```
 
-## scss
+## Add scss
 
 ```sh
 yarn add node-sass
@@ -32,7 +51,7 @@ yarn add node-sass
 
 Then we can `import './xxxx.scss'`
 
-## react-router
+## Add react-router
 
 ```sh
 yarn add react-router-dom
@@ -65,3 +84,4 @@ ngClass
 1. https://react-bootstrap.github.io/
 2. https://github.com/FortAwesome/react-fontawesome
 3. [How to reference a DOM element in React](https://flaviocopes.com/react-ref-element/)
+4. https://jscomplete.com/learn/complete-intro-react

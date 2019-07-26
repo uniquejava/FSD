@@ -1,3 +1,13 @@
+# Smart Player (React 16)
+
+## setup
+
+```sh
+cd lab03xxx/smart-player
+npm start
+
+```
+
 ## fontawesome
 
 ```sh

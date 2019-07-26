@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
-
+import EditCourseDialog from './edit_course';
 import './course.css';
+import ConfirmDeleteDilaog from './del_course';
 
 const initialState = {
   courses: [],
@@ -10,6 +11,12 @@ const initialState = {
   titleRequiredError: false,
   urlRequireError: false,
   urlInvalidError: false,
+
+  lgShow: false,
+
+  id: null,
+  formData: {},
+  confirmDialogVisible: false,
 };
 
 const COURSES_URL = 'http://localhost:3000/courses';
@@ -19,7 +26,7 @@ class Course extends Component {
 
   componentDidMount() {
     axios
-      .get(COURSES_URL)
+      .get(`${COURSES_URL}?_sort=id&_order=desc`)
       .then(res => {
         let courses = res.data;
         this.setState({
@@ -34,6 +41,18 @@ class Course extends Component {
   render() {
     return (
       <Fragment>
+        <EditCourseDialog
+          formData={this.state.formData}
+          handleFormDataChange={this.handleFormDataChange}
+          lgShow={this.state.lgShow}
+          setLgShow={this.setLgShow}
+        />
+
+        <ConfirmDeleteDilaog
+          show={this.state.confirmDialogVisible}
+          onHide={this.delete}
+        />
+
         <div className="card mb-2">
           <div className="card-header">New Video</div>
           <div className="card-body">{this.buildForm()}</div>
@@ -71,7 +90,7 @@ class Course extends Component {
       urlInvalidError,
     } = this.state;
     return (
-      <form onSubmit={this.save}>
+      <form onSubmit={this.save} noValidate>
         <div className="form-group row">
           <label className="col-sm-2">Title:</label>
           <div className="col-sm-9">
@@ -115,9 +134,7 @@ class Course extends Component {
         <div className="row">
           <label className="col-sm-2 d-none d-sm-block">&nbsp;</label>
           <div className="col-sm-9">
-            <button type="submit" className="btn btn-primary">
-              Add Video
-            </button>
+            <button className="btn btn-primary">Add Video</button>
           </div>
         </div>
       </form>
@@ -140,7 +157,10 @@ class Course extends Component {
           </button>
         </td>
         <td>
-          <button className="btn btn-danger" onClick={() => this.delete(c.id)}>
+          <button
+            className="btn btn-danger"
+            onClick={() => this.preDelete(c.id)}
+          >
             Delete
           </button>
         </td>
@@ -191,7 +211,7 @@ class Course extends Component {
         console.log('res=', res);
 
         courses.unshift(course);
-        this.setState(initialState);
+        this.setState({ ...initialState, courses });
 
         console.log('success');
       },
@@ -201,11 +221,96 @@ class Course extends Component {
     );
   };
 
-  edit = cid => {};
+  setLgShow = (show, action) => {
+    this.setState({
+      lgShow: show,
+    });
 
-  delete = cid => {};
+    if (action === 'save') {
+      this.updateVideo(this.state.formData);
+    }
+  };
 
-  approve = cid => {};
+  edit = id => {
+    const courses = this.state.courses;
+    const idx = courses.findIndex(c => c.id === id);
+    const course = courses[idx];
+
+    this.setState({
+      lgShow: true,
+      id,
+      formData: course,
+    });
+  };
+
+  handleFormDataChange = item => {
+    let newForm = { ...this.state.formData, ...item };
+    this.setState({ formData: newForm });
+  };
+
+  updateVideo = formData => {
+    const courses = [...this.state.courses];
+    const id = formData.id;
+
+    formData.approved = false;
+
+    const idx = courses.findIndex(c => c.id === id);
+    axios.put(`${COURSES_URL}/${id}`, formData).then(
+      res => {
+        courses.splice(idx, 1, formData);
+        this.setState({ courses });
+
+        console.log('success');
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  };
+
+  preDelete = id => {
+    this.setState({
+      id,
+      confirmDialogVisible: true,
+    });
+  };
+
+  delete = action => {
+    this.setState({
+      confirmDialogVisible: false,
+    });
+
+    if (action === 'delete') {
+      const { id, courses } = this.state;
+      axios.delete(`${COURSES_URL}/${id}`).then(
+        res => {
+          const idx = courses.findIndex(c => c.id === id);
+          courses.splice(idx, 1);
+          this.setState({ courses });
+          console.log('success');
+        },
+        error => {
+          console.error(error);
+        }
+      );
+    }
+  };
+
+  approve = id => {
+    const { courses } = this.state;
+
+    axios.patch(`${COURSES_URL}/${id}`, { approved: true }).then(
+      res => {
+        const idx = courses.findIndex(c => c.id === id);
+        courses.splice(idx, 1, { ...courses[idx], approved: true });
+
+        this.setState({ courses });
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  };
 }
 
 export default Course;

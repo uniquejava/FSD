@@ -38,7 +38,7 @@ class VideoPlayer extends Component {
 
   componentDidMount() {
     axios
-      .get('http://localhost:3000/courses')
+      .get('http://localhost:3000/courses?approved=true')
       .then(res => {
         let courses = res.data;
         this.setState({

@@ -6,16 +6,22 @@ import ConfirmDeleteDilaog from './del_course';
 
 const initialState = {
   courses: [],
+
+  // add form
   title: '',
   url: 'https://',
+
+  // validation
   titleRequiredError: false,
   urlRequireError: false,
   urlInvalidError: false,
 
-  lgShow: false,
-
-  id: null,
+  // edit
+  editDialogVisible: false,
   formData: {},
+
+  // delete
+  id: null,
   confirmDialogVisible: false,
 };
 
@@ -44,8 +50,8 @@ class Course extends Component {
         <EditCourseDialog
           formData={this.state.formData}
           handleFormDataChange={this.handleFormDataChange}
-          lgShow={this.state.lgShow}
-          setLgShow={this.setLgShow}
+          show={this.state.editDialogVisible}
+          onHide={this.edit}
         />
 
         <ConfirmDeleteDilaog
@@ -152,7 +158,10 @@ class Course extends Component {
           </a>
         </td>
         <td>
-          <button className="btn btn-primary" onClick={() => this.edit(c.id)}>
+          <button
+            className="btn btn-primary"
+            onClick={() => this.preEdit(c.id)}
+          >
             Edit
           </button>
         </td>
@@ -221,23 +230,13 @@ class Course extends Component {
     );
   };
 
-  setLgShow = (show, action) => {
-    this.setState({
-      lgShow: show,
-    });
-
-    if (action === 'save') {
-      this.updateVideo(this.state.formData);
-    }
-  };
-
-  edit = id => {
+  preEdit = id => {
     const courses = this.state.courses;
     const idx = courses.findIndex(c => c.id === id);
     const course = courses[idx];
 
     this.setState({
-      lgShow: true,
+      editDialogVisible: true,
       id,
       formData: course,
     });
@@ -248,24 +247,31 @@ class Course extends Component {
     this.setState({ formData: newForm });
   };
 
-  updateVideo = formData => {
-    const courses = [...this.state.courses];
-    const id = formData.id;
+  edit = action => {
+    this.setState({
+      editDialogVisible: false,
+    });
 
-    formData.approved = false;
+    if (action === 'save') {
+      const courses = [...this.state.courses];
+      const formData = this.state.formData;
+      const id = formData.id;
 
-    const idx = courses.findIndex(c => c.id === id);
-    axios.put(`${COURSES_URL}/${id}`, formData).then(
-      res => {
-        courses.splice(idx, 1, formData);
-        this.setState({ courses });
+      formData.approved = false;
 
-        console.log('success');
-      },
-      error => {
-        console.error(error);
-      }
-    );
+      const idx = courses.findIndex(c => c.id === id);
+      axios.put(`${COURSES_URL}/${id}`, formData).then(
+        res => {
+          courses.splice(idx, 1, formData);
+          this.setState({ courses });
+
+          console.log('success');
+        },
+        error => {
+          console.error(error);
+        }
+      );
+    }
   };
 
   preDelete = id => {

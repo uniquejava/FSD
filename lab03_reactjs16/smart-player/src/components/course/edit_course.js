@@ -5,14 +5,14 @@ class EditCourseDialog extends Component {
   render() {
     console.log('EditCourseDialog render ...');
 
-    const { formData, handleFormDataChange, lgShow, setLgShow } = this.props;
+    const { formData, handleFormDataChange, show, onHide } = this.props;
     const { title, url } = formData;
 
     return (
       <Modal
         size="lg"
-        show={lgShow}
-        onHide={() => setLgShow(false)}
+        show={show}
+        onHide={onHide}
         aria-labelledby="example-modal-sizes-title-lg"
       >
         <Modal.Header closeButton>
@@ -53,7 +53,7 @@ class EditCourseDialog extends Component {
           <button
             className="btn btn-light"
             onClick={() => {
-              setLgShow(false);
+              onHide();
             }}
           >
             Cancel
@@ -61,7 +61,7 @@ class EditCourseDialog extends Component {
           <button
             className="btn btn-primary"
             onClick={() => {
-              setLgShow(false, 'save');
+              onHide('save');
             }}
           >
             Save

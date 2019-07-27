@@ -11,19 +11,16 @@ import VideoPlayer from './components/video-player';
 import Course from './components/course';
 
 class App extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.handleToggleSideMenu = this.handleToggleSideMenu.bind(this);
-
-    this.state = { hide: false };
-  }
+  state = { hide: false };
 
   render() {
+    const { hide } = this.state;
+
     return (
       <Router>
         <Header toggleSideMenu={this.handleToggleSideMenu} />
         <div className="body">
-          <SideMenu hide={this.state.hide} />
+          <SideMenu hide={hide} />
           <main>
             <Switch>
               <Route exact path="/watch" component={VideoPlayer} />
@@ -36,11 +33,11 @@ class App extends Component {
     );
   }
 
-  handleToggleSideMenu() {
+  handleToggleSideMenu = () => {
     this.setState(() => ({
       hide: !this.state.hide,
     }));
-  }
+  };
 }
 
 export default App;

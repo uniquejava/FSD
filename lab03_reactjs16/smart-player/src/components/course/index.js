@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import axios from 'axios';
+import * as api from '../../api';
 import EditCourseDialog from './edit_course';
-import './course.css';
 import ConfirmDeleteDilaog from './del_course';
+import './course.css';
 
 const initialState = {
   courses: [],
@@ -25,14 +25,12 @@ const initialState = {
   confirmDialogVisible: false,
 };
 
-const COURSES_URL = 'http://localhost:3000/courses';
-
 class Course extends Component {
   state = initialState;
 
   componentDidMount() {
-    axios
-      .get(`${COURSES_URL}?_sort=id&_order=desc`)
+    api
+      .getCourses()
       .then(res => {
         let courses = res.data;
         this.setState({
@@ -49,7 +47,7 @@ class Course extends Component {
       <Fragment>
         <EditCourseDialog
           formData={this.state.formData}
-          handleFormDataChange={this.handleFormDataChange}
+          onFormDataChange={this.onFormDataChange}
           show={this.state.editDialogVisible}
           onHide={this.edit}
         />
@@ -215,7 +213,7 @@ class Course extends Component {
       approved: false,
     };
 
-    axios.post(COURSES_URL, course).then(
+    api.saveCourse(course).then(
       res => {
         console.log('res=', res);
 
@@ -242,7 +240,7 @@ class Course extends Component {
     });
   };
 
-  handleFormDataChange = item => {
+  onFormDataChange = item => {
     let newForm = { ...this.state.formData, ...item };
     this.setState({ formData: newForm });
   };
@@ -260,7 +258,7 @@ class Course extends Component {
       formData.approved = false;
 
       const idx = courses.findIndex(c => c.id === id);
-      axios.put(`${COURSES_URL}/${id}`, formData).then(
+      api.updateCourse(id, formData).then(
         res => {
           courses.splice(idx, 1, formData);
           this.setState({ courses });
@@ -288,7 +286,7 @@ class Course extends Component {
 
     if (action === 'delete') {
       const { id, courses } = this.state;
-      axios.delete(`${COURSES_URL}/${id}`).then(
+      api.deleteCourse(id).then(
         res => {
           const idx = courses.findIndex(c => c.id === id);
           courses.splice(idx, 1);
@@ -304,8 +302,7 @@ class Course extends Component {
 
   approve = id => {
     const { courses } = this.state;
-
-    axios.patch(`${COURSES_URL}/${id}`, { approved: true }).then(
+    api.approveCourse(id).then(
       res => {
         const idx = courses.findIndex(c => c.id === id);
         courses.splice(idx, 1, { ...courses[idx], approved: true });

@@ -4,28 +4,24 @@
 
 1. react
 2. react-router
-3. react-bootstrap
-4. axios
+3. redux
+4. redux-thunk
+5. react-bootstrap
+6. axios
 
 ## Setup
 
 ```sh
 https://github.com/uniquejava/FSD.git
 cd FSD
-json-server --watch json-server/db.json
+json-server -p 3001 -w json-server/db.json
 
 cd lab03_reactjs16/smart-player
 npm start
 
 ```
 
-open http://localhost:3001 (as port 3000 occupied by json-server)
-
-## Todo
-
-1. extract service layer
-2. http interceptors
-3. toasts
+open http://localhost:3000
 
 ## Add fontawesome
 

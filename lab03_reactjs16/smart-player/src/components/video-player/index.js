@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import Player from './player';
 import Controls from './controls';
 import PlayList from './playlist';
+import * as api from '../../api';
 import './video-player.css';
 
 const VOTE_UP = 'up';
@@ -37,8 +37,8 @@ class VideoPlayer extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get('http://localhost:3000/courses?approved=true')
+    api
+      .getApprovedCourses()
       .then(res => {
         let courses = res.data;
         this.setState({

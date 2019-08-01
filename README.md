@@ -18,9 +18,10 @@ Source code: https://github.com/uniquejava/FSD
 
 1. [x] html5/css3/es6
 2. [x] angular8
-3. [ ] react16
-4. [ ] vue2
-5. [ ] spring boot
+3. [x] react16
+4. [x] java8
+5. [ ] spring mvc | jdbc
+6. [ ] spring boot | jpa
 
 ## Other stacks(Bonus)
 

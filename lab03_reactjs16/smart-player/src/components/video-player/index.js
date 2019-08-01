@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Player from './player';
 import Controls from './controls';
 import PlayList from './playlist';
-import * as api from '../../api';
 import './video-player.css';
+import { fetchApprovedCourses } from '../../redux/actions/playListActions';
 
 const VOTE_UP = 'up';
 const VOTE_DOWN = 'down';
@@ -13,7 +14,6 @@ class VideoPlayer extends Component {
     super(props, context);
     this.state = {
       currentCourse: null,
-      courses: [],
       muted: false,
       likes: 0,
       unlikes: 0,
@@ -37,23 +37,15 @@ class VideoPlayer extends Component {
   }
 
   componentDidMount() {
-    api
-      .getApprovedCourses()
-      .then(res => {
-        let courses = res.data;
-        this.setState({
-          courses: courses,
-          currentCourse: null,
-          muted: this.video.muted,
-        });
-      })
-      .catch(err => {
-        console.log('err=', err);
-      });
+    this.props.fetchApprovedCourses();
+    this.setState({
+      currentCourse: null,
+      muted: this.video.muted,
+    });
   }
 
   render() {
-    const { muted, likes, unlikes, ratio, courses } = this.state;
+    const { muted, likes, unlikes, ratio } = this.state;
     return (
       <div className="container-fluid">
         <div className="row">
@@ -82,7 +74,7 @@ class VideoPlayer extends Component {
 
           <div className="col-lg-4">
             <PlayList
-              courses={courses}
+              courses={this.props.courses}
               selectCourse={this.handleCourseSelected}
             />
           </div>
@@ -199,4 +191,15 @@ class VideoPlayer extends Component {
   }
 }
 
-export default VideoPlayer;
+const mapStateToProps = state => ({
+  courses: state.playlist,
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchApprovedCourses: () => dispatch(fetchApprovedCourses()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(VideoPlayer);

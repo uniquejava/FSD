@@ -1,12 +1,17 @@
 import React, { Component, Fragment } from 'react';
-import * as api from '../../api';
+import { connect } from 'react-redux';
 import EditCourseDialog from './edit_course';
 import ConfirmDeleteDilaog from './del_course';
 import './course.css';
+import {
+  fetchAllCourses,
+  saveCourse,
+  updateCourse,
+  deleteCourse,
+  approveCourse,
+} from '../../redux/actions/courseActions';
 
 const initialState = {
-  courses: [],
-
   // add form
   title: '',
   url: 'https://',
@@ -29,17 +34,7 @@ class Course extends Component {
   state = initialState;
 
   componentDidMount() {
-    api
-      .getCourses()
-      .then(res => {
-        let courses = res.data;
-        this.setState({
-          courses: courses,
-        });
-      })
-      .catch(err => {
-        console.log('err=', err);
-      });
+    this.props.fetchAllCourses();
   }
 
   render() {
@@ -77,7 +72,7 @@ class Course extends Component {
                   </th>
                 </tr>
               </thead>
-              <tbody>{this.buildRows(this.state.courses)}</tbody>
+              <tbody>{this.buildRows(this.props.courses)}</tbody>
             </table>
           </div>
         </div>
@@ -203,7 +198,7 @@ class Course extends Component {
       return false;
     }
 
-    const { courses, title, url } = this.state;
+    const { title, url } = this.state;
 
     const course = {
       id: Date.now(),
@@ -213,23 +208,12 @@ class Course extends Component {
       approved: false,
     };
 
-    api.saveCourse(course).then(
-      res => {
-        console.log('res=', res);
-
-        courses.unshift(course);
-        this.setState({ ...initialState, courses });
-
-        console.log('success');
-      },
-      error => {
-        console.error(error);
-      }
-    );
+    this.props.saveCourse(course);
+    this.setState({ ...initialState });
   };
 
   preEdit = id => {
-    const courses = this.state.courses;
+    const courses = this.props.courses;
     const idx = courses.findIndex(c => c.id === id);
     const course = courses[idx];
 
@@ -251,24 +235,10 @@ class Course extends Component {
     });
 
     if (action === 'save') {
-      const courses = [...this.state.courses];
       const formData = this.state.formData;
       const id = formData.id;
-
       formData.approved = false;
-
-      const idx = courses.findIndex(c => c.id === id);
-      api.updateCourse(id, formData).then(
-        res => {
-          courses.splice(idx, 1, formData);
-          this.setState({ courses });
-
-          console.log('success');
-        },
-        error => {
-          console.error(error);
-        }
-      );
+      this.props.updateCourse(id, formData);
     }
   };
 
@@ -285,35 +255,29 @@ class Course extends Component {
     });
 
     if (action === 'delete') {
-      const { id, courses } = this.state;
-      api.deleteCourse(id).then(
-        res => {
-          const idx = courses.findIndex(c => c.id === id);
-          courses.splice(idx, 1);
-          this.setState({ courses });
-          console.log('success');
-        },
-        error => {
-          console.error(error);
-        }
-      );
+      const { id } = this.state;
+      this.props.deleteCourse(id);
     }
   };
 
   approve = id => {
-    const { courses } = this.state;
-    api.approveCourse(id).then(
-      res => {
-        const idx = courses.findIndex(c => c.id === id);
-        courses.splice(idx, 1, { ...courses[idx], approved: true });
-
-        this.setState({ courses });
-      },
-      error => {
-        console.error(error);
-      }
-    );
+    this.props.approveCourse(id);
   };
 }
 
-export default Course;
+const mapStateToProps = state => ({
+  courses: state.courses,
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchAllCourses: () => dispatch(fetchAllCourses()),
+  saveCourse: course => dispatch(saveCourse(course)),
+  updateCourse: (id, course) => dispatch(updateCourse(id, course)),
+  deleteCourse: id => dispatch(deleteCourse(id)),
+  approveCourse: id => dispatch(approveCourse(id)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Course);

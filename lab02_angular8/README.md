@@ -1,5 +1,7 @@
 # Angular8 Media Player
 
+![angular8 screenshot](./fsd_angular8_screen.png)
+
 ### Tech stack
 
 1. Angular 8.1

@@ -26,4 +26,15 @@ public class HomeController {
 
         return mv;
     }
+
+    @GetMapping(value = "/admin**")
+    public ModelAndView adminPage() {
+
+        ModelAndView mv = new ModelAndView("admin");
+        mv.addObject("title", "Spring Security Hello World");
+        mv.addObject("message", "This is protected page!");
+        return mv;
+
+    }
+
 }

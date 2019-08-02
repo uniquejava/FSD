@@ -10,9 +10,10 @@ Source code: https://github.com/uniquejava/FSD
 
 ## Environment
 
-1. macOS 10.14.x
-2. VS Code
-3. Intellij IDEA Community
+1. macOS 10.14.6
+2. Visual Studio Code 1.36.1
+3. Intellij IDEA Community 2019
+4. Spring Tool Suite 4
 
 ## Different Editions
 
@@ -20,7 +21,7 @@ Source code: https://github.com/uniquejava/FSD
 2. [x] angular8
 3. [x] react16
 4. [x] java8
-5. [ ] spring mvc | jdbc
+5. [ ] spring mvc | jdbc | security | jwt
 6. [ ] spring boot | jpa
 
 ## Other stacks(Bonus)

@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 
 public class SalaryInput {
     private BigDecimal startingSalary;
-    private BigDecimal incInPercent;
+    private double incInPercent;
     private Frequency incFrequency;
-    private BigDecimal decAmount;
+    private BigDecimal deductionsOnIncome;
     private Frequency decFrequency;
     private int years;
 
@@ -18,11 +18,11 @@ public class SalaryInput {
         this.startingSalary = startingSalary;
     }
 
-    public BigDecimal getIncInPercent() {
+    public double getIncInPercent() {
         return incInPercent;
     }
 
-    public void setIncInPercent(BigDecimal incInPercent) {
+    public void setIncInPercent(double incInPercent) {
         this.incInPercent = incInPercent;
     }
 
@@ -34,12 +34,12 @@ public class SalaryInput {
         this.incFrequency = incFrequency;
     }
 
-    public BigDecimal getDecAmount() {
-        return decAmount;
+    public BigDecimal getDeductionsOnIncome() {
+        return deductionsOnIncome;
     }
 
-    public void setDecAmount(BigDecimal decAmount) {
-        this.decAmount = decAmount;
+    public void setDeductionsOnIncome(BigDecimal deductionsOnIncome) {
+        this.deductionsOnIncome = deductionsOnIncome;
     }
 
     public Frequency getDecFrequency() {
@@ -64,7 +64,7 @@ public class SalaryInput {
                 "startingSalary=" + startingSalary +
                 ", incInPercent=" + incInPercent +
                 ", incFrequency=" + incFrequency +
-                ", decAmount=" + decAmount +
+                ", deductionsOnIncome=" + deductionsOnIncome +
                 ", decFrequency=" + decFrequency +
                 ", years=" + years +
                 '}';

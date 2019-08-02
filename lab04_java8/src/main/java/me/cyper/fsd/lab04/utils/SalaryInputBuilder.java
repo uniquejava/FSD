@@ -2,15 +2,9 @@ package me.cyper.fsd.lab04.utils;
 
 import me.cyper.fsd.lab04.model.Frequency;
 import me.cyper.fsd.lab04.model.SalaryInput;
-import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 public class SalaryInputBuilder extends SalaryInput {
     private Scanner scanner;
@@ -19,7 +13,7 @@ public class SalaryInputBuilder extends SalaryInput {
         scanner = new Scanner(System.in);
     }
 
-    public String read(String message) {
+    private String read(String message) {
         System.out.print(message);
         return scanner.nextLine();
     }
@@ -48,9 +42,9 @@ public class SalaryInputBuilder extends SalaryInput {
     public SalaryInputBuilder collectIncrementInPercent() {
         String input = read("Input increment in percent: ");
         try {
-            BigDecimal result = new BigDecimal(input);
+            double result = Double.parseDouble(input);
 
-            if (result.compareTo(BigDecimal.ZERO) >= 0) {
+            if (result >= 0) {
                 this.setIncInPercent(result);
 
                 return this;
@@ -86,8 +80,8 @@ public class SalaryInputBuilder extends SalaryInput {
         try {
             BigDecimal result = new BigDecimal(input);
 
-            if (result.compareTo(BigDecimal.ZERO) >= 0) {
-                this.setDecAmount(result);
+            if (result.compareTo(BigDecimal.ZERO) >=0 ) {
+                this.setDeductionsOnIncome(result);
 
                 return this;
 
@@ -127,7 +121,7 @@ public class SalaryInputBuilder extends SalaryInput {
                 return this;
 
             } else {
-                System.err.println("Prediction years cannot be less than 0.");
+                System.err.println("Prediction years must be greater than 0.");
                 return this.collectPredictionYears();
             }
 

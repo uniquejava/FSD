@@ -1,8 +1,10 @@
 package me.cyper.fsd.lab04.model;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public enum Frequency {
     QUARTERLY(4), HALF_YEARLY(2), ANNUALLY(1);
@@ -33,6 +35,7 @@ public enum Frequency {
     }
 
     public static Set<Integer> getValues() {
-        return map.keySet();
+        // for demoing java8 stream purpose, can be simper: return map.keySet();
+        return Arrays.stream(Frequency.values()).map(frequency -> frequency.getValue()).collect(Collectors.toSet());
     }
 }

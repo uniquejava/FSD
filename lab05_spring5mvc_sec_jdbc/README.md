@@ -1,5 +1,7 @@
 # Course App (spring mvc)
 
+![lab05 screenshot](./login.jpg)
+
 ## Tech stack
 
 1. [x] Spring MVC 5

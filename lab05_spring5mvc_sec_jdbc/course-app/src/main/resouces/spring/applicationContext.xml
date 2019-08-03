@@ -45,4 +45,5 @@
     <tx:annotation-driven
         transaction-manager="transactionManager" />
 
+    <import resource="captcha.xml"/>
 </beans>

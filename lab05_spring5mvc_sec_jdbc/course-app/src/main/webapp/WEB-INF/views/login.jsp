@@ -6,28 +6,30 @@
 <head>
 <meta charset="UTF-8">
 <title>FSD Course Center - Login</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-<style type="text/css">
-form.form-signin {
-    width: 400px;
-    border: solid #eee 1px;
-    margin: 0 auto;
-    margin-top: 150px;
-    box-sizing: content-box;
-    padding: 1.5rem 3rem;
-    box-shadow: 0px 0px 6px 0px #dee2e6;
-}
-
-.form-signin-heading {
-    margin-bottom: 2rem;
-}
-
-</style>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+  crossorigin="anonymous"
+/>
+<link
+  rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.9.0/css/all.css"
+  integrity="sha384-i1LQnF23gykqWXg6jxC2ZbCbUMxyw5gLZY6UiUS98LYV5unm8GWmfkIS6jqJfb4E"
+  crossorigin="anonymous"
+/>
+<link rel="stylesheet" href="${ctx }/assets/css/signin.css" />
+<script type="text/javascript">
+  function changeCaptcha(ctx){
+	  $(".captcha-image").attr("src", ctx + "/captcha_image");
+  }
+</script>
 </head>
-<body>
+<body class="login-page">
 	<div class="container">
 		<form class="form-signin" method="post" action="${ctx }/login">
-			<h2 class="form-signin-heading">Please sign in</h2>
+		    <h2 class="form-signin-heading">FSD Course Center</h2>
 			<c:if test="${not empty errorMessge}">
 			     <div class="alert alert-danger" role="alert">${ errorMessge }</div>
 			</c:if>
@@ -35,7 +37,7 @@ form.form-signin {
 				<label for="username" class="sr-only">Username</label>
 				<input
 					type="text" id="username" name="username" class="form-control"
-					placeholder="Username" required="" autofocus="">
+					placeholder="Username" required="" autofocus="" autocomplete="off">
 			</p>
 			<p>
 				<label for="password" class="sr-only">Password</label>
@@ -43,8 +45,19 @@ form.form-signin {
 					type="password" id="password" name="password" class="form-control"
 					placeholder="Password" required="">
 			</p>
+			<p>
+				<label for="password" class="sr-only">Captcha</label>
+				 <input
+					class="form-control captcha-input" name="kaptcha" class="form-control"
+					placeholder="Captcha code" required="" autocomplete="off">
+				  
+				 <span class="captcha-area">
+                    <img src="${ctx}/captcha_image" onclick="changeCaptcha('${ctx }')" width="80" height="34" class="captcha-image" alt="Captcha Code"/>
+                    <a href="javascript:void(0)" class="btn-refresh" onclick="changeCaptcha('${ctx }')"><i class="fas fa-redo"></i></a>
+				 </span>
+			</p>
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-			<button class="btn btn-lg btn-primary btn-block" type="submit" >Signin</button>
+			<button class="btn btn-lg btn-success btn-block btn-signin" type="submit" >Signin</button>
 		</form>
 	</div>
 </body>

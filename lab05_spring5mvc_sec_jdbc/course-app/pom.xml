@@ -52,15 +52,15 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-        
+
         <!-- Spring JDBC Dependency -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-        
-        
+
+
         <!-- Spring Security -->
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -73,7 +73,15 @@
             <artifactId>spring-security-config</artifactId>
             <version>${spring.security.version}</version>
         </dependency>
-        
+
+
+        <!-- kaptcha - A kaptcha generation engine. -->
+        <dependency>
+            <groupId>com.github.penggle</groupId>
+            <artifactId>kaptcha</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+
 
         <!-- JSTL Dependency -->
         <dependency>

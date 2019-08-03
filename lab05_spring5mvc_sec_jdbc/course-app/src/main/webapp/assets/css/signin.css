@@ -1,0 +1,69 @@
+.login-page {
+	background-image: url("/course-app/assets/images/pexels-photo-2310641.jpeg");
+	background-size: cover;
+	background-position: bottom;
+}
+
+.form-signin-heading {
+	margin-bottom: 2rem;
+	color: rgba(255, 255, 255, 0.75);
+	font-weight: 900;
+}
+
+form.form-signin {
+	width: 400px;
+	border-radius: 0.5em;
+	margin: 0px auto;
+	margin-top: calc(50vh - 280px);
+	padding: 3rem 4rem 2rem;
+	background: rgba(240, 240, 240, 0.2);
+	background-clip: padding-box;
+	box-sizing: content-box;
+}
+
+.form-control {
+	border: none;
+	background-color: rgba(255, 255, 255, 0.6);
+}
+
+.form-control:focus {
+	background-clip: padding-box;
+	border: inherit;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.captcha-input {
+	width: 60%;
+	display: inline-block;
+}
+
+.captcha-area {
+	float: right;
+	position: relative;
+	top: 3px;
+}
+
+.captcha-image {
+	cursor: pointer;
+}
+
+a.btn-refresh {
+	display: inline-block;
+	margin: 0 0.5rem;
+	vertical-align: middle;
+	color: #fff;
+	font-size: 1.5rem;
+}
+
+a.btn-refresh:hover {
+	color: #eee;
+}
+
+.btn-signin {
+	margin-top: 2.5rem;
+}
+
+.alert-danger {
+	opacity: 0.8;
+}

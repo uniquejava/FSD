@@ -4,15 +4,22 @@
          xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
                         http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security.xsd">
 
+    <b:bean id="passwordEncoder" class="org.springframework.security.crypto.password.NoOpPasswordEncoder" factory-method="getInstance"/>
+    <b:bean id="kaptchaAuthenticationFilter" class="me.cyper.fsd.lab05.config.KaptchaAuthenticationFilter">
+      <b:constructor-arg index="0" value="/login" />
+      <b:constructor-arg index="1" value="/login?error" />
+      <b:property name="authenticationManager" ref="authenticationManager"></b:property>
+    </b:bean>
+ 
     <http auto-config="true" use-expressions="true">
         <csrf disabled="false"/>
+        <custom-filter ref="kaptchaAuthenticationFilter" before="FORM_LOGIN_FILTER"/>
         <intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
         <form-login login-page="/login"/>
     </http>
     
-    <b:bean id="passwordEncoder" class="org.springframework.security.crypto.password.NoOpPasswordEncoder" factory-method="getInstance"/>
 
-    <authentication-manager>
+    <authentication-manager id="authenticationManager">
         <authentication-provider>
             <!-- <user-service>
                 <user name="cyper" password="{noop}123456" authorities="ROLE_ADMIN" />

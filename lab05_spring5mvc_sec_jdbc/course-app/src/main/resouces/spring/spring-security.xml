@@ -11,11 +11,11 @@
     </http>
 
     <authentication-manager>
-      <authentication-provider>
-        <user-service>
-        <user name="cyper" password="{noop}123456" authorities="ROLE_ADMIN" />
-        </user-service>
-      </authentication-provider>
+        <authentication-provider>
+            <user-service>
+                <user name="cyper" password="{noop}123456" authorities="ROLE_ADMIN" />
+            </user-service>
+        </authentication-provider>
     </authentication-manager>
 
 </beans:beans>

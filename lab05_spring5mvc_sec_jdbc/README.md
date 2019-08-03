@@ -15,10 +15,25 @@
 1. Start up tomcat 9 server
 2. Open in browser: http://localhost:8080/course-app/
 
-## Security Errors
+## Spring Security
 
-1. Failed to evaluate expression 'ROLE_USER' => (ref #4)
+### Security basic version
+
+基于： https://www.mkyong.com/spring-security/spring-security-hello-world-example/
+
+默认提供的 EndPoint 有：
+
+1. GET/POST http://localhost:8080/course-app/login
+2. GET/POST http://localhost:8080/course-app/logout
+
+### Security Errors
+
+1. Failed to evaluate expression 'ROLE_USER' => (ref #5)
 2. There is no PasswordEncoder mapped for the id "null" => 加上前缀(noop)
+
+### Security custom authentication
+
+1. https://howtodoinjava.com/spring-security/jdbc-user-service-based-spring-security-example/
 
 ## References
 

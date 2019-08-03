@@ -20,18 +20,18 @@
     
 
     <authentication-manager id="authenticationManager">
-        <authentication-provider>
+        <authentication-provider user-service-ref="userDao">
             <!-- <user-service>
                 <user name="cyper" password="{noop}123456" authorities="ROLE_ADMIN" />
             </user-service> -->
             
             <password-encoder ref="passwordEncoder" />
             
-            <jdbc-user-service 
+            <!-- <jdbc-user-service 
                 data-source-ref="dataSource" 
                 users-by-username-query="select username, password, 'true' from tbl_user where username=?;"
                 authorities-by-username-query="select username, 'ROLE_ADMIN' from tbl_user where username=?;"
-            />
+            /> -->
             
         </authentication-provider>
     </authentication-manager>

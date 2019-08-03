@@ -17,6 +17,8 @@
 
 ## Spring Security
 
+[Spring Security Guides](https://docs.spring.io/spring-security/site/docs/current/guides/html5/)
+
 ### Security basic version
 
 基于： https://www.mkyong.com/spring-security/spring-security-hello-world-example/
@@ -95,3 +97,5 @@
 4. https://howtodoinjava.com/spring5/security5/security-java-config-enablewebsecurity-example/
 5. https://stackoverflow.com/questions/35715065/it-throws-me-500-failed-to-evaluate-expression-role-user-in-spring-security
 6. [What is the difference between spring factory-method and factory-bean?](https://stackoverflow.com/questions/18772490/what-is-the-difference-between-spring-factory-method-and-factory-bean)
+7. https://github.com/linagora/linshare-core/blob/master/src/main/resources/springContext-security.xml
+8. [写得贼好 Creating a Custom Login Form](https://docs.spring.io/spring-security/site/docs/current/guides/html5/form-javaconfig.html)

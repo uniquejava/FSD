@@ -9,9 +9,14 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 </head>
-<body class="container">
+<body>
 
-	<div>this is admin page.</div>
+	<div class="container">
+		<h1>This is secured!</h1>
+		<p>
+			Hello <b><c:out value="${pageContext.request.remoteUser}" /></b>
+		</p>
+	</div>
 
 </body>
 </html>

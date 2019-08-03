@@ -1,0 +1,219 @@
+/* header */
+@media (min-width: 768px) {
+.bd-navbar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1071;
+}
+}
+
+.bd-navbar {
+    min-height: 4rem;
+    background-color: #44372d;
+    background-image: url("/course-app/assets/images/pexels-photo-2310641.jpeg");
+    background-size: cover;
+    background-position: bottom;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.05), inset 0 -1px 0 rgba(0,0,0,.1);
+}
+
+/* drop down */
+.bd-navbar .dropdown-item.active {
+    font-weight: 600;
+    color: #212529;
+    background-color: transparent;
+    background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8… 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e);
+    background-repeat: no-repeat;
+    background-position: .4rem .6rem;
+    background-size: .75rem .75rem;
+}
+.dropdown-item.active, .dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: #007bff;
+}
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: .25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+
+/* github */
+
+.p-2 {
+    padding: .5rem!important;
+}
+.nav-link {
+    display: block;
+    padding: .5rem 1rem;
+}
+
+.bd-navbar .navbar-nav-svg {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    vertical-align: text-top;
+}
+
+/* download */
+
+.btn-bd-download {
+    font-weight: 600;
+    color: #ffe484;
+    border-color: #ffe484;
+}
+
+.btn-bd-download:focus {
+    box-shadow: 0 0 0 3px rgba(255,228,132,.25);
+}
+.btn-bd-download:active, .btn-bd-download:hover {
+    color: #2a2730;
+    background-color: #ffe484;
+    border-color: #ffe484;
+}
+
+/* side menu */
+@media (min-width: 1200px) {
+  .bd-sidebar {
+      -ms-flex: 0 1 320px;
+      flex: 0 1 320px;
+  }
+}
+
+@media (min-width: 768px) {
+  .bd-sidebar {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 4rem;
+      z-index: 1000;
+      min-height: calc(100vh - 64px);
+  }
+}
+
+
+.bd-sidebar {
+    -ms-flex-order: 0;
+    order: 0;
+    border-right: 1px solid rgba(0,0,0,.1);
+}
+
+/* search */
+.bd-search {
+    position: relative;
+    padding: 1rem 15px;
+    margin-right: -15px;
+    margin-left: -15px;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+[type=search] {
+    outline-offset: -2px;
+    -webkit-appearance: none;
+}
+
+button, input {
+    overflow: visible;
+}
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.bd-search-docs-toggle {
+    line-height: 1;
+    color: #212529;
+}
+
+/* side menu */
+
+.nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+@media (min-width: 768px) {
+  .bd-links {
+      display: block!important;
+  }
+}
+
+@media (min-width: 768px) {
+  .bd-links {
+      max-height: calc(100vh - 9rem);
+      overflow-y: auto;
+  }
+}
+
+.bd-links {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.bd-toc-item.active {
+    margin-bottom: 1rem;
+}
+
+.bd-toc-item.active>.bd-toc-link {
+    color: rgba(0,0,0,.85);
+}
+.bd-toc-link {
+    display: block;
+    padding: .25rem 1.5rem;
+    font-weight: 600;
+    color: rgba(0,0,0,.65);
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.bd-toc-item.active>.bd-sidenav {
+    display: block;
+}
+
+.bd-sidebar .nav>li>a {
+    display: block;
+    padding: .25rem 1.5rem;
+    font-size: 90%;
+    color: rgba(0,0,0,.65);
+}
+
+.bd-sidebar .nav>li>a:hover {
+    color: rgba(0,0,0,.85);
+    text-decoration: none;
+    background-color: transparent;
+}

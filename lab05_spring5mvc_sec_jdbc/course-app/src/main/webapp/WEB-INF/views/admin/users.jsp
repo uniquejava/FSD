@@ -14,21 +14,39 @@
 </head>
 <body>
 
-	<jsp:include page="layout/header.jsp"></jsp:include>
+    <jsp:include page="../layout/header.jsp"></jsp:include>
 
-	<div class="container-fluid">
-		<div class="row flex-xl-nowrap">
-			<div class="col-12 col-md-3 col-xl-2 bd-sidebar">
-			
-				<jsp:include page="layout/sidemenu.jsp"></jsp:include>
-			</div>
+    <div class="container-fluid">
+        <div class="row flex-xl-nowrap">
+            <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+            
+                <jsp:include page="../layout/sidemenu.jsp"></jsp:include>
+            </div>
 
-			<main class="col-12 col-md-9 col-xl-10 py-md-3 pl-md-5 bd-content" role="main">
-			 This is the home page. Everyone can see it.
-			</main>
-		</div>
+            <main class="col-12 col-md-9 col-xl-10 py-md-3 pl-md-5 bd-content" role="main">
+            <h2>List of users</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>name</th>
+                        <th>email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${users}" var="o">
+                        <tr>
+                            <td>${o.name}</td>
+                            <td>${o.email}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
 
-	</div>
+            </table>
+
+            </main>
+        </div>
+
+    </div>
 
 
 </body>

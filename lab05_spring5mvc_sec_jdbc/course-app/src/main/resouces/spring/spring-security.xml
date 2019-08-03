@@ -14,7 +14,8 @@
     <http auto-config="true" use-expressions="true">
         <csrf disabled="false"/>
         <custom-filter ref="kaptchaAuthenticationFilter" before="FORM_LOGIN_FILTER"/>
-        <intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/user/**" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
         <form-login login-page="/login"/>
     </http>
     

@@ -79,7 +79,7 @@
 
 需要实现如下接口， 注意 loadUserByUsername 不能返回 null.
 
-````java
+```java
 @Repository
 public class UserDao implements UserDetailsService {
     @Override
@@ -110,11 +110,43 @@ public class UserDao implements UserDetailsService {
 }
 ```
 
+### Security with custom AuthenticationManager/AuthenticationProvider
+
+[Custom Authentication Manager with Spring Security and Java Configuration](https://stackoverflow.com/questions/31826233/custom-authentication-manager-with-spring-security-and-java-configuration)
+
+暂时没有必要实现， 步骤如下
+
+```xml
+<authentication-manager alias="authenticationManager">
+    <authentication-provider ref="myAuthenticationProvider" />
+</authentication-manager>
+
+```
+
+```java
+public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    String username = authentication.getPrincipal() + "";
+    String password = authentication.getCredentials() + "";
+
+    User user = userRepo.findOne(username);
+    if (user == null) {
+        throw new BadCredentialsException("1000");
+    }
+    if (user.isDisabled()) {
+        throw new DisabledException("1001");
+    }
+    if (!encoder.matches(password, user.getPassword())) {
+        throw new BadCredentialsException("1000");
+    }
+    List<Right> userRights = rightRepo.getUserRights(username);
+    return new UsernamePasswordAuthenticationToken(username, password, userRights.stream().map(x -> new SimpleGrantedAuthority(x.getName())).collect(Collectors.toList()));
+}
+```
+
 ### Security Errors
 
 1. Failed to evaluate expression 'ROLE_USER' => (ref #5)
 2. There is no PasswordEncoder mapped for the id "null" => 加上前缀(noop)
-
 
 ## custom login form
 
@@ -126,7 +158,7 @@ public class UserDao implements UserDetailsService {
     <intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
     <form-login />
 </http>
-````
+```
 
 将`<form-login />` 改为 `<form-login login-page="/login"/>` Spring 就会用我们自定义的 loginForm 页面。
 

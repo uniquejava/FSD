@@ -26,11 +26,22 @@ public class HomeController {
 
         return mv;
     }
+    
+    @GetMapping("/admin/users")
+    public ModelAndView users() {
+        
+        ModelAndView mv = new ModelAndView("admin/users");
+        
+        List<User> users = userService.findAllUsers();
+        mv.addObject("users", users);
+        
+        return mv;
+    }
 
-    @GetMapping(value = "/admin**")
+    @GetMapping(value = "/admin/admin")
     public ModelAndView adminPage() {
 
-        ModelAndView mv = new ModelAndView("admin");
+        ModelAndView mv = new ModelAndView("admin/admin");
         mv.addObject("title", "Spring Security Hello World");
         mv.addObject("message", "This is protected page!");
         return mv;

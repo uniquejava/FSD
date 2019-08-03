@@ -14,17 +14,21 @@
 </head>
 <body>
 
-	<jsp:include page="layout/header.jsp"></jsp:include>
+    <jsp:include page="../layout/header.jsp"></jsp:include>
 
 	<div class="container-fluid">
 		<div class="row flex-xl-nowrap">
 			<div class="col-12 col-md-3 col-xl-2 bd-sidebar">
-			
-				<jsp:include page="layout/sidemenu.jsp"></jsp:include>
+
+				<jsp:include page="../layout/sidemenu.jsp"></jsp:include>
 			</div>
 
-			<main class="col-12 col-md-9 col-xl-10 py-md-3 pl-md-5 bd-content" role="main">
-			 This is the home page. Everyone can see it.
+			<main class="col-12 col-md-9 col-xl-10 py-md-3 pl-md-5 bd-content"
+				role="main">
+			<h1>This is secured!</h1>
+			<p>
+				Hello <b><c:out value="${pageContext.request.remoteUser}" /></b>
+			</p>
 			</main>
 		</div>
 

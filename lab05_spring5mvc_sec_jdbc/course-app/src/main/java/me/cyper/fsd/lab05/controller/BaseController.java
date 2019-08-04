@@ -12,7 +12,7 @@ import me.cyper.fsd.lab05.exception.BusinessException;
 public class BaseController {
     final static Logger logger = LoggerFactory.getLogger(BaseController.class);
 
-    public void checkCaptach(String captcha, HttpSession session) {
+    public void checkCaptcha(String captcha, HttpSession session) {
         String expect = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
 
         if (logger.isDebugEnabled()) {

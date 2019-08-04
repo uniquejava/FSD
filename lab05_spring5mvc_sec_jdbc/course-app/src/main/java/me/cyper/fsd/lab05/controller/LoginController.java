@@ -67,7 +67,7 @@ public class LoginController extends BaseController {
     public Result doRegister(@RequestParam(name = "kaptcha", required = true) String kaptcha, @RequestBody User user,
             HttpSession session) {
 
-        checkCaptach(kaptcha, session);
+        checkCaptcha(kaptcha, session);
 
         userService.saveUser(user);
         return Result.ok(user);

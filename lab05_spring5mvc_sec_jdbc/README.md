@@ -14,8 +14,17 @@
 
 ## How to run
 
-1. Start up tomcat 9 server
-2. Open in browser: http://localhost:8080/course-app/
+```sh
+git clone https://github.com/uniquejava/FSD.git
+cd FSD/lab05
+mvn clean package
+cp ./target/course-app.war TOMCAT_HOME/webapps
+```
+
+1. Build war file `mvn clean package`
+2. Copy `target/course-app.war` to `<TOMCAT_HOME>/webapps`
+3. Start up tomcat 9 server `sh <TOMCAT_HOME>/bin/startup.sh`
+4. Open in browser: http://localhost:8080/course-app/
 
 ## Spring Security
 

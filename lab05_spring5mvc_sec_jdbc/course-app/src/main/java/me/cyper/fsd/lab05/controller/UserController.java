@@ -43,7 +43,7 @@ public class UserController extends BaseController {
     public Result updateAccount(@RequestParam(name = "kaptcha", required = true) String kaptcha, @RequestBody User user,
             HttpSession session) {
 
-        checkCaptach(kaptcha, session);
+        checkCaptcha(kaptcha, session);
 
         userService.updateUser(user);
 

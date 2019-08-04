@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="${ctx }/assets/css/signin.css" />
 <script type="text/javascript">
   function changeCaptcha(ctx){
-	  $(".captcha-image").attr("src", ctx + "/captcha_image");
+	  $(".captcha-image").attr("src", ctx + "/captcha_image?ts=" + Date.now());
   }
 </script>
 </head>

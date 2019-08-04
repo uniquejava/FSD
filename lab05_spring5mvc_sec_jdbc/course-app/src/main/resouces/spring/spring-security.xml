@@ -11,6 +11,8 @@
       <b:property name="authenticationManager" ref="authenticationManager"></b:property>
     </b:bean>
  
+    <http pattern="/assets/**" security="none"/>
+ 
     <http auto-config="true" use-expressions="true">
         <csrf disabled="false"/>
         <custom-filter ref="kaptchaAuthenticationFilter" before="FORM_LOGIN_FILTER"/>

@@ -1,5 +1,7 @@
 # Spring Security notes
 
+中文博客: https://www.cnblogs.com/fenglan/category/887982.html
+
 ### Security basic version
 
 基于： https://www.mkyong.com/spring-security/spring-security-hello-world-example/

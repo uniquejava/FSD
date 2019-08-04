@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 
 <form class="bd-search d-flex align-items-center">
@@ -16,10 +17,18 @@
 		<ul class="nav bd-sidenav">
 			<li class="active bd-sidenav-active">
 			<a href="#"> Introduction </a></li>
-			<li><a href="${ctx }/login"> Login </a></li>
-			<li><a href="${ctx }/logout"> Logout </a></li>
+			
+			
 			<li><a href="#"> Register </a></li>
-
+			
+			<sec:authorize access="hasRole('ROLE_ANONYMOUS')">
+			    <li><a href="${ctx }/login"> Login </a></li>
+			</sec:authorize>
+			
+			<sec:authorize access="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
+				<li><a href="${ctx }/logout"> Logout </a></li>
+				<li><a href="${ctx }/account/update"> Account Update </a></li>
+			</sec:authorize>
 		</ul>
 	</div>
 </nav>

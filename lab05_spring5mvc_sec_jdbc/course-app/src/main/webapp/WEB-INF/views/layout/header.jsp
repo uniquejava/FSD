@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
@@ -10,12 +11,19 @@
       <li class="nav-item">
         <a class="nav-link active" href="${ctx }/">Home</a>
       </li>
+      
+      <sec:authorize access="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
       <li class="nav-item">
         <a class="nav-link " href="#">Tutorials</a>
       </li>
+      </sec:authorize>
+      
+      <sec:authorize access="hasRole('ROLE_ADMIN')">
       <li class="nav-item">
-        <a class="nav-link " href="${ctx }/admin/admin">Administration</a>
+          <a class="nav-link " href="${ctx }/admin/admin">Administration</a>
       </li>
+      </sec:authorize>
+      
     </ul>
   </div>
 

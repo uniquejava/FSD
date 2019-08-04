@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.code.kaptcha.Constants;
 
 import me.cyper.fsd.lab05.entity.User;
+import me.cyper.fsd.lab05.exception.BusinessException;
 import me.cyper.fsd.lab05.service.UserService;
 import me.cyper.fsd.lab05.util.Result;
 
@@ -69,7 +70,7 @@ public class LoginController {
         System.out.println("expect=" + expect);
 
         if (expect == null || !kaptcha.equalsIgnoreCase(expect)) {
-            return Result.error("Incorrect captcha code.");
+            throw new BusinessException("Invalid captcha code.");
         }
 
         userService.saveUser(user);

@@ -22,6 +22,7 @@
         <jdk.version>1.8</jdk.version>
         <spring.version>5.1.8.RELEASE</spring.version>
         <spring.security.version>5.1.5.RELEASE</spring.security.version>
+        <jackson.version>2.9.9</jackson.version>
         <junit.version>4.11</junit.version>
         <jstl.version>1.2.1</jstl.version>
         <tld.version>1.1.2</tld.version>
@@ -45,7 +46,6 @@
             <version>3.7</version>
         </dependency>
 
-
         <!-- Spring MVC Dependency -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -60,7 +60,19 @@
             <version>${spring.version}</version>
         </dependency>
 
+        <!-- Need this for json to/from object -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
 
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        
         <!-- Spring Security -->
         <dependency>
             <groupId>org.springframework.security</groupId>

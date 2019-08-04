@@ -14,7 +14,7 @@
     <http pattern="/assets/**" security="none"/>
  
     <http auto-config="true" use-expressions="true">
-        <csrf disabled="false"/>
+        <csrf disabled="true"/>
         <custom-filter ref="kaptchaAuthenticationFilter" before="FORM_LOGIN_FILTER"/>
         <intercept-url pattern="/user/**" access="hasRole('ROLE_USER')" />
         <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />

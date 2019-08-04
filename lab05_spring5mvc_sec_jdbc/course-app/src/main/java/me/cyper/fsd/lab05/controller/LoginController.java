@@ -1,7 +1,5 @@
 package me.cyper.fsd.lab05.controller;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,10 +14,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import me.cyper.fsd.lab05.entity.User;
 import me.cyper.fsd.lab05.service.UserService;
+import me.cyper.fsd.lab05.util.Result;
 
 @Controller
 public class LoginController {
@@ -58,18 +59,10 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public String doRegister(@RequestParam Map<String, String> body) {
-        System.out.println(body);
-        
-        User user = new User();
-        user.setName(body.get("name"));
-        user.setEmail(body.get("email"));
-        user.setUsername(body.get("username"));
-        user.setPassword(body.get("password"));
-        
+    @ResponseBody
+    public Result doRegister(@RequestBody User user) {
         userService.saveUser(user);
-        
-        return "redirect:/";
+        return Result.ok(user);
     }
 
 }

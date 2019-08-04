@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>FSD Course Center</title>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="${ctx }/assets/js/jquery-3.4.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -19,9 +19,34 @@
 <link rel="stylesheet" href="${ctx }/assets/css/layout.css" />
 <link rel="stylesheet" href="${ctx }/assets/css/signup.css" />
 <script type="text/javascript">
-  function changeCaptcha(ctx){
-      $(".captcha-image").attr("src", ctx + "/captcha_image");
-  }
+	function changeCaptcha(ctx) {
+		$(".captcha-image").attr("src", ctx + "/captcha_image");
+	}
+
+	function registerUser() {
+
+		let data = {
+			name : $('#name').val(),
+			email : $('#email').val(),
+			username : $('#username').val(),
+			password : $('#password').val()
+		};
+
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "${ctx}/register?kaptcha=" + $('#kaptcha').val(),
+			data : JSON.stringify(data),
+			dataType : 'json',
+			timeout : 100000,
+		}).done(function(data) {
+			console.log("SUCCESS: ", data);
+		}).fail(function(e) {
+			console.log("FAIL: ", e);
+		}).always(function() {
+			console.log("ALWAYS");
+		});
+	}
 </script>
 </head>
 <body>
@@ -66,12 +91,12 @@
 		            <p>
 		                <label> <img src="${ctx}/captcha_image" onclick="changeCaptcha('${ctx }')" width="80" height="34" class="captcha-image" alt="Captcha Code"/>
                            <a href="javascript:void(0)" class="btn-refresh" onclick="changeCaptcha('${ctx }')"><i class="fas fa-redo"></i></a></label>
-		                   <input class="form-control captcha-input" name="kaptcha" placeholder="Enter Captcha" required="" autocomplete="off">
+		                   <input class="form-control captcha-input" id="kaptcha" name="kaptcha" placeholder="Enter Captcha" required="" autocomplete="off">
 		            </p>
 		            <p>
 		               <label></label>
 		               <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                       <button class="btn btn-success" type="submit" > Register</button>
+                       <button class="btn btn-success" type="button" onclick="registerUser()"> Register</button>
                        <button class="btn btn-light ml-4" type="reset" >Reset</button>
 		            </p>
             </div>

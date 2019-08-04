@@ -21,8 +21,8 @@ Source code: https://github.com/uniquejava/FSD
 2. [x] angular8
 3. [x] react16
 4. [x] java8
-5. [ ] spring mvc | jdbc | security
-6. [ ] spring boot | jpa
+5. [x] spring mvc | jdbc | security (xml based) | jsp
+6. [ ] spring boot | jpa | security (java config) | thymeleaf
 7. [ ] spring cloud
 
 ## Other stacks(Bonus)

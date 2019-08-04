@@ -36,12 +36,18 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("User does not exist.");
         }
 
-        Collection<GrantedAuthority> grantedAuths = Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        GrantedAuthority roleUser = new SimpleGrantedAuthority("ROLE_USER");
+        GrantedAuthority roleAdmin = new SimpleGrantedAuthority("ROLE_ADMIN");
+        Collection<GrantedAuthority> grantedAuths = Arrays.asList(roleUser, roleAdmin);
         return new org.springframework.security.core.userdetails.User(username, user.getPassword(), grantedAuths);
 
     }
 
     public User saveUser(User user) {
         return userDao.saveUser(user);
+    }
+
+    public void updateUser(User user) {
+        userDao.updateUser(user);
     }
 }

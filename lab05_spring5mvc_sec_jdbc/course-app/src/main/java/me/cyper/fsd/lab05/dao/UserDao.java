@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -20,6 +22,7 @@ import me.cyper.fsd.lab05.entity.User;
 
 @Repository
 public class UserDao {
+    final static Logger logger = LoggerFactory.getLogger(UserDao.class);
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -42,6 +45,12 @@ public class UserDao {
 
     public User findByUsername(String username) {
         String sql = "select * from tbl_user where username=?";
+        
+        if (logger.isDebugEnabled()) {
+            logger.debug("sql: {}", sql);
+            logger.debug("data: {}", username);
+        }
+        
         User result = jdbcTemplate.query(sql, new ResultSetExtractor<User>() {
             public User extractData(ResultSet rs) throws SQLException {
                 if (rs.next()) {
@@ -64,6 +73,12 @@ public class UserDao {
     public User saveUser(User user) {
         String sql = "insert into tbl_user(name,email,username,password) values (?,?,?,?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
+        
+        if (logger.isDebugEnabled()) {
+            logger.debug("sql: {}", sql);
+            logger.debug("data: {}", user);
+        }
+        
         jdbcTemplate.update(new PreparedStatementCreator() {
 
             @Override
@@ -78,7 +93,9 @@ public class UserDao {
         }, keyHolder);
 
 //      user.setUserId(keyHolder.getKeys().intValue());
-        System.out.println(keyHolder.getKeys());
+        if (logger.isDebugEnabled()) {
+            logger.debug("keyholder: {}", keyHolder.getKeys());
+        }
 
         return user;
 
@@ -86,6 +103,11 @@ public class UserDao {
 
     public void updateUser(User user) {
         String sql = "update tbl_user set name=?,email=?,username=?,password=? where user_id=?";
+
+        if (logger.isDebugEnabled()) {
+            logger.debug("sql: {}", sql);
+            logger.debug("data: {}", user);
+        }
 
         List<Object> params = new ArrayList<>();
         params.add(user.getName());

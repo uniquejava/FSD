@@ -56,8 +56,11 @@
                     <a href="javascript:void(0)" class="btn-refresh" onclick="changeCaptcha('${ctx }')"><i class="fas fa-redo"></i></a>
 				 </span>
 			</p>
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-			<button class="btn btn-lg btn-success btn-block btn-signin" type="submit" >Signin</button>
+			<p class="d-flex mt-5">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	            <button class="btn btn-lg btn-success btn-block mt-2" type="submit" >Signin</button>
+	            <div class="float-right text-light">No account? <a class="text-warning" href="${ctx }/register">Register for free now.</a></div>
+            </p>
 		</form>
 	</div>
 </body>

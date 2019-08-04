@@ -20,15 +20,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.code.kaptcha.Constants;
-
 import me.cyper.fsd.lab05.entity.User;
-import me.cyper.fsd.lab05.exception.BusinessException;
 import me.cyper.fsd.lab05.service.UserService;
 import me.cyper.fsd.lab05.util.Result;
 
 @Controller
-public class LoginController {
+public class LoginController extends BaseController {
     final static Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
@@ -69,15 +66,8 @@ public class LoginController {
     @ResponseBody
     public Result doRegister(@RequestParam(name = "kaptcha", required = true) String kaptcha, @RequestBody User user,
             HttpSession session) {
-        String expect = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
 
-        if (logger.isDebugEnabled()) {
-            logger.debug("expected captcha: {}, actual: {}", expect, kaptcha);
-        }
-
-        if (expect == null || !kaptcha.equalsIgnoreCase(expect)) {
-            throw new BusinessException("Invalid captcha code.");
-        }
+        checkCaptach(kaptcha, session);
 
         userService.saveUser(user);
         return Result.ok(user);

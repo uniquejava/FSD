@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,25 +27,21 @@ public class HomeController {
 
         return mv;
     }
-    
+
     @GetMapping("/admin/users")
-    public ModelAndView users() {
-        
-        ModelAndView mv = new ModelAndView("admin/users");
-        
+    public String users(Model model) {
         List<User> users = userService.findAllUsers();
-        mv.addObject("users", users);
-        
-        return mv;
+        model.addAttribute("users", users);
+        model.addAttribute("activeLink", "admin");
+        return "admin/users";
     }
 
     @GetMapping(value = "/admin/admin")
-    public ModelAndView adminPage() {
-
-        ModelAndView mv = new ModelAndView("admin/admin");
-        mv.addObject("title", "Spring Security Hello World");
-        mv.addObject("message", "This is protected page!");
-        return mv;
+    public String adminPage(Model model) {
+        model.addAttribute("title", "Spring Security Hello World");
+        model.addAttribute("message", "This is protected page!");
+        model.addAttribute("activeLink", "admin");
+        return "admin/admin";
 
     }
 

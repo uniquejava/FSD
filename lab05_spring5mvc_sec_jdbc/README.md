@@ -1,6 +1,6 @@
 # Course App (spring mvc)
 
-![lab05 screenshot](./login.jpg)
+![lab05 screenshot](./account.jpg)
 
 ## Tech stack
 

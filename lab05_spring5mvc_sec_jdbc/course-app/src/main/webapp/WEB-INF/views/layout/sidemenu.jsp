@@ -27,7 +27,7 @@
 			
 			<sec:authorize access="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
 				<li><a href="${ctx }/logout"> Logout </a></li>
-				<li><a href="${ctx }/account/update"> Account Update </a></li>
+				<li><a href="${ctx }/user/account"> Account Update </a></li>
 			</sec:authorize>
 		</ul>
 	</div>

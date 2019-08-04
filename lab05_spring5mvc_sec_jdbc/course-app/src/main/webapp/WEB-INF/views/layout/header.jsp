@@ -9,18 +9,18 @@
   <div class="navbar-nav-scroll">
     <ul class="navbar-nav bd-navbar-nav flex-row">
       <li class="nav-item">
-        <a class="nav-link active" href="${ctx }/">Home</a>
+        <a class="nav-link <c:if test="${empty activeLink}">active</c:if>" href="${ctx }/">Home</a>
       </li>
       
       <sec:authorize access="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
       <li class="nav-item">
-        <a class="nav-link " href="#">Tutorials</a>
+        <a class="nav-link <c:if test="${activeLink eq 'tutorials' }">active</c:if>" href="${ctx }/user/tutorials">Tutorials</a>
       </li>
       </sec:authorize>
       
       <sec:authorize access="hasRole('ROLE_ADMIN')">
       <li class="nav-item">
-          <a class="nav-link " href="${ctx }/admin/admin">Administration</a>
+          <a class="nav-link <c:if test="${activeLink eq 'admin' }">active</c:if>" href="${ctx }/admin/admin">Administration</a>
       </li>
       </sec:authorize>
       
@@ -33,10 +33,10 @@
         Feedback
       </a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
-        <a class="dropdown-item" href="#">Issues</a>
-        <a class="dropdown-item" href="#">Pull request</a>
+        <a class="dropdown-item" target="_blank" href="https://github.com/uniquejava/FSD/issues">Issues</a>
+        <a class="dropdown-item" target="_blank" href="https://github.com/uniquejava/FSD/pulls">Pull request</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Source code</a>
+        <a class="dropdown-item" target="_blank" href="https://github.com/uniquejava/FSD">Source code</a>
       </div>
     </li>
 
@@ -45,5 +45,14 @@
     </li>
   </ul>
 
-  <a class="btn btn-bd-download d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3" href="https://github.com/uniquejava/FSD">Download</a>
+	<sec:authorize access="hasRole('ROLE_ANONYMOUS')">
+		<a
+			class="btn btn-bd-download d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
+			href="${ctx }/login">Login</a>
+	</sec:authorize>
+	<sec:authorize access="hasRole('ROLE_USER')">
+		<a
+			class="btn btn-bd-download d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
+			href="${ctx }/logout">Logout</a>
+	</sec:authorize>
 </header>

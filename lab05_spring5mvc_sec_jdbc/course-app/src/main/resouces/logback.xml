@@ -19,8 +19,8 @@
         </encoder>
     </appender>
     <logger name="org.springframework" level="INFO" />
-    <logger name="me.cyper" level="INFO" />
-    <root level="INFO">
+    <logger name="me.cyper" level="DEBUG" />
+    <root level="DEBUG">
         <appender-ref ref="ROLLING" />
         <appender-ref ref="stdout" />
     </root>

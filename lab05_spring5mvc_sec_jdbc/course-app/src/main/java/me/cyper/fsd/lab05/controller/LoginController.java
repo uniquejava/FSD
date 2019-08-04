@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.code.kaptcha.Constants;
+
 import me.cyper.fsd.lab05.entity.User;
 import me.cyper.fsd.lab05.service.UserService;
 import me.cyper.fsd.lab05.util.Result;
@@ -26,7 +28,7 @@ import me.cyper.fsd.lab05.util.Result;
 public class LoginController {
     @Autowired
     private UserService userService;
-    
+
     @GetMapping(value = "/login")
     public String loginPage(@RequestParam(value = "error", required = false) String error,
             @RequestParam(value = "logout", required = false) String logout, HttpSession session, Model model) {
@@ -60,7 +62,16 @@ public class LoginController {
 
     @PostMapping("/register")
     @ResponseBody
-    public Result doRegister(@RequestBody User user) {
+    public Result doRegister(@RequestParam(name = "kaptcha", required = true) String kaptcha, @RequestBody User user,
+            HttpSession session) {
+        String expect = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
+
+        System.out.println("expect=" + expect);
+
+        if (expect == null || !kaptcha.equalsIgnoreCase(expect)) {
+            return Result.error("Incorrect captcha code.");
+        }
+
         userService.saveUser(user);
         return Result.ok(user);
     }

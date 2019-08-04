@@ -35,14 +35,16 @@
 		$.ajax({
 			type : "POST",
 			contentType : "application/json",
-			url : "${ctx}/register?kaptcha=" + $('#kaptcha').val(),
+			url : "${ctx}/register",
 			data : JSON.stringify(data),
 			dataType : 'json',
 			timeout : 100000,
-		}).done(function(data) {
-			console.log("SUCCESS: ", data);
+		}).done(function(res) {
+			if(res.code !== 200) {
+				alert(res.data);
+			}
 		}).fail(function(e) {
-			console.log("FAIL: ", e);
+			alert("FAIL: ", e);
 		}).always(function() {
 			console.log("ALWAYS");
 		});

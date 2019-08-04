@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -27,6 +29,8 @@ import me.cyper.fsd.lab05.util.Result;
 
 @Controller
 public class LoginController {
+    final static Logger logger = LoggerFactory.getLogger(LoginController.class);
+
     @Autowired
     private UserService userService;
 
@@ -67,7 +71,9 @@ public class LoginController {
             HttpSession session) {
         String expect = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
 
-        System.out.println("expect=" + expect);
+        if (logger.isDebugEnabled()) {
+            logger.debug("expected captcha: {}, actual: {}", expect, kaptcha);
+        }
 
         if (expect == null || !kaptcha.equalsIgnoreCase(expect)) {
             throw new BusinessException("Invalid captcha code.");

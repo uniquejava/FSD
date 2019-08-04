@@ -98,6 +98,14 @@
             <artifactId>kaptcha</artifactId>
             <version>2.3.2</version>
         </dependency>
+        
+        
+        <!-- logging , spring 5 no more bridge, thanks spring-jcl -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
 
 
         <!-- JSTL Dependency -->

@@ -21,6 +21,14 @@
 
 [Spring Security Guides](https://docs.spring.io/spring-security/site/docs/current/guides/html5/)
 
+## Exception Handling
+
+https://www.baeldung.com/exception-handling-for-rest-with-spring
+
+## Logging
+
+https://www.mkyong.com/maven/how-to-create-a-web-application-project-with-maven/
+
 ## References
 
 1. https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc

@@ -1,9 +1,12 @@
 package me.cyper.fsd.lab05.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,10 +15,17 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import me.cyper.fsd.lab05.entity.User;
+import me.cyper.fsd.lab05.service.UserService;
 
 @Controller
 public class LoginController {
+    @Autowired
+    private UserService userService;
+    
     @GetMapping(value = "/login")
     public String loginPage(@RequestParam(value = "error", required = false) String error,
             @RequestParam(value = "logout", required = false) String logout, HttpSession session, Model model) {
@@ -41,4 +51,25 @@ public class LoginController {
         }
         return "redirect:/login?logout=true";
     }
+
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String doRegister(@RequestParam Map<String, String> body) {
+        System.out.println(body);
+        
+        User user = new User();
+        user.setName(body.get("name"));
+        user.setEmail(body.get("email"));
+        user.setUsername(body.get("username"));
+        user.setPassword(body.get("password"));
+        
+        userService.saveUser(user);
+        
+        return "redirect:/";
+    }
+
 }

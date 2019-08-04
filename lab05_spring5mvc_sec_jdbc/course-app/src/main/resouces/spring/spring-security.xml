@@ -23,7 +23,7 @@
     
 
     <authentication-manager id="authenticationManager">
-        <authentication-provider user-service-ref="userDao">
+        <authentication-provider user-service-ref="userService">
             <!-- <user-service>
                 <user name="cyper" password="{noop}123456" authorities="ROLE_ADMIN" />
             </user-service> -->

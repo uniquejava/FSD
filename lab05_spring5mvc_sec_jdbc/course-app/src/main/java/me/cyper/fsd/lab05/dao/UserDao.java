@@ -1,26 +1,25 @@
 package me.cyper.fsd.lab05.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import me.cyper.fsd.lab05.entity.User;
 
 @Repository
-public class UserDao implements UserDetailsService {
+public class UserDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -41,29 +40,61 @@ public class UserDao implements UserDetailsService {
         return result;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public User findByUsername(String username) {
         String sql = "select * from tbl_user where username=?";
-        UserDetails result = jdbcTemplate.query(sql, new ResultSetExtractor<UserDetails>() {
-            public UserDetails extractData(ResultSet rs) throws SQLException {
+        User result = jdbcTemplate.query(sql, new ResultSetExtractor<User>() {
+            public User extractData(ResultSet rs) throws SQLException {
                 if (rs.next()) {
-                    Collection<GrantedAuthority> grantedAuths = Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
-                    String username = rs.getString("username");
-                    String password = rs.getString("password");
-                    UserDetails user = new org.springframework.security.core.userdetails.User(username, password,
-                            grantedAuths);
-                    return user;
+                    User o = new User();
+                    o.setUserId(rs.getInt("user_id"));
+                    o.setName(rs.getString("name"));
+                    o.setEmail(rs.getString("email"));
+                    o.setUsername(rs.getString("username"));
+                    o.setPassword(rs.getString("password"));
+                    return o;
                 }
 
                 return null;
             }
         }, username);
 
-        if (result == null) {
-            throw new UsernameNotFoundException("User does not exist.");
-        }
-
         return result;
+    }
+
+    public User saveUser(User user) {
+        String sql = "insert into tbl_user(name,email,username,password) values (?,?,?,?)";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(new PreparedStatementCreator() {
+
+            @Override
+            public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.setString(1, user.getName());
+                ps.setString(2, user.getEmail());
+                ps.setString(3, user.getUsername());
+                ps.setString(4, user.getPassword());
+                return ps;
+            }
+        }, keyHolder);
+
+//      user.setUserId(keyHolder.getKeys().intValue());
+        System.out.println(keyHolder.getKeys());
+
+        return user;
+
+    }
+
+    public void updateUser(User user) {
+        String sql = "update tbl_user set name=?,email=?,username=?,password=? where user_id=?";
+
+        List<Object> params = new ArrayList<>();
+        params.add(user.getName());
+        params.add(user.getEmail());
+        params.add(user.getUsername());
+        params.add(user.getPassword());
+        params.add(user.getUserId());
+
+        jdbcTemplate.update(sql, params.toArray());
 
     }
 

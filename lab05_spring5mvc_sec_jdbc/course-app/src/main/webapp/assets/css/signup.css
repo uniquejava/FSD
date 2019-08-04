@@ -1,0 +1,35 @@
+.form-signup {
+	margin-top: 1rem;
+	max-width: 800px;
+}
+
+.form-signup p {
+	display: flex;
+}
+
+.form-signup label {
+	min-width: 130px;
+}
+
+.form-signup .form-control {
+	min-width: 280px;
+}
+
+.form-signup button {
+	flex-grow: 1;
+}
+
+.captcha-image {
+	cursor: pointer;
+}
+
+a.btn-refresh {
+	display: inline-block;
+	margin: 0 0.8rem;
+	color: #212529;
+	vertical-align: middle;
+}
+
+a.btn-refresh:hover {
+	color: #212529;
+}

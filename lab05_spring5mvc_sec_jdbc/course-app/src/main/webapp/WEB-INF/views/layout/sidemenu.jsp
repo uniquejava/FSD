@@ -19,7 +19,7 @@
 			<a href="#"> Introduction </a></li>
 			
 			
-			<li><a href="#"> Register </a></li>
+			<li><a href="${ctx }/register"> Register </a></li>
 			
 			<sec:authorize access="hasRole('ROLE_ANONYMOUS')">
 			    <li><a href="${ctx }/login"> Login </a></li>

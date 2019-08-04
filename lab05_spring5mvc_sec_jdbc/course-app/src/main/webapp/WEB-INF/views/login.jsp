@@ -49,7 +49,7 @@
 				<label for="password" class="sr-only">Captcha</label>
 				 <input
 					class="form-control captcha-input" name="kaptcha" class="form-control"
-					placeholder="Captcha code" required="" autocomplete="off">
+					placeholder="Enter Captcha" required="" autocomplete="off">
 				  
 				 <span class="captcha-area">
                     <img src="${ctx}/captcha_image" onclick="changeCaptcha('${ctx }')" width="80" height="34" class="captcha-image" alt="Captcha Code"/>

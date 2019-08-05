@@ -25,6 +25,7 @@ cp ./target/course-app.war TOMCAT_HOME/webapps
 2. Copy `target/course-app.war` to `<TOMCAT_HOME>/webapps`
 3. Start up tomcat 9 server `sh <TOMCAT_HOME>/bin/startup.sh`
 4. Open in browser: http://localhost:8080/course-app/
+5. Built-in users: `admin/admin` and `tomcat/tomcat`.
 
 ## Spring Security
 

@@ -1,6 +1,6 @@
 package me.cyper.fsd.lab05.service;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -37,8 +37,15 @@ public class UserService implements UserDetailsService {
         }
 
         GrantedAuthority roleUser = new SimpleGrantedAuthority("ROLE_USER");
-        GrantedAuthority roleAdmin = new SimpleGrantedAuthority("ROLE_ADMIN");
-        Collection<GrantedAuthority> grantedAuths = Arrays.asList(roleUser, roleAdmin);
+
+        Collection<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
+        grantedAuths.add(roleUser);
+
+        if (user.isAdmin()) {
+            GrantedAuthority roleAdmin = new SimpleGrantedAuthority("ROLE_ADMIN");
+            grantedAuths.add(roleAdmin);
+        }
+
         return new org.springframework.security.core.userdetails.User(username, user.getPassword(), grantedAuths);
 
     }

@@ -19,6 +19,10 @@
 	flex-grow: 1;
 }
 
+.checkbox {
+  margin-left: 148px;
+}
+
 .captcha-image {
 	cursor: pointer;
 }

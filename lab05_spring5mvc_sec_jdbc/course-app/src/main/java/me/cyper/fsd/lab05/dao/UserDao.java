@@ -36,6 +36,7 @@ public class UserDao {
                 o.setEmail(rs.getString("email"));
                 o.setUsername(rs.getString("username"));
                 o.setPassword(rs.getString("password"));
+                o.setAdmin(rs.getBoolean("admin"));
                 return o;
             }
         });
@@ -60,6 +61,7 @@ public class UserDao {
                     o.setEmail(rs.getString("email"));
                     o.setUsername(rs.getString("username"));
                     o.setPassword(rs.getString("password"));
+                    o.setAdmin(rs.getBoolean("admin"));
                     return o;
                 }
 
@@ -71,7 +73,7 @@ public class UserDao {
     }
 
     public User saveUser(User user) {
-        String sql = "insert into tbl_user(name,email,username,password) values (?,?,?,?)";
+        String sql = "insert into tbl_user(name,email,username,password,admin) values (?,?,?,?,?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         
         if (logger.isDebugEnabled()) {
@@ -88,6 +90,7 @@ public class UserDao {
                 ps.setString(2, user.getEmail());
                 ps.setString(3, user.getUsername());
                 ps.setString(4, user.getPassword());
+                ps.setBoolean(5, user.isAdmin());
                 return ps;
             }
         }, keyHolder);
@@ -102,7 +105,7 @@ public class UserDao {
     }
 
     public void updateUser(User user) {
-        String sql = "update tbl_user set name=?,email=?,username=?,password=? where user_id=?";
+        String sql = "update tbl_user set name=?,email=?,username=?,password=?,admin=? where user_id=?";
 
         if (logger.isDebugEnabled()) {
             logger.debug("sql: {}", sql);
@@ -115,6 +118,7 @@ public class UserDao {
         params.add(user.getUsername());
         params.add(user.getPassword());
         params.add(user.getUserId());
+        params.add(user.isAdmin());
 
         jdbcTemplate.update(sql, params.toArray());
 

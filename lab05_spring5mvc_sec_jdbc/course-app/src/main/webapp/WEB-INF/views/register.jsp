@@ -29,7 +29,8 @@
 			name : $('#name').val(),
 			email : $('#email').val(),
 			username : $('#username').val(),
-			password : $('#password').val()
+			password : $('#password').val(),
+			admin : $('#admin').prop('checked')
 		};
 
 		$.ajax({
@@ -56,7 +57,7 @@
     <div class="container-fluid">
         <div class="row flex-xl-nowrap">
             <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
-            
+
                 <jsp:include page="layout/sidemenu.jsp"></jsp:include>
             </div>
 
@@ -88,6 +89,12 @@
 		                 <input
 		                    type="password" id="password" name="password" class="form-control" required="">
 		            </p>
+
+					<p class="checkbox">
+						<input type="checkbox" class="form-check-input" id="admin">
+						<label for="admin">I am an administrator!</label>
+					</p>
+
 		            <p>
 		                <label> <img src="${ctx}/captcha_image" onclick="changeCaptcha('${ctx }')" width="80" height="34" class="captcha-image" alt="Captcha Code"/>
                            <a href="javascript:void(0)" class="btn-refresh" onclick="changeCaptcha('${ctx }')"><i class="fas fa-redo"></i></a></label>

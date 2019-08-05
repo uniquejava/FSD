@@ -6,6 +6,7 @@ public class User {
     private String email;
     private String username;
     private String password;
+    private boolean admin;
 
     public Integer getUserId() {
         return userId;
@@ -47,8 +48,18 @@ public class User {
         this.password = password;
     }
 
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
     @Override
     public String toString() {
-        return "User [userId=" + userId + ", name=" + name + ", email=" + email + ", username=" + username + "]";
+        return "User [userId=" + userId + ", name=" + name + ", email=" + email + ", username=" + username + ", admin="
+                + admin + "]";
     }
+
 }

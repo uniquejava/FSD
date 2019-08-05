@@ -1,3 +1,3 @@
-insert into tbl_user(name,email,username,password) values 
-('cyper yin','cyper@cn.ibm.com', 'uniquejava','passw0rd'),
-('green','green@cn.ibm.com', 'green','passw0rd');
+insert into tbl_user(name,email,username,password,admin) values 
+('admin','admin@mycompany.com', 'admin','admin', TRUE),
+('tomcat','tomcat@mycompany.com', 'tomcat','tomcat', FALSE);

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,11 +19,21 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import me.cyper.fsd.lab05.util.Result;
 
 /**
  * Global Exception Handler.
+ * 
+ * <pre>
+ * 
+ * 1. Handle Bad Request Exceptions, see https://www.baeldung.com/global-error-handler-in-a-spring-rest-api
+ * 2. Business Exception
+ * 3. Unexpected Error.
+ * 
+ * </pre>
+ * 
  */
 @ControllerAdvice
 @RestController
@@ -32,14 +44,14 @@ class GlobalControllerExceptionHandler {
     protected MessageSource messageSource;
 
     /**
-     * Parameter Validation Errors. (code: 400).
+     * Handle Bean Validation(JSR 303) Errors. (code: 400).
      * 
      * @param e
      * @return
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = { MethodArgumentNotValidException.class })
-    public Result handleClientError(MethodArgumentNotValidException e) {
+    public Result handleValidationErrors(MethodArgumentNotValidException e) {
         List<String> errors = new ArrayList<String>();
         for (FieldError error : e.getBindingResult().getFieldErrors()) {
             errors.add(error.getField() + ": " + error.getDefaultMessage());
@@ -51,7 +63,41 @@ class GlobalControllerExceptionHandler {
     }
 
     /**
-     * Client exceptions (code: 400).
+     * ConstrainViolationException: This exception reports the result of constraint
+     * violations. (code: 400).
+     * 
+     * @param e
+     * @return
+     */
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = { ConstraintViolationException.class })
+    public Result handleConstraintViolation(ConstraintViolationException e) {
+        List<String> errors = new ArrayList<String>();
+        for (ConstraintViolation<?> violation : e.getConstraintViolations()) {
+            errors.add(violation.getRootBeanClass().getName() + " " + violation.getPropertyPath() + ": "
+                    + violation.getMessage());
+        }
+
+        return new Result(HttpStatus.BAD_REQUEST.value(), errors);
+    }
+
+    /**
+     * MethodArgumentTypeMismatchException: This exception is thrown when method
+     * argument is not the expected type. (code: 400).
+     * 
+     * @param e
+     * @return
+     */
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = { MethodArgumentTypeMismatchException.class })
+    public Result handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException e) {
+        String error = e.getName() + " should be of type " + e.getRequiredType().getName();
+
+        return new Result(HttpStatus.BAD_REQUEST.value(), error);
+    }
+
+    /**
+     * Business exceptions (code: 400).
      * 
      * @param e
      * @return
@@ -65,7 +111,7 @@ class GlobalControllerExceptionHandler {
 
     /**
      * 
-     * Uncaught system exceptions (code: 500).
+     * Unexpected Error (code: 500).
      *
      * @param e
      * @return

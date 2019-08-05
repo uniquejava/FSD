@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import me.cyper.fsd.lab05.entity.User;
+import me.cyper.fsd.lab05.exception.BusinessException;
 import me.cyper.fsd.lab05.service.UserService;
 import me.cyper.fsd.lab05.util.Result;
 
@@ -65,10 +66,15 @@ public class LoginController extends BaseController {
 
     @PostMapping("/register")
     @ResponseBody
-    public Result doRegister(@RequestParam(name = "kaptcha", required = true) String kaptcha, @Valid @RequestBody User user,
-            HttpSession session) {
+    public Result doRegister(@RequestParam(name = "kaptcha", required = true) String kaptcha,
+            @Valid @RequestBody User user, HttpSession session) {
 
         checkCaptcha(kaptcha, session);
+
+        User existingUser = userService.findByUsername(user.getUsername());
+        if (existingUser != null) {
+            throw new BusinessException(String.format("Username %s already exists.", user.getUsername()));
+        }
 
         userService.saveUser(user);
         return Result.ok(user);

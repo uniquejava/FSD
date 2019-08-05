@@ -15,18 +15,18 @@ Source code: https://github.com/uniquejava/FSD
 3. Intellij IDEA Community 2019
 4. Spring Tool Suite 4 (editorconfig)
 
-## Different Editions
+## Required assignments
 
-1. [x] html5/css3/es6
-2. [x] angular8
-3. [x] react16
-4. [x] java8
+1. [x] html5/css3/es6 (html5 media player)
+2. [x] angular8 (html5 media player)
+3. [x] react16 (html5 media player)
+4. [x] java8 (salary predictor)
 5. [x] spring mvc | jdbc | security (xml based) | validation | jsp
 6. [ ] spring boot | jpa | security (java config) | validation | thymeleaf
-7. [ ] spring cloud
+7. [ ] spring boot rest api | swagger | jwt | react.js | ant-design (前后端分离)
+8. [ ] spring cloud
 
-## Other stacks(Bonus)
+## Real world
 
-1. player vue edition
-2. player flutter edition
-3. backend node.js edition
+101. [ ] spring boot + spring security + jwt + vue.js + ant-design
+102. [ ] node.js + jwt + mongodb + vue.js + element-ui

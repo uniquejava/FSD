@@ -1,0 +1,24 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# Matches multiple files with brace expansion notation
+# Set default charset
+[*.{java,xml,properties,sql}]
+charset = utf-8
+
+# Indentation
+[*.{java,jsp,xml,properties,sql}]
+indent_style = space
+indent_size = 4
+
+# Indentation for bash file
+[*.{sh,css,html}]
+indent_style = space
+indent_size = 2

@@ -44,6 +44,4 @@ https://www.baeldung.com/global-error-handler-in-a-spring-rest-api
 
 ## References
 
-1. https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc
-2. https://howtodoinjava.com/spring5/security5/security-java-config-enablewebsecurity-example/
-3. [写得贼好 Creating a Custom Login Form](https://docs.spring.io/spring-security/site/docs/current/guides/html5/form-javaconfig.html)
+1. https://stackoverflow.com/questions/24916894/serving-static-web-resources-in-spring-boot-spring-security-application

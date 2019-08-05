@@ -39,6 +39,10 @@ https://www.baeldung.com/exception-handling-for-rest-with-spring
 
 https://www.mkyong.com/maven/how-to-create-a-web-application-project-with-maven/
 
+## Validation
+
+https://lmonkiewicz.com/programming/get-noticed-2017/spring-boot-rest-request-validation/
+
 ## References
 
 1. https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc

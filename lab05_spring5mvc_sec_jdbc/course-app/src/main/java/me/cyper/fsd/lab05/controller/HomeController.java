@@ -38,8 +38,6 @@ public class HomeController {
 
     @GetMapping(value = "/admin/admin")
     public String adminPage(Model model) {
-        model.addAttribute("title", "Spring Security Hello World");
-        model.addAttribute("message", "This is protected page!");
         model.addAttribute("activeLink", "admin");
         return "admin/admin";
 

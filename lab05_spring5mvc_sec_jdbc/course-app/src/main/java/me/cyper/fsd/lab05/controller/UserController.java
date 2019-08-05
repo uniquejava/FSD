@@ -1,6 +1,7 @@
 package me.cyper.fsd.lab05.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,8 +41,8 @@ public class UserController extends BaseController {
 
     @PutMapping("/account")
     @ResponseBody
-    public Result updateAccount(@RequestParam(name = "kaptcha", required = true) String kaptcha, @RequestBody User user,
-            HttpSession session) {
+    public Result updateAccount(@RequestParam(name = "kaptcha", required = true) String kaptcha,
+            @Valid @RequestBody User user, HttpSession session) {
 
         checkCaptcha(kaptcha, session);
 

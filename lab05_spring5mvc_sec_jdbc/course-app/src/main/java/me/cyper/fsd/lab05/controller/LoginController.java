@@ -3,6 +3,7 @@ package me.cyper.fsd.lab05.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,7 +65,7 @@ public class LoginController extends BaseController {
 
     @PostMapping("/register")
     @ResponseBody
-    public Result doRegister(@RequestParam(name = "kaptcha", required = true) String kaptcha, @RequestBody User user,
+    public Result doRegister(@RequestParam(name = "kaptcha", required = true) String kaptcha, @Valid @RequestBody User user,
             HttpSession session) {
 
         checkCaptcha(kaptcha, session);

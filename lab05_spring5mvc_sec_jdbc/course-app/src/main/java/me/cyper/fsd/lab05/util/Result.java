@@ -26,7 +26,7 @@ public class Result {
 
     private int code;
     private Object data;
-    private String message;
+    private Object message;
 
     public final static Result OK = new Result(STATUS_OK);
 
@@ -52,7 +52,7 @@ public class Result {
             this.data = data;
             this.message = "success";
         } else {
-            this.message = String.valueOf(data);
+            this.message = data;
         }
         
     }
@@ -73,11 +73,11 @@ public class Result {
         this.data = data;
     }
     
-    public String getMessage() {
+    public Object getMessage() {
         return message;
     }
     
-    public void setMessage(String message) {
+    public void setMessage(Object message) {
         this.message = message;
     }
 

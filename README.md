@@ -14,6 +14,7 @@ Source code: https://github.com/uniquejava/FSD
 2. Visual Studio Code 1.36.1 (prettier)
 3. Intellij IDEA Community 2019
 4. Spring Tool Suite 4 (editorconfig)
+5. Test with Google Chrome
 
 ## Required assignments
 
@@ -21,12 +22,14 @@ Source code: https://github.com/uniquejava/FSD
 2. [x] angular8 (html5 media player)
 3. [x] react16 (html5 media player)
 4. [x] java8 (salary predictor)
-5. [x] spring mvc | jdbc | security (xml based) | validation | jsp
-6. [x] spring boot | jpa | security (java config) | validation | thymeleaf
-7. [ ] spring boot rest api | swagger | jwt | react.js | ant-design (前后端分离)
-8. [ ] spring cloud
+5. [x] spring mvc (2019/8/19)
+6. [ ] spring boot (2019/9/2)
+7. [ ] database design (2019/9/23)
+8. [ ] maven/git/junit (2019/10/14)
+9. [ ] CI/CD: jenkins & docker (2019/10/21)
 
 ## Real world
 
 101. [ ] spring boot + spring security + jwt + vue.js + ant-design
 102. [ ] node.js + jwt + mongodb + vue.js + element-ui
+103. [ ] spring boot rest api | swagger | jwt | react.js | ant-design

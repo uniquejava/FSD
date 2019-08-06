@@ -1,5 +1,7 @@
 # Course App (spring boot)
 
+![lab06 screenshot](./success.jpg)
+
 ## Tech stack
 
 1. [x] Spring Boot 2.1.x
@@ -16,6 +18,9 @@
 ## TODO
 
 1. [ ] Custom 403(Access Denied Page)
+2. [ ] Remember me
+3. [ ] JWT
+4. [ ] Spinner
 
 ## How to run
 
@@ -32,9 +37,15 @@ mvn spring-boot:run -Dspring.profiles.active=dev
 
 [Spring Security Guides](https://docs.spring.io/spring-security/site/docs/current/guides/html5/)
 
+## Remember-Me Authentication
+
+https://docs.spring.io/spring-security/site/docs/5.1.6.RELEASE/reference/htmlsingle/#remember-me
+
 ## CSRF
 
-https://stackoverflow.com/a/25707276/2497876
+When should you use CSRF protection? Our recommendation is to use CSRF protection for any request that could be processed by a browser by normal users. If you are only creating a service that is used by non-browser clients, you will likely want to disable CSRF protection.
+
+https://docs.spring.io/spring-security/site/docs/5.1.6.RELEASE/reference/htmlsingle/#csrf
 
 ## Exception Handling
 

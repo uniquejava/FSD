@@ -13,31 +13,19 @@
 <link type="text/css" rel="stylesheet" th:href="@{/css/signup.css}" />
 <script th:inline="javascript">
   var token = $("meta[name='_csrf']").attr("content");
-	$.ajaxSetup({
-	    beforeSend: function(xhr) {
-	        xhr.setRequestHeader('X-CSRF-TOKEN', token);
-	    }
-	});
-	
-	function changeCaptcha(){
-	  var link = /*[[@{/captcha_image}]]*/ 'test';
-	  $(".captcha-image").attr("src", `${link}?ts=${ Date.now()}`);
-	}
+  $.ajaxSetup({
+      beforeSend: function(xhr) {
+          xhr.setRequestHeader('X-CSRF-TOKEN', token);
+      }
+  });
+  
+  function changeCaptcha(){
+    var link = /*[[@{/captcha_image}]]*/ 'test';
+    $(".captcha-image").attr("src", `${link}?ts=${ Date.now()}`);
+  }
 
-  function updateUser() {
-    if($('#password').val() !== $('#password2').val()) {
-       $.toast({
-                heading: 'Error',
-                text: 'password mismatch.',
-                showHideTransition: 'fade',
-                icon: 'error',
-                position: 'top-right'
-            })
-      return false;
-    }
-
+  function registerUser() {
     let data = {
-      userId : $('#userId').val(),
       name : $('#name').val(),
       email : $('#email').val(),
       username : $('#username').val(),
@@ -45,10 +33,10 @@
       admin : $('#admin').prop('checked'),
     };
     
-    var link = /*[[@{/user/account}]]*/ '/user/account';
+    var link = /*[[@{/register}]]*/ '/register';
 
     $.ajax({
-      type : "PUT",
+      type : "POST",
       contentType : "application/json",
       url : `${link}?kaptcha=` + $('#kaptcha').val(),
       data : JSON.stringify(data),
@@ -57,7 +45,7 @@
         }).done(function(res) {
             $.toast({
                 heading: 'Success',
-                text: 'Account updated successfully.',
+                text: 'Registration is successful.',
                 showHideTransition: 'slide',
                 icon: 'success',
                 position: 'top-right'
@@ -93,33 +81,28 @@
                 <p>
                     <label for="name">Name</label>
                     <input
-                        type="text" id="name" name="name" th:value="${user.name }" class="form-control"
+                        type="text" id="name" name="name" class="form-control"
                         required="" autofocus="" autocomplete="off">
                 </p>
                 <p>
                     <label for="email">Email</label>
                      <input
-                        type="email" id="email" name="email" th:value="${user.email }" class="form-control"
+                        type="email" id="email" name="email" class="form-control"
                         required="" autocomplete="off">
                 </p>
                 <p>
                     <label for="username">Username</label>
                     <input
-                        type="text" id="username" name="username" th:value="${user.username }" class="form-control"
+                        type="text" id="username" name="username" class="form-control"
                        required="" autofocus="" autocomplete="off">
                 </p>
                 <p>
                     <label for="password">Password</label>
                      <input
-                        type="password" id="password" name="password" th:value="${user.password }" class="form-control" required="">
-                </p>
-                <p>
-                    <label for="password2">Re-Enter Password:</label>
-                     <input
-                        type="password" id="password2" name="password2" class="form-control" required="">
+                        type="password" id="password" name="password" class="form-control" required="">
                 </p>
                 <p class="checkbox">
-                        <input type="checkbox" class="form-check-input" id="admin" th:checked="${user.admin}">
+                        <input type="checkbox" class="form-check-input" id="admin">
                         <label for="admin">I am an administrator!</label>
                     </p>
                 <p>
@@ -129,8 +112,8 @@
                 </p>
                 <p>
                    <label></label>
-                   <input type="hidden" name="userId" id="userId" th:value="${user.userId}" />
-                   <button class="btn btn-success" type="button" onclick="updateUser()"> Update </button>
+                   <button class="btn btn-success" type="button" onclick="registerUser()"> Register</button>
+                   <button class="btn btn-light ml-4" type="reset" >Reset</button>
                 </p>
             </div>
             </main>

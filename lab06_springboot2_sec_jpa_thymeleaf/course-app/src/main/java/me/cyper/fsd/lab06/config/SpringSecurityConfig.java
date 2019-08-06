@@ -11,6 +11,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,6 +21,7 @@ import me.cyper.fsd.lab06.security.KaptchaAuthenticationFilter;
 import me.cyper.fsd.lab06.service.UserService;
 
 @Configuration
+@EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -56,7 +58,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // @formatter:off
 
-        http.csrf().disable()
+        http
             .authorizeRequests()
             
                 // Common locations for static resources.

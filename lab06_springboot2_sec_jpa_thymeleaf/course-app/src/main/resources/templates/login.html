@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>FSD Course Center - Login</title>
 <script th:src="@{/webjars/jquery/3.4.1/dist/jquery.min.js}"></script>
-<link type="text/css" rel="stylesheet" th:href="@{webjars/font-awesome/releases/v5.9.0/css/all.css}" />
+<link type="text/css" rel="stylesheet" th:href="@{webjars/font-awesome/5.9.0/css/all.css}" />
 <link type="text/css" rel="stylesheet" th:href="@{webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
 <link type="text/css" rel="stylesheet" th:href="@{/css/signin.css}" />
 <script th:inline="javascript">
@@ -43,7 +43,6 @@
 				 </span>
 			</p>
 			<p class="d-flex mt-5">
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	            <button class="btn btn-lg btn-success btn-block mt-2" type="submit" >Signin</button>
 	            <div class="float-right text-light">No account? <a class="text-warning" th:href="@{/register}">Register for free now.</a></div>
             </p>

@@ -11,7 +11,7 @@
 .bd-navbar {
     min-height: 4rem;
     background-color: #44372d;
-    background-image: url("/images/pexels-photo-2310641.jpeg");
+    background-image: url("/course-app/images/pexels-photo-2310641.jpeg");
     background-size: cover;
     background-position: bottom;
     box-shadow: 0 0.5rem 1rem rgba(0,0,0,.05), inset 0 -1px 0 rgba(0,0,0,.1);

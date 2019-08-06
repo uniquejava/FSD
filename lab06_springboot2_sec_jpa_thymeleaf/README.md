@@ -26,6 +26,10 @@ mvc spring-boot:run -Dspring.profiles.active=dev
 
 [Spring Security Guides](https://docs.spring.io/spring-security/site/docs/current/guides/html5/)
 
+## CSRF
+
+https://stackoverflow.com/a/25707276/2497876
+
 ## Exception Handling
 
 https://www.baeldung.com/global-error-handler-in-a-spring-rest-api
@@ -35,6 +39,8 @@ https://www.baeldung.com/exception-handling-for-rest-with-spring
 ## Logging
 
 https://www.mkyong.com/maven/how-to-create-a-web-application-project-with-maven/
+
+https://stackoverflow.com/questions/30571319/spring-boot-logging-pattern
 
 ## Validation
 

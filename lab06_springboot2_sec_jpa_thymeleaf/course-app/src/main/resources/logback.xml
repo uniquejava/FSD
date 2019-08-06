@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+    <!-- use Spring default values -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    
     <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>fsd.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
@@ -12,12 +15,15 @@
             <pattern>%date %level [%file:%line] %m%n</pattern>
         </encoder>
     </appender>
-    
+
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
+            <!-- <pattern>${CONSOLE_LOG_PATTERN}</pattern> -->
             <pattern>[%d %p]%m%n</pattern>
+            <charset>utf8</charset>
         </encoder>
     </appender>
+    
     <logger name="org.springframework" level="INFO" />
     <logger name="me.cyper" level="DEBUG" />
     <root level="INFO">

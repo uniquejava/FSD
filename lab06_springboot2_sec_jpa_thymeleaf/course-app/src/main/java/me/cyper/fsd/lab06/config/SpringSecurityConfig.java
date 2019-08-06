@@ -56,6 +56,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         // 允许来自同一来源的H2 控制台的请求
         http.headers().frameOptions().sameOrigin();
 
+        // http.csrf().disable();
+        
         // @formatter:off
 
         http
@@ -84,6 +86,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 // when we successfully logout, redirect the browser to /login?logout (since we have not specified otherwise)
                 // we are in charge of rendering a logout confirmation page when /login?logout is requested
                 .loginPage("/login")
+                .defaultSuccessUrl("/")
 
                 // we need to instruct Spring Security to allow anyone to access the /login URL
                 .permitAll()

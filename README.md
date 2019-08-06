@@ -22,7 +22,7 @@ Source code: https://github.com/uniquejava/FSD
 3. [x] react16 (html5 media player)
 4. [x] java8 (salary predictor)
 5. [x] spring mvc | jdbc | security (xml based) | validation | jsp
-6. [ ] spring boot | jpa | security (java config) | validation | thymeleaf
+6. [x] spring boot | jpa | security (java config) | validation | thymeleaf
 7. [ ] spring boot rest api | swagger | jwt | react.js | ant-design (前后端分离)
 8. [ ] spring cloud
 

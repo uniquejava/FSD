@@ -67,7 +67,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 // This line is invalid, see https://stackoverflow.com/a/32056323/2497876
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 
-                .antMatchers("/","/captcha_image**", "/h2/**").permitAll()
+                .antMatchers("/","/register", "/captcha_image**", "/h2/**").permitAll()
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")
                 .antMatchers("/user/**").hasAnyRole("USER")
 
@@ -86,7 +86,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 // when we successfully logout, redirect the browser to /login?logout (since we have not specified otherwise)
                 // we are in charge of rendering a logout confirmation page when /login?logout is requested
                 .loginPage("/login")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/", true)
 
                 // we need to instruct Spring Security to allow anyone to access the /login URL
                 .permitAll()

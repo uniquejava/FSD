@@ -5,7 +5,7 @@
 <title>FSD Course Center</title>
 <script th:src="@{/webjars/jquery/3.4.1/dist/jquery.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-<link rel="stylesheet" th:href="@{webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+<link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
 <link rel="stylesheet" th:href="@{/css/layout.css}" />
 </head>
 <body>
@@ -19,11 +19,10 @@
 			</div>
 
 			<main class="col-12 col-md-9 col-xl-10 py-md-3 pl-md-5 bd-content"
-				role="main"> This is the home page. Everyone can see it.
-
-			<ul>
-				<li th:each="user : ${users}" th:text="${user.name + '=>' + user.email}"></li>
-			</ul>
+				role="main"> 
+				
+				  Hello <b sec:authentication="name">,</b>
+          <p>This is the admin page. ROLE_ADMIN can see it.</p>
 			</main>
 
 

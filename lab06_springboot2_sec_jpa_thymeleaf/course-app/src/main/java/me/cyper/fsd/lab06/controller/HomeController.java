@@ -16,9 +16,7 @@ public class HomeController {
     private UserService userService;
 
     @GetMapping("/")
-    public String main(Model model) {
-        List<User> users = userService.findAllUsers();
-        model.addAttribute("users", users);
+    public String home() {
         return "home";
     }
 

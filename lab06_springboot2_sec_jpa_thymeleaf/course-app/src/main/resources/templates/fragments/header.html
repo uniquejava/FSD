@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-  layout:decorator="layout/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>FSD Course Center</title>
+<script th:src="@{/webjars/jquery/3.4.1/dist/jquery.min.js}"></script>
 <link rel="stylesheet"
   th:href="@{webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
 <link rel="stylesheet" th:href="@{/css/layout.css}" />
@@ -50,11 +50,11 @@
     <a
       sec:authorize="hasRole('ROLE_ANONYMOUS')"
       class="btn btn-bd-download d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-      href="${ctx }/login">Login</a>
+      th:href="@{/login}">Login</a>
     <a
       sec:authorize="hasRole('ROLE_USER')"
       class="btn btn-bd-download d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-      href="${ctx }/logout">Logout</a>
+      th:href="@{/logout}">Logout</a>
 </header>
 </body>
 </html>

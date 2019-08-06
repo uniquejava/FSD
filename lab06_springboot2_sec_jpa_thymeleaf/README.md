@@ -2,25 +2,31 @@
 
 ## Tech stack
 
-1. [x] Spring Boot 2.1.6
-2. [x] Spring Security
+1. [x] Spring Boot 2.1.x
+2. [x] Spring Security 5
 3. [x] Spring Data JPA
 4. [x] Spring Logging
 5. [x] Spring Bean Validation (JSR-303)
 6. [x] Spring Global Exception Handler
 7. [x] Thymeleaf
-8. [x] Bootstrap 4.3
-9. [x] jQuery Toast Plugin
-10. [x] Tomcat 9
-11. [x] H2 In-Memory Database
+8. [x] jQuery/Bootstrap 4.3/FontAwesome/webjars
+9. [x] Tomcat 9
+10. [x] H2 In-Memory Database
+
+## TODO
+
+1. [ ] Custom 403(Access Denied Page)
 
 ## How to run
 
 ```sh
 git clone https://github.com/uniquejava/FSD.git
-cd FSD/lab06
-mvc spring-boot:run -Dspring.profiles.active=dev
+cd FSD/lab06/course-app
+mvn spring-boot:run -Dspring.profiles.active=dev
 ```
+
+1. Open in browser: http://localhost:8080/course-app/
+2. Built-in users: `admin/admin` and `tomcat/tomcat`.
 
 ## Spring Security
 

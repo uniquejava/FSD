@@ -42,7 +42,13 @@
            <a href="javascript:void(0)" class="btn-refresh" onclick="changeCaptcha()"><i class="fas fa-redo"></i></a>
 				 </span>
 			</p>
-			<p class="d-flex mt-5">
+			
+			<p class="checkbox">
+        <input type="checkbox" class="form-check-input" id="remember" name="remember-me">
+        <label for="remember">Remember me</label>
+      </p>
+      
+			<p class="d-flex mt-4">
 	            <button class="btn btn-lg btn-success btn-block mt-2" type="submit" >Signin</button>
 	            <div class="float-right text-light">No account? <a class="text-warning" th:href="@{/register}">Register for free now.</a></div>
             </p>

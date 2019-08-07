@@ -1,6 +1,7 @@
 package me.cyper.fsd.lab06.config;
 
 import javax.servlet.Filter;
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -16,6 +17,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import me.cyper.fsd.lab06.security.KaptchaAuthenticationFilter;
 import me.cyper.fsd.lab06.service.UserService;
@@ -26,12 +29,22 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private DataSource dataSource;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
+    
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+        tokenRepository.setDataSource(dataSource);
+        tokenRepository.setCreateTableOnStartup(false);
+        return tokenRepository;
+       
+    }
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
@@ -89,7 +102,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // we need to instruct Spring Security to allow anyone to access the /login URL
                 .permitAll()
-
+                
+                .and()
+                
+                // remember me
+                .rememberMe()
+                .tokenRepository(persistentTokenRepository())
+                .tokenValiditySeconds(3600 * 24)
+                .userDetailsService(userService)
+        
                 .and()
 
                 // logout().permitAll() allows any user to request logout and view logout success URL.

@@ -64,6 +64,12 @@ a.btn-refresh:hover {
 	color: #eee;
 }
 
+.checkbox {
+  margin-left: 20px;
+  color: #eee;
+}
+
+
 .alert-danger {
 	opacity: 0.8;
 }

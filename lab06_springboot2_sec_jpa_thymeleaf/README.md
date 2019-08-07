@@ -18,7 +18,7 @@
 ## TODO
 
 1. [ ] Custom 403(Access Denied Page)
-2. [ ] Remember me
+2. [x] Remember me
 3. [ ] JWT
 4. [ ] Spinner
 
@@ -40,6 +40,21 @@ mvn spring-boot:run -Dspring.profiles.active=dev
 [Spring Security Guides](https://docs.spring.io/spring-security/site/docs/current/guides/html5/)
 
 ## Remember-Me Authentication
+
+checkbox: `remember-me`
+
+Login
+
+```
+Browser => UsernamePasswordAuthenticationFilter => RememberMeService => TokenRepository + 写 Cookie
+```
+
+Request a resource
+
+```
+Browser => RememberMeAuthenticationFilter（读 Cookie)
+=> RememberMeService => TokenRepository (查 Cookie) => UserDetailsService
+```
 
 https://docs.spring.io/spring-security/site/docs/5.1.6.RELEASE/reference/htmlsingle/#remember-me
 

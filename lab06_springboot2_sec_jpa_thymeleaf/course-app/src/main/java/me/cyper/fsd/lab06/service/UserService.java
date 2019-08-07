@@ -11,6 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import me.cyper.fsd.lab06.dao.UserDao;
@@ -20,6 +21,9 @@ import me.cyper.fsd.lab06.entity.User;
 public class UserService implements UserDetailsService {
     @Autowired
     private UserDao userDao;
+    
+    @Autowired
+    private PasswordEncoder encoder;
 
     public List<User> findAllUsers() {
         return userDao.findAll();
@@ -52,10 +56,12 @@ public class UserService implements UserDetailsService {
     }
 
     public User saveUser(User user) {
+        user.setPassword(encoder.encode(user.getPassword()));
         return userDao.save(user);
     }
 
     public void updateUser(User user) {
+        user.setPassword(encoder.encode(user.getPassword()));
         userDao.save(user);
     }
 }

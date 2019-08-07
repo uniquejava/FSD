@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -27,10 +27,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
 
-    @SuppressWarnings("deprecation")
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -53,7 +52,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         Filter filter = new KaptchaAuthenticationFilter("/login", "/login?error");
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 
-        // 允许来自同一来源的H2 控制台的请求
+        //allow same origin request from h2 console
         http.headers().frameOptions().sameOrigin();
 
         // http.csrf().disable();

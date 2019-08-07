@@ -35,6 +35,8 @@ mvn spring-boot:run -Dspring.profiles.active=dev
 
 ## Spring Security
 
+[Official reference doc](https://docs.spring.io/spring-security/site/docs/5.1.6.RELEASE/reference/htmlsingle/#ns-config)
+
 [Spring Security Guides](https://docs.spring.io/spring-security/site/docs/current/guides/html5/)
 
 ## Remember-Me Authentication

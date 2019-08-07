@@ -33,6 +33,8 @@ cp ./target/course-app.war TOMCAT_HOME/webapps
 
 ## Spring Security
 
+[Official reference doc](https://docs.spring.io/spring-security/site/docs/5.1.6.RELEASE/reference/htmlsingle/#ns-config)
+
 [Spring Security Guides](https://docs.spring.io/spring-security/site/docs/current/guides/html5/)
 
 ## Exception Handling

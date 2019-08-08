@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>FSD Course Center</title>
+<script th:src="@{/webjars/jquery/3.4.1/dist/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/layout.css}" />
+</head>
+<body>
+  <div th:replace="fragments/header :: header"></div>
+
+  <div class="container-fluid">
+    <div class="row flex-xl-nowrap">
+      <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+        <div th:replace="fragments/sidemenu :: search"></div>
+        <div th:replace="fragments/sidemenu :: nav"></div>
+      </div>
+
+      <main class="col-12 col-md-9 col-xl-10 py-md-3 pl-md-5 bd-content"
+        role="main">
+        <h3 class="text-secondary">Sorry! Access denied :(</h1>
+        You don't have permission to view this page.
+      </main>
+
+
+    </div>
+
+  </div>
+</body>
+</html>

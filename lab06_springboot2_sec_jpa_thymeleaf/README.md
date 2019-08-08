@@ -17,7 +17,7 @@
 
 ## TODO
 
-1. [ ] Custom 403(Access Denied Page)
+1. [x] Custom 403(Access Denied Page)
 2. [x] Remember me
 3. [ ] JWT
 4. [ ] Spinner

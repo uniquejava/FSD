@@ -80,8 +80,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 
                 .antMatchers("/","/register", "/captcha_image**", "/h2/**").permitAll()
-                .antMatchers("/admin/**").hasAnyRole("ADMIN")
-                .antMatchers("/user/**").hasAnyRole("USER")
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/user/**").hasRole("USER")
 
                 // every request requires the user to be authenticated
                 .anyRequest().authenticated()

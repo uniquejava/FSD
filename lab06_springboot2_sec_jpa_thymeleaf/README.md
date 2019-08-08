@@ -5,7 +5,7 @@
 ## Tech stack
 
 1. [x] Spring Boot 2.1.x
-2. [x] Spring Security 5
+2. [x] Spring Security 5 (remember me)
 3. [x] Spring Data JPA
 4. [x] Spring Logging
 5. [x] Spring Bean Validation (JSR-303)
@@ -14,13 +14,6 @@
 8. [x] jQuery/Bootstrap 4.3/FontAwesome/webjars
 9. [x] Tomcat 9
 10. [x] H2 In-Memory Database
-
-## TODO
-
-1. [x] Custom 403(Access Denied Page)
-2. [x] Remember me
-3. [ ] JWT
-4. [ ] Spinner
 
 ## How to run
 
@@ -43,20 +36,13 @@ mvn spring-boot:run -Dspring.profiles.active=dev
 
 checkbox: `remember-me`
 
-Login
-
-```
-Browser => UsernamePasswordAuthenticationFilter => RememberMeService => TokenRepository + 写 Cookie
-```
-
-Request a resource
-
-```
-Browser => RememberMeAuthenticationFilter（读 Cookie)
-=> RememberMeService => TokenRepository (查 Cookie) => UserDetailsService
-```
-
 https://docs.spring.io/spring-security/site/docs/5.1.6.RELEASE/reference/htmlsingle/#remember-me
+
+## JWT
+
+[娓娓道来 REST Security with JWT using Java and Spring Security](https://www.toptal.com/java/rest-security-with-jwt-spring-security-and-java)
+
+https://grokonez.com/spring-framework/spring-security/spring-boot-spring-security-jwt-authentication-architecture-tutorial
 
 ## CSRF
 

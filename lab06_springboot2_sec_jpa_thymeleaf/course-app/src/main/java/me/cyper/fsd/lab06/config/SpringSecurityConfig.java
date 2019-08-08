@@ -83,6 +83,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasRole("USER")
 
+                // The order matters here, you must put anyRequest at the end.
                 // every request requires the user to be authenticated
                 .anyRequest().authenticated()
 
